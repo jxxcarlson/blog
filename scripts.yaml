@@ -1,0 +1,6 @@
+
+scripts:
+ 
+  refresh-scripta: cp -r /Users/carlson/dev/lamdera/bluesky/scripta-compiler-v2/src vendor/
+
+    
