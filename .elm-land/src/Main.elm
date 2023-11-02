@@ -18,6 +18,7 @@ import Pages.Home_
 import Pages.About
 import Pages.Apps
 import Pages.Counter
+import Pages.Photos.Paris
 import Pages.Scripta
 import Pages.NotFound_
 import Pages.NotFound_
@@ -117,6 +118,11 @@ initPageAndLayout model =
                     Main.Pages.Model.Counter
                     (Effect.map Main.Pages.Msg.Counter >> fromPageEffect model)
                     (Page.init (Pages.Counter.page) ())
+            , layout = Nothing
+            }
+
+        Route.Path.Photos_Paris ->
+            { page = ( Main.Pages.Model.Photos_Paris, Cmd.none )
             , layout = Nothing
             }
 
@@ -376,6 +382,11 @@ updateFromPage msg model =
                 (Effect.map Main.Pages.Msg.Counter >> fromPageEffect model)
                 (Page.update (Pages.Counter.page) pageMsg pageModel)
 
+        ( Main.Pages.Msg.Photos_Paris, Main.Pages.Model.Photos_Paris ) ->
+            ( model.page
+            , Cmd.none
+            )
+
         ( Main.Pages.Msg.Scripta pageMsg, Main.Pages.Model.Scripta pageModel ) ->
             Tuple.mapBoth
                 Main.Pages.Model.Scripta
@@ -421,6 +432,9 @@ toLayoutFromPage model =
             Nothing
 
         Main.Pages.Model.Counter pageModel ->
+            Nothing
+
+        Main.Pages.Model.Photos_Paris ->
             Nothing
 
         Main.Pages.Model.Scripta pageModel ->
@@ -496,6 +510,9 @@ subscriptions model =
                     Page.subscriptions Pages.Counter.page pageModel
                         |> Sub.map Main.Pages.Msg.Counter
                         |> Sub.map Page
+
+                Main.Pages.Model.Photos_Paris ->
+                    Sub.none
 
                 Main.Pages.Model.Scripta pageModel ->
                     Page.subscriptions Pages.Scripta.page pageModel
@@ -580,6 +597,9 @@ viewPage model =
             Page.view Pages.Counter.page pageModel
                 |> View.map Main.Pages.Msg.Counter
                 |> View.map Page
+
+        Main.Pages.Model.Photos_Paris ->
+            (Pages.Photos.Paris.page)
 
         Main.Pages.Model.Scripta pageModel ->
             Page.view Pages.Scripta.page pageModel
@@ -679,6 +699,9 @@ toPageUrlHookCmd model routes =
                 |> List.map Page
                 |> toCommands
 
+        Main.Pages.Model.Photos_Paris ->
+            Cmd.none
+
         Main.Pages.Model.Scripta pageModel ->
             Page.toUrlMessages routes Pages.Scripta.page 
                 |> List.map Main.Pages.Msg.Scripta
@@ -751,6 +774,9 @@ isAuthProtected routePath =
             False
 
         Route.Path.Counter ->
+            False
+
+        Route.Path.Photos_Paris ->
             False
 
         Route.Path.Scripta ->

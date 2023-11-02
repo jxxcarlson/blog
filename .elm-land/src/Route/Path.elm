@@ -11,6 +11,7 @@ type Path
     | About
     | Apps
     | Counter
+    | Photos_Paris
     | Scripta
     | NotFound_
 
@@ -43,6 +44,9 @@ fromString urlPath =
         "counter" :: [] ->
             Just Counter
 
+        "photos" :: "paris" :: [] ->
+            Just Photos_Paris
+
         "scripta" :: [] ->
             Just Scripta
 
@@ -72,6 +76,9 @@ toString path =
 
                 Counter ->
                     [ "counter" ]
+
+                Photos_Paris ->
+                    [ "photos", "paris" ]
 
                 Scripta ->
                     [ "scripta" ]

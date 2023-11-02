@@ -4,6 +4,7 @@ import Pages.Home_
 import Pages.About
 import Pages.Apps
 import Pages.Counter
+import Pages.Photos.Paris
 import Pages.Scripta
 import Pages.NotFound_
 
@@ -13,5 +14,6 @@ type Msg
     | About Pages.About.Msg
     | Apps Pages.Apps.Msg
     | Counter Pages.Counter.Msg
+    | Photos_Paris
     | Scripta Pages.Scripta.Msg
     | NotFound_ Pages.NotFound_.Msg
