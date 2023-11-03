@@ -19,6 +19,7 @@ import Pages.About
 import Pages.Apps
 import Pages.Counter
 import Pages.Photos.Paris
+import Pages.Science.Champagne
 import Pages.Scripta
 import Pages.NotFound_
 import Pages.NotFound_
@@ -123,6 +124,11 @@ initPageAndLayout model =
 
         Route.Path.Photos_Paris ->
             { page = ( Main.Pages.Model.Photos_Paris, Cmd.none )
+            , layout = Nothing
+            }
+
+        Route.Path.Science_Champagne ->
+            { page = ( Main.Pages.Model.Science_Champagne, Cmd.none )
             , layout = Nothing
             }
 
@@ -387,6 +393,11 @@ updateFromPage msg model =
             , Cmd.none
             )
 
+        ( Main.Pages.Msg.Science_Champagne, Main.Pages.Model.Science_Champagne ) ->
+            ( model.page
+            , Cmd.none
+            )
+
         ( Main.Pages.Msg.Scripta pageMsg, Main.Pages.Model.Scripta pageModel ) ->
             Tuple.mapBoth
                 Main.Pages.Model.Scripta
@@ -435,6 +446,9 @@ toLayoutFromPage model =
             Nothing
 
         Main.Pages.Model.Photos_Paris ->
+            Nothing
+
+        Main.Pages.Model.Science_Champagne ->
             Nothing
 
         Main.Pages.Model.Scripta pageModel ->
@@ -512,6 +526,9 @@ subscriptions model =
                         |> Sub.map Page
 
                 Main.Pages.Model.Photos_Paris ->
+                    Sub.none
+
+                Main.Pages.Model.Science_Champagne ->
                     Sub.none
 
                 Main.Pages.Model.Scripta pageModel ->
@@ -600,6 +617,9 @@ viewPage model =
 
         Main.Pages.Model.Photos_Paris ->
             (Pages.Photos.Paris.page)
+
+        Main.Pages.Model.Science_Champagne ->
+            (Pages.Science.Champagne.page)
 
         Main.Pages.Model.Scripta pageModel ->
             Page.view Pages.Scripta.page pageModel
@@ -702,6 +722,9 @@ toPageUrlHookCmd model routes =
         Main.Pages.Model.Photos_Paris ->
             Cmd.none
 
+        Main.Pages.Model.Science_Champagne ->
+            Cmd.none
+
         Main.Pages.Model.Scripta pageModel ->
             Page.toUrlMessages routes Pages.Scripta.page 
                 |> List.map Main.Pages.Msg.Scripta
@@ -777,6 +800,9 @@ isAuthProtected routePath =
             False
 
         Route.Path.Photos_Paris ->
+            False
+
+        Route.Path.Science_Champagne ->
             False
 
         Route.Path.Scripta ->

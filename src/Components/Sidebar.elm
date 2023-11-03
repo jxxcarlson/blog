@@ -35,6 +35,7 @@ sidebar_ =
         [ link [] { url = "/", label = el [] (text "Home") }
         , link [] { url = "/about", label = el [] (text "About") }
         , link [] { url = "/photos/paris", label = el [] (text "Paris: Photos") }
+        , link [] { url = "/science/champagne", label = el [] (text "Science: Champagne") }
         , link [] { url = "/apps", label = el [] (text "Apps") }
         , link [] { url = "/counter", label = el [] (text "Counter") }
         , link [] { url = "/scripta", label = el [] (text "Scripta") }

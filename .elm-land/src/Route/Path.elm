@@ -12,6 +12,7 @@ type Path
     | Apps
     | Counter
     | Photos_Paris
+    | Science_Champagne
     | Scripta
     | NotFound_
 
@@ -47,6 +48,9 @@ fromString urlPath =
         "photos" :: "paris" :: [] ->
             Just Photos_Paris
 
+        "science" :: "champagne" :: [] ->
+            Just Science_Champagne
+
         "scripta" :: [] ->
             Just Scripta
 
@@ -79,6 +83,9 @@ toString path =
 
                 Photos_Paris ->
                     [ "photos", "paris" ]
+
+                Science_Champagne ->
+                    [ "science", "champagne" ]
 
                 Scripta ->
                     [ "scripta" ]

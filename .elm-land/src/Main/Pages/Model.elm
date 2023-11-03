@@ -5,6 +5,7 @@ import Pages.About
 import Pages.Apps
 import Pages.Counter
 import Pages.Photos.Paris
+import Pages.Science.Champagne
 import Pages.Scripta
 import Pages.NotFound_
 import View exposing (View)
@@ -16,6 +17,7 @@ type Model
     | Apps Pages.Apps.Model
     | Counter Pages.Counter.Model
     | Photos_Paris
+    | Science_Champagne
     | Scripta Pages.Scripta.Model
     | NotFound_ Pages.NotFound_.Model
     | Redirecting_
