@@ -3,24 +3,26 @@ module PageHelper.Element exposing (article)
 import Config
 import Element exposing (..)
 import Element.Font as Font
+import Render.Msg
 import Scripta
 
 
-article : Document -> Element msg
+article : Document -> Element Render.Msg.MarkupMsg
 article document =
     column [ spacing 24, paddingXY 24 24 ]
         [ title document.title
         , header document
-        , compile document.content |> column [ Font.size 14, spacing 12, width (px 500) ]
+
+        --, compile document.content |> column [ Font.size 14, spacing 12, width (px 500) ]
+        , element document.content
         ]
 
 
-
---element src =
---    row [ centerX ]
---        [ Scripta.katexCSS
---        , Scripta.display Config.articleWidth 700 src |> Element.map Render
---        ]
+element src =
+    row [ centerX ]
+        [ Scripta.katexCSS
+        , Scripta.display Config.articleWidth 600 src -- |> Element.map Render
+        ]
 
 
 header : Document -> Element msg
@@ -38,8 +40,8 @@ header doc =
 splitHeader : Document -> String -> Element msg
 splitHeader doc str =
     row [ spacing 12 ]
-        [ image [ width (px 250) ] { src = doc.imageUrl, description = doc.imageDescription }
-        , column [ width (px 250), alignTop ]
+        [ image [ width (px 300) ] { src = doc.imageUrl, description = doc.imageDescription }
+        , column [ width (px 300), alignTop ]
             [ column [ Font.size 14, spacing 12 ] (compile str)
             ]
         ]
@@ -47,7 +49,7 @@ splitHeader doc str =
 
 imageHeader : Document -> Element msg
 imageHeader doc =
-    image [ width (px 500) ] { src = doc.imageUrl, description = doc.imageDescription }
+    image [ width (px 600) ] { src = doc.imageUrl, description = doc.imageDescription }
 
 
 type alias Document =

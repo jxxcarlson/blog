@@ -18,8 +18,8 @@ type Model
     | Apps Pages.Apps.Model
     | Counter Pages.Counter.Model
     | Photos_Paris
-    | Science_Champagne
-    | Science_ReasonWhy
+    | Science_Champagne Pages.Science.Champagne.Model
+    | Science_ReasonWhy Pages.Science.ReasonWhy.Model
     | Scripta Pages.Scripta.Model
     | NotFound_ Pages.NotFound_.Model
     | Redirecting_

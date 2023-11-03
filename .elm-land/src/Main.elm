@@ -129,12 +129,20 @@ initPageAndLayout model =
             }
 
         Route.Path.Science_Champagne ->
-            { page = ( Main.Pages.Model.Science_Champagne, Cmd.none )
+            { page = 
+                Tuple.mapBoth
+                    Main.Pages.Model.Science_Champagne
+                    (Effect.map Main.Pages.Msg.Science_Champagne >> fromPageEffect model)
+                    (Page.init (Pages.Science.Champagne.page) ())
             , layout = Nothing
             }
 
         Route.Path.Science_ReasonWhy ->
-            { page = ( Main.Pages.Model.Science_ReasonWhy, Cmd.none )
+            { page = 
+                Tuple.mapBoth
+                    Main.Pages.Model.Science_ReasonWhy
+                    (Effect.map Main.Pages.Msg.Science_ReasonWhy >> fromPageEffect model)
+                    (Page.init (Pages.Science.ReasonWhy.page) ())
             , layout = Nothing
             }
 
@@ -399,15 +407,17 @@ updateFromPage msg model =
             , Cmd.none
             )
 
-        ( Main.Pages.Msg.Science_Champagne, Main.Pages.Model.Science_Champagne ) ->
-            ( model.page
-            , Cmd.none
-            )
+        ( Main.Pages.Msg.Science_Champagne pageMsg, Main.Pages.Model.Science_Champagne pageModel ) ->
+            Tuple.mapBoth
+                Main.Pages.Model.Science_Champagne
+                (Effect.map Main.Pages.Msg.Science_Champagne >> fromPageEffect model)
+                (Page.update (Pages.Science.Champagne.page) pageMsg pageModel)
 
-        ( Main.Pages.Msg.Science_ReasonWhy, Main.Pages.Model.Science_ReasonWhy ) ->
-            ( model.page
-            , Cmd.none
-            )
+        ( Main.Pages.Msg.Science_ReasonWhy pageMsg, Main.Pages.Model.Science_ReasonWhy pageModel ) ->
+            Tuple.mapBoth
+                Main.Pages.Model.Science_ReasonWhy
+                (Effect.map Main.Pages.Msg.Science_ReasonWhy >> fromPageEffect model)
+                (Page.update (Pages.Science.ReasonWhy.page) pageMsg pageModel)
 
         ( Main.Pages.Msg.Scripta pageMsg, Main.Pages.Model.Scripta pageModel ) ->
             Tuple.mapBoth
@@ -459,10 +469,10 @@ toLayoutFromPage model =
         Main.Pages.Model.Photos_Paris ->
             Nothing
 
-        Main.Pages.Model.Science_Champagne ->
+        Main.Pages.Model.Science_Champagne pageModel ->
             Nothing
 
-        Main.Pages.Model.Science_ReasonWhy ->
+        Main.Pages.Model.Science_ReasonWhy pageModel ->
             Nothing
 
         Main.Pages.Model.Scripta pageModel ->
@@ -542,11 +552,15 @@ subscriptions model =
                 Main.Pages.Model.Photos_Paris ->
                     Sub.none
 
-                Main.Pages.Model.Science_Champagne ->
-                    Sub.none
+                Main.Pages.Model.Science_Champagne pageModel ->
+                    Page.subscriptions Pages.Science.Champagne.page pageModel
+                        |> Sub.map Main.Pages.Msg.Science_Champagne
+                        |> Sub.map Page
 
-                Main.Pages.Model.Science_ReasonWhy ->
-                    Sub.none
+                Main.Pages.Model.Science_ReasonWhy pageModel ->
+                    Page.subscriptions Pages.Science.ReasonWhy.page pageModel
+                        |> Sub.map Main.Pages.Msg.Science_ReasonWhy
+                        |> Sub.map Page
 
                 Main.Pages.Model.Scripta pageModel ->
                     Page.subscriptions Pages.Scripta.page pageModel
@@ -635,11 +649,15 @@ viewPage model =
         Main.Pages.Model.Photos_Paris ->
             (Pages.Photos.Paris.page)
 
-        Main.Pages.Model.Science_Champagne ->
-            (Pages.Science.Champagne.page)
+        Main.Pages.Model.Science_Champagne pageModel ->
+            Page.view Pages.Science.Champagne.page pageModel
+                |> View.map Main.Pages.Msg.Science_Champagne
+                |> View.map Page
 
-        Main.Pages.Model.Science_ReasonWhy ->
-            (Pages.Science.ReasonWhy.page)
+        Main.Pages.Model.Science_ReasonWhy pageModel ->
+            Page.view Pages.Science.ReasonWhy.page pageModel
+                |> View.map Main.Pages.Msg.Science_ReasonWhy
+                |> View.map Page
 
         Main.Pages.Model.Scripta pageModel ->
             Page.view Pages.Scripta.page pageModel
@@ -742,11 +760,17 @@ toPageUrlHookCmd model routes =
         Main.Pages.Model.Photos_Paris ->
             Cmd.none
 
-        Main.Pages.Model.Science_Champagne ->
-            Cmd.none
+        Main.Pages.Model.Science_Champagne pageModel ->
+            Page.toUrlMessages routes Pages.Science.Champagne.page 
+                |> List.map Main.Pages.Msg.Science_Champagne
+                |> List.map Page
+                |> toCommands
 
-        Main.Pages.Model.Science_ReasonWhy ->
-            Cmd.none
+        Main.Pages.Model.Science_ReasonWhy pageModel ->
+            Page.toUrlMessages routes Pages.Science.ReasonWhy.page 
+                |> List.map Main.Pages.Msg.Science_ReasonWhy
+                |> List.map Page
+                |> toCommands
 
         Main.Pages.Model.Scripta pageModel ->
             Page.toUrlMessages routes Pages.Scripta.page 

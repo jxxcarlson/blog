@@ -1,16 +1,59 @@
-module Pages.Science.ReasonWhy exposing (page)
+module Pages.Science.ReasonWhy exposing (Model, Msg(..), page)
 
 import Components.Sidebar as Sidebar
+import Config
+import Element exposing (..)
+import Element.Font as Font
+import Page exposing (Page)
 import PageHelper.Element
+import Render.Msg exposing (MarkupMsg)
+import Scripta
 import View exposing (View)
 
 
-page : View msg
+page : Page Model Msg
 page =
+    Page.sandbox
+        { init = init
+        , update = update
+        , view = view
+        }
+
+
+
+-- INIT
+
+
+type alias Model =
+    {}
+
+
+init : Model
+init =
+    {}
+
+
+
+-- UPDATE
+
+
+type Msg
+    = Render MarkupMsg
+
+
+update : Msg -> Model -> Model
+update msg model =
+    case msg of
+        Render _ ->
+            model
+
+
+view : Model -> View Msg
+view model =
     Sidebar.view
-        { title = "Science.ReasonWhy"
+        { title = "Scripta"
         , attributes = []
-        , element = PageHelper.Element.article document
+        , element = PageHelper.Element.article document |> Element.map Render
         }
 
 
@@ -23,13 +66,10 @@ document =
     }
 
 
-contentHeader =
-    """
-"""
-
-
 content =
     """
+| title
+
 In the beginning, at the instant of creation, there came into being numerous particles:
 quarks and antiquarks, protons and and antiprotons, electrons and antielectrons,
 each kind paired with its opposite. Thus was matter and antimatter created in equal measure.

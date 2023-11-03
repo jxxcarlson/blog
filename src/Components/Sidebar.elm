@@ -27,9 +27,12 @@ view props =
 sidebar_ =
     column
         [ alignTop
-        , Font.size 16
+        , Font.size 14
         , spacing 8
+        , width (px 260)
+        , height fill
         , paddingXY 24 12
+        , Font.color Color.white
         , Background.color Color.sidebar
         ]
         [ link [] { url = "/", label = el [] (text "Home") }

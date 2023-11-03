@@ -1,16 +1,59 @@
-module Pages.Science.Champagne exposing (page)
+module Pages.Science.Champagne exposing (Model, Msg(..), page)
 
 import Components.Sidebar as Sidebar
+import Config
+import Element exposing (..)
+import Element.Font as Font
+import Page exposing (Page)
 import PageHelper.Element
+import Render.Msg exposing (MarkupMsg)
+import Scripta
 import View exposing (View)
 
 
-page : View msg
+page : Page Model Msg
 page =
+    Page.sandbox
+        { init = init
+        , update = update
+        , view = view
+        }
+
+
+
+-- INIT
+
+
+type alias Model =
+    {}
+
+
+init : Model
+init =
+    {}
+
+
+
+-- UPDATE
+
+
+type Msg
+    = Render MarkupMsg
+
+
+update : Msg -> Model -> Model
+update msg model =
+    case msg of
+        Render _ ->
+            model
+
+
+view : Model -> View Msg
+view model =
     Sidebar.view
-        { title = "Science.Champagne"
+        { title = "Scripta"
         , attributes = []
-        , element = PageHelper.Element.article document
+        , element = PageHelper.Element.article document |> Element.map Render
         }
 
 
@@ -29,13 +72,14 @@ There is a belief, common in France anyway, that the fizziness of an opened bott
 
 But is this belief true? Examining it critically is an excellent, non-technical way of understanding the experimental method. In brief, the method is a way of separating the possibly true from the definitely false. We, as citizens, need to do this just as much as does the scientist in the laboratory.
 
-So let’s have at it. What arguments pro and con are there for the spoon-the-bottle hypothesis?
+So let’s have at it. What arguments pro and con are there for the spoon-the-bottle hypothesis? On the pro side of the ledger is that people I know and respect believe the hypothesis. Also in favor is that the belief is shared by many others, and has been around for a long time.  This is a version of the Argument from Authority.
+
 """
 
 
 content =
     """
-On the pro side of the ledger is that people I know and respect believe the hypothesis. Also in favor is that the belief is shared by many others, and has been around for a long time.  This is a version of the Argument from Authority.
+| title
 
 What about the con side?  When I first heard about this use of a spoon — after half-finishing the second bottle of champagne with friends — I objected that “it just didn’t seem right.”  Pressed to explain, I questioned the mechanism: how could the spoon stop bubbles from forming in the liquid below, then escaping though the neck, passing around the spoon, which “obviously” did not form real barrier.
 
@@ -45,7 +89,7 @@ My proposal was accepted, and we set about preparing the experiment.  The next m
 
 This little tale illustrates the essence of the experimental method in science: formulate a precise question, then design and carry out experiment to answer it.  Nothing more, nothing less.  Simple, effective, and useful in everyday life.
 
-@subheading One more thing
+[b One more thing]
 
 There is one more thing.  You do not have to accept my judgement of the spoon-in-the-bottle hypothesis.  Rather than accepting my authority, you can carry out the experiment yourself.  If you get the same results, or similar once, this confirms the hypothesis.  A good experiment is repeatable.
 """
