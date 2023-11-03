@@ -19,7 +19,7 @@ document =
     , content = content
     , imageUrl = "https://jxxcarlsonblog.files.wordpress.com/2020/05/winebottle.jpeg"
     , imageDescription = "A glass of champagne"
-    , contentHeader = contentHeader
+    , contentHeader = Just contentHeader
     }
 
 

@@ -19,7 +19,7 @@ type Model
     | Counter Pages.Counter.Model
     | Photos_Paris
     | Science_Champagne
-    | Science_ReasonWhy Pages.Science.ReasonWhy.Model
+    | Science_ReasonWhy
     | Scripta Pages.Scripta.Model
     | NotFound_ Pages.NotFound_.Model
     | Redirecting_

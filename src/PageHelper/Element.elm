@@ -1,7 +1,9 @@
 module PageHelper.Element exposing (article)
 
+import Config
 import Element exposing (..)
 import Element.Font as Font
+import Scripta
 
 
 article : Document -> Element msg
@@ -13,21 +15,46 @@ article document =
         ]
 
 
+
+--element src =
+--    row [ centerX ]
+--        [ Scripta.katexCSS
+--        , Scripta.display Config.articleWidth 700 src |> Element.map Render
+--        ]
+
+
 header : Document -> Element msg
 header doc =
+    case
+        doc.contentHeader
+    of
+        Just str ->
+            splitHeader doc str
+
+        Nothing ->
+            imageHeader doc
+
+
+splitHeader : Document -> String -> Element msg
+splitHeader doc str =
     row [ spacing 12 ]
         [ image [ width (px 250) ] { src = doc.imageUrl, description = doc.imageDescription }
         , column [ width (px 250), alignTop ]
-            [ column [ Font.size 14, spacing 12 ] (compile doc.contentHeader)
+            [ column [ Font.size 14, spacing 12 ] (compile str)
             ]
         ]
+
+
+imageHeader : Document -> Element msg
+imageHeader doc =
+    image [ width (px 500) ] { src = doc.imageUrl, description = doc.imageDescription }
 
 
 type alias Document =
     { title : String
     , imageUrl : String
     , imageDescription : String
-    , contentHeader : String
+    , contentHeader : Maybe String
     , content : String
     }
 

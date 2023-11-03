@@ -134,19 +134,7 @@ initPageAndLayout model =
             }
 
         Route.Path.Science_ReasonWhy ->
-            let
-                page : Page.Page Pages.Science.ReasonWhy.Model Pages.Science.ReasonWhy.Msg
-                page =
-                    Pages.Science.ReasonWhy.page model.shared (Route.fromUrl () model.url)
-
-                ( pageModel, pageEffect ) =
-                    Page.init page ()
-            in
-            { page = 
-                Tuple.mapBoth
-                    Main.Pages.Model.Science_ReasonWhy
-                    (Effect.map Main.Pages.Msg.Science_ReasonWhy >> fromPageEffect model)
-                    ( pageModel, pageEffect )
+            { page = ( Main.Pages.Model.Science_ReasonWhy, Cmd.none )
             , layout = Nothing
             }
 
@@ -416,11 +404,10 @@ updateFromPage msg model =
             , Cmd.none
             )
 
-        ( Main.Pages.Msg.Science_ReasonWhy pageMsg, Main.Pages.Model.Science_ReasonWhy pageModel ) ->
-            Tuple.mapBoth
-                Main.Pages.Model.Science_ReasonWhy
-                (Effect.map Main.Pages.Msg.Science_ReasonWhy >> fromPageEffect model)
-                (Page.update (Pages.Science.ReasonWhy.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
+        ( Main.Pages.Msg.Science_ReasonWhy, Main.Pages.Model.Science_ReasonWhy ) ->
+            ( model.page
+            , Cmd.none
+            )
 
         ( Main.Pages.Msg.Scripta pageMsg, Main.Pages.Model.Scripta pageModel ) ->
             Tuple.mapBoth
@@ -475,11 +462,8 @@ toLayoutFromPage model =
         Main.Pages.Model.Science_Champagne ->
             Nothing
 
-        Main.Pages.Model.Science_ReasonWhy pageModel ->
-            Route.fromUrl () model.url
-                |> Pages.Science.ReasonWhy.page model.shared
-                |> Page.layout pageModel
-                |> Maybe.map (Layouts.map (Main.Pages.Msg.Science_ReasonWhy >> Page))
+        Main.Pages.Model.Science_ReasonWhy ->
+            Nothing
 
         Main.Pages.Model.Scripta pageModel ->
             Nothing
@@ -561,10 +545,8 @@ subscriptions model =
                 Main.Pages.Model.Science_Champagne ->
                     Sub.none
 
-                Main.Pages.Model.Science_ReasonWhy pageModel ->
-                    Page.subscriptions (Pages.Science.ReasonWhy.page model.shared (Route.fromUrl () model.url)) pageModel
-                        |> Sub.map Main.Pages.Msg.Science_ReasonWhy
-                        |> Sub.map Page
+                Main.Pages.Model.Science_ReasonWhy ->
+                    Sub.none
 
                 Main.Pages.Model.Scripta pageModel ->
                     Page.subscriptions Pages.Scripta.page pageModel
@@ -656,10 +638,8 @@ viewPage model =
         Main.Pages.Model.Science_Champagne ->
             (Pages.Science.Champagne.page)
 
-        Main.Pages.Model.Science_ReasonWhy pageModel ->
-            Page.view (Pages.Science.ReasonWhy.page model.shared (Route.fromUrl () model.url)) pageModel
-                |> View.map Main.Pages.Msg.Science_ReasonWhy
-                |> View.map Page
+        Main.Pages.Model.Science_ReasonWhy ->
+            (Pages.Science.ReasonWhy.page)
 
         Main.Pages.Model.Scripta pageModel ->
             Page.view Pages.Scripta.page pageModel
@@ -765,11 +745,8 @@ toPageUrlHookCmd model routes =
         Main.Pages.Model.Science_Champagne ->
             Cmd.none
 
-        Main.Pages.Model.Science_ReasonWhy pageModel ->
-            Page.toUrlMessages routes (Pages.Science.ReasonWhy.page model.shared (Route.fromUrl () model.url)) 
-                |> List.map Main.Pages.Msg.Science_ReasonWhy
-                |> List.map Page
-                |> toCommands
+        Main.Pages.Model.Science_ReasonWhy ->
+            Cmd.none
 
         Main.Pages.Model.Scripta pageModel ->
             Page.toUrlMessages routes Pages.Scripta.page 

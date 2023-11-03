@@ -18,6 +18,6 @@ type Msg
     | Counter Pages.Counter.Msg
     | Photos_Paris
     | Science_Champagne
-    | Science_ReasonWhy Pages.Science.ReasonWhy.Msg
+    | Science_ReasonWhy
     | Scripta Pages.Scripta.Msg
     | NotFound_ Pages.NotFound_.Msg
