@@ -14,16 +14,15 @@ import Main.Layouts.Msg
 import Main.Pages.Model
 import Main.Pages.Msg
 import Page
-import Pages.Home_
 import Pages.About
 import Pages.Apps
 import Pages.Counter
+import Pages.Home_
+import Pages.NotFound_
 import Pages.Photos.Paris
 import Pages.Science.Champagne
 import Pages.Science.ReasonWhy
 import Pages.Scripta
-import Pages.NotFound_
-import Pages.NotFound_
 import Route exposing (Route)
 import Route.Path
 import Shared
@@ -77,10 +76,10 @@ init json url key =
       , shared = sharedModel
       }
     , Cmd.batch
-          [ Tuple.second page
-          , layout |> Maybe.map Tuple.second |> Maybe.withDefault Cmd.none
-          , fromSharedEffect { key = key, url = url, shared = sharedModel } sharedEffect
-          ]
+        [ Tuple.second page
+        , layout |> Maybe.map Tuple.second |> Maybe.withDefault Cmd.none
+        , fromSharedEffect { key = key, url = url, shared = sharedModel } sharedEffect
+        ]
     )
 
 
@@ -88,38 +87,38 @@ initPageAndLayout : { key : Browser.Navigation.Key, url : Url, shared : Shared.M
 initPageAndLayout model =
     case Route.Path.fromUrl model.url of
         Route.Path.Home_ ->
-            { page = 
+            { page =
                 Tuple.mapBoth
                     Main.Pages.Model.Home_
                     (Effect.map Main.Pages.Msg.Home_ >> fromPageEffect model)
-                    (Page.init (Pages.Home_.page) ())
+                    (Page.init Pages.Home_.page ())
             , layout = Nothing
             }
 
         Route.Path.About ->
-            { page = 
+            { page =
                 Tuple.mapBoth
                     Main.Pages.Model.About
                     (Effect.map Main.Pages.Msg.About >> fromPageEffect model)
-                    (Page.init (Pages.About.page) ())
+                    (Page.init Pages.About.page ())
             , layout = Nothing
             }
 
         Route.Path.Apps ->
-            { page = 
+            { page =
                 Tuple.mapBoth
                     Main.Pages.Model.Apps
                     (Effect.map Main.Pages.Msg.Apps >> fromPageEffect model)
-                    (Page.init (Pages.Apps.page) ())
+                    (Page.init Pages.Apps.page ())
             , layout = Nothing
             }
 
         Route.Path.Counter ->
-            { page = 
+            { page =
                 Tuple.mapBoth
                     Main.Pages.Model.Counter
                     (Effect.map Main.Pages.Msg.Counter >> fromPageEffect model)
-                    (Page.init (Pages.Counter.page) ())
+                    (Page.init Pages.Counter.page ())
             , layout = Nothing
             }
 
@@ -129,29 +128,29 @@ initPageAndLayout model =
             }
 
         Route.Path.Science_Champagne ->
-            { page = 
+            { page =
                 Tuple.mapBoth
                     Main.Pages.Model.Science_Champagne
                     (Effect.map Main.Pages.Msg.Science_Champagne >> fromPageEffect model)
-                    (Page.init (Pages.Science.Champagne.page) ())
+                    (Page.init (Pages.Science.Champagne.page model.shared (Route.fromUrl () model.url)) ())
             , layout = Nothing
             }
 
         Route.Path.Science_ReasonWhy ->
-            { page = 
+            { page =
                 Tuple.mapBoth
                     Main.Pages.Model.Science_ReasonWhy
                     (Effect.map Main.Pages.Msg.Science_ReasonWhy >> fromPageEffect model)
-                    (Page.init (Pages.Science.ReasonWhy.page) ())
+                    (Page.init (Pages.Science.ReasonWhy.page model.shared (Route.fromUrl () model.url)) ())
             , layout = Nothing
             }
 
         Route.Path.Scripta ->
-            { page = 
+            { page =
                 Tuple.mapBoth
                     Main.Pages.Model.Scripta
                     (Effect.map Main.Pages.Msg.Scripta >> fromPageEffect model)
-                    (Page.init (Pages.Scripta.page) ())
+                    (Page.init Pages.Scripta.page ())
             , layout = Nothing
             }
 
@@ -164,7 +163,7 @@ initPageAndLayout model =
                 ( pageModel, pageEffect ) =
                     Page.init page ()
             in
-            { page = 
+            { page =
                 Tuple.mapBoth
                     Main.Pages.Model.NotFound_
                     (Effect.map Main.Pages.Msg.NotFound_ >> fromPageEffect model)
@@ -205,7 +204,7 @@ runWhenAuthenticatedWithLayout model toRecord =
             toRecord user
 
         Auth.Action.ShowLoadingPage loadingView ->
-            { page = 
+            { page =
                 ( Main.Pages.Model.Loading_
                 , Cmd.none
                 )
@@ -213,7 +212,7 @@ runWhenAuthenticatedWithLayout model toRecord =
             }
 
         Auth.Action.ReplaceRoute options ->
-            { page = 
+            { page =
                 ( Main.Pages.Model.Redirecting_
                 , toCmd (Effect.replaceRoute options)
                 )
@@ -221,7 +220,7 @@ runWhenAuthenticatedWithLayout model toRecord =
             }
 
         Auth.Action.PushRoute options ->
-            { page = 
+            { page =
                 ( Main.Pages.Model.Redirecting_
                 , toCmd (Effect.pushRoute options)
                 )
@@ -229,7 +228,7 @@ runWhenAuthenticatedWithLayout model toRecord =
             }
 
         Auth.Action.LoadExternalUrl externalUrl ->
-            { page = 
+            { page =
                 ( Main.Pages.Model.Redirecting_
                 , Browser.Navigation.load externalUrl
                 )
@@ -272,15 +271,16 @@ update msg model =
                 in
                 ( newModel
                 , Cmd.batch
-                      [ toPageUrlHookCmd newModel
-                            { from = Route.fromUrl () model.url
-                            , to = Route.fromUrl () newModel.url
-                            }
-                      , toLayoutUrlHookCmd model newModel
-                            { from = Route.fromUrl () model.url
-                            , to = Route.fromUrl () newModel.url
-                            }
-                      ]
+                    [ toPageUrlHookCmd newModel
+                        { from = Route.fromUrl () model.url
+                        , to = Route.fromUrl () newModel.url
+                        }
+                    , toLayoutUrlHookCmd model
+                        newModel
+                        { from = Route.fromUrl () model.url
+                        , to = Route.fromUrl () newModel.url
+                        }
+                    ]
                 )
 
             else
@@ -304,13 +304,14 @@ update msg model =
                 in
                 ( newModel
                 , Cmd.batch
-                      [ pageCmd
-                      , layoutCmd
-                      , toLayoutUrlHookCmd model newModel
-                            { from = Route.fromUrl () model.url
-                            , to = Route.fromUrl () newModel.url
-                            }
-                      ]
+                    [ pageCmd
+                    , layoutCmd
+                    , toLayoutUrlHookCmd model
+                        newModel
+                        { from = Route.fromUrl () model.url
+                        , to = Route.fromUrl () newModel.url
+                        }
+                    ]
                 )
 
         Page pageMsg ->
@@ -341,7 +342,7 @@ update msg model =
                     , Auth.onPageLoad sharedModel (Route.fromUrl () model.url)
                     )
             in
-            if isAuthProtected (Route.fromUrl () model.url).path && (hasActionTypeChanged oldAction newAction) then
+            if isAuthProtected (Route.fromUrl () model.url).path && hasActionTypeChanged oldAction newAction then
                 let
                     { layout, page } =
                         initPageAndLayout { key = model.key, shared = sharedModel, url = model.url, layout = model.layout }
@@ -356,10 +357,10 @@ update msg model =
                 in
                 ( { model | shared = sharedModel, page = pageModel, layout = layoutModel }
                 , Cmd.batch
-                      [ pageCmd
-                      , layoutCmd
-                      , fromSharedEffect { model | shared = sharedModel } sharedEffect
-                      ]
+                    [ pageCmd
+                    , layoutCmd
+                    , fromSharedEffect { model | shared = sharedModel } sharedEffect
+                    ]
                 )
 
             else
@@ -370,8 +371,8 @@ update msg model =
         Batch messages ->
             ( model
             , messages
-                  |> List.map (Task.succeed >> Task.perform identity)
-                  |> Cmd.batch
+                |> List.map (Task.succeed >> Task.perform identity)
+                |> Cmd.batch
             )
 
 
@@ -382,25 +383,25 @@ updateFromPage msg model =
             Tuple.mapBoth
                 Main.Pages.Model.Home_
                 (Effect.map Main.Pages.Msg.Home_ >> fromPageEffect model)
-                (Page.update (Pages.Home_.page) pageMsg pageModel)
+                (Page.update Pages.Home_.page pageMsg pageModel)
 
         ( Main.Pages.Msg.About pageMsg, Main.Pages.Model.About pageModel ) ->
             Tuple.mapBoth
                 Main.Pages.Model.About
                 (Effect.map Main.Pages.Msg.About >> fromPageEffect model)
-                (Page.update (Pages.About.page) pageMsg pageModel)
+                (Page.update Pages.About.page pageMsg pageModel)
 
         ( Main.Pages.Msg.Apps pageMsg, Main.Pages.Model.Apps pageModel ) ->
             Tuple.mapBoth
                 Main.Pages.Model.Apps
                 (Effect.map Main.Pages.Msg.Apps >> fromPageEffect model)
-                (Page.update (Pages.Apps.page) pageMsg pageModel)
+                (Page.update Pages.Apps.page pageMsg pageModel)
 
         ( Main.Pages.Msg.Counter pageMsg, Main.Pages.Model.Counter pageModel ) ->
             Tuple.mapBoth
                 Main.Pages.Model.Counter
                 (Effect.map Main.Pages.Msg.Counter >> fromPageEffect model)
-                (Page.update (Pages.Counter.page) pageMsg pageModel)
+                (Page.update Pages.Counter.page pageMsg pageModel)
 
         ( Main.Pages.Msg.Photos_Paris, Main.Pages.Model.Photos_Paris ) ->
             ( model.page
@@ -411,19 +412,19 @@ updateFromPage msg model =
             Tuple.mapBoth
                 Main.Pages.Model.Science_Champagne
                 (Effect.map Main.Pages.Msg.Science_Champagne >> fromPageEffect model)
-                (Page.update (Pages.Science.Champagne.page) pageMsg pageModel)
+                (Page.update (Pages.Science.Champagne.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
 
         ( Main.Pages.Msg.Science_ReasonWhy pageMsg, Main.Pages.Model.Science_ReasonWhy pageModel ) ->
             Tuple.mapBoth
                 Main.Pages.Model.Science_ReasonWhy
                 (Effect.map Main.Pages.Msg.Science_ReasonWhy >> fromPageEffect model)
-                (Page.update (Pages.Science.ReasonWhy.page) pageMsg pageModel)
+                (Page.update (Pages.Science.ReasonWhy.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
 
         ( Main.Pages.Msg.Scripta pageMsg, Main.Pages.Model.Scripta pageModel ) ->
             Tuple.mapBoth
                 Main.Pages.Model.Scripta
                 (Effect.map Main.Pages.Msg.Scripta >> fromPageEffect model)
-                (Page.update (Pages.Scripta.page) pageMsg pageModel)
+                (Page.update Pages.Scripta.page pageMsg pageModel)
 
         ( Main.Pages.Msg.NotFound_ pageMsg, Main.Pages.Model.NotFound_ pageModel ) ->
             Tuple.mapBoth
@@ -519,7 +520,7 @@ hasActionTypeChanged oldAction newAction =
         ( Auth.Action.LoadExternalUrl _, Auth.Action.LoadExternalUrl _ ) ->
             False
 
-        ( _,  _ ) ->
+        ( _, _ ) ->
             True
 
 
@@ -553,12 +554,12 @@ subscriptions model =
                     Sub.none
 
                 Main.Pages.Model.Science_Champagne pageModel ->
-                    Page.subscriptions Pages.Science.Champagne.page pageModel
+                    Page.subscriptions (Pages.Science.Champagne.page model.shared (Route.fromUrl () model.url)) pageModel
                         |> Sub.map Main.Pages.Msg.Science_Champagne
                         |> Sub.map Page
 
                 Main.Pages.Model.Science_ReasonWhy pageModel ->
-                    Page.subscriptions Pages.Science.ReasonWhy.page pageModel
+                    Page.subscriptions (Pages.Science.ReasonWhy.page model.shared (Route.fromUrl () model.url)) pageModel
                         |> Sub.map Main.Pages.Msg.Science_ReasonWhy
                         |> Sub.map Page
 
@@ -594,7 +595,7 @@ subscriptions model =
     in
     Sub.batch
         [ Shared.subscriptions route model.shared
-              |> Sub.map Shared
+            |> Sub.map Shared
         , subscriptionsFromPage
         , subscriptionsFromLayout
         ]
@@ -647,15 +648,15 @@ viewPage model =
                 |> View.map Page
 
         Main.Pages.Model.Photos_Paris ->
-            (Pages.Photos.Paris.page)
+            Pages.Photos.Paris.page
 
         Main.Pages.Model.Science_Champagne pageModel ->
-            Page.view Pages.Science.Champagne.page pageModel
+            Page.view (Pages.Science.Champagne.page model.shared (Route.fromUrl () model.url)) pageModel
                 |> View.map Main.Pages.Msg.Science_Champagne
                 |> View.map Page
 
         Main.Pages.Model.Science_ReasonWhy pageModel ->
-            Page.view Pages.Science.ReasonWhy.page pageModel
+            Page.view (Pages.Science.ReasonWhy.page model.shared (Route.fromUrl () model.url)) pageModel
                 |> View.map Main.Pages.Msg.Science_ReasonWhy
                 |> View.map Page
 
@@ -734,25 +735,25 @@ toPageUrlHookCmd model routes =
     in
     case model.page of
         Main.Pages.Model.Home_ pageModel ->
-            Page.toUrlMessages routes Pages.Home_.page 
+            Page.toUrlMessages routes Pages.Home_.page
                 |> List.map Main.Pages.Msg.Home_
                 |> List.map Page
                 |> toCommands
 
         Main.Pages.Model.About pageModel ->
-            Page.toUrlMessages routes Pages.About.page 
+            Page.toUrlMessages routes Pages.About.page
                 |> List.map Main.Pages.Msg.About
                 |> List.map Page
                 |> toCommands
 
         Main.Pages.Model.Apps pageModel ->
-            Page.toUrlMessages routes Pages.Apps.page 
+            Page.toUrlMessages routes Pages.Apps.page
                 |> List.map Main.Pages.Msg.Apps
                 |> List.map Page
                 |> toCommands
 
         Main.Pages.Model.Counter pageModel ->
-            Page.toUrlMessages routes Pages.Counter.page 
+            Page.toUrlMessages routes Pages.Counter.page
                 |> List.map Main.Pages.Msg.Counter
                 |> List.map Page
                 |> toCommands
@@ -761,25 +762,25 @@ toPageUrlHookCmd model routes =
             Cmd.none
 
         Main.Pages.Model.Science_Champagne pageModel ->
-            Page.toUrlMessages routes Pages.Science.Champagne.page 
+            Page.toUrlMessages routes (Pages.Science.Champagne.page model.shared (Route.fromUrl () model.url))
                 |> List.map Main.Pages.Msg.Science_Champagne
                 |> List.map Page
                 |> toCommands
 
         Main.Pages.Model.Science_ReasonWhy pageModel ->
-            Page.toUrlMessages routes Pages.Science.ReasonWhy.page 
+            Page.toUrlMessages routes (Pages.Science.ReasonWhy.page model.shared (Route.fromUrl () model.url))
                 |> List.map Main.Pages.Msg.Science_ReasonWhy
                 |> List.map Page
                 |> toCommands
 
         Main.Pages.Model.Scripta pageModel ->
-            Page.toUrlMessages routes Pages.Scripta.page 
+            Page.toUrlMessages routes Pages.Scripta.page
                 |> List.map Main.Pages.Msg.Scripta
                 |> List.map Page
                 |> toCommands
 
         Main.Pages.Model.NotFound_ pageModel ->
-            Page.toUrlMessages routes (Pages.NotFound_.page model.shared (Route.fromUrl () model.url)) 
+            Page.toUrlMessages routes (Pages.NotFound_.page model.shared (Route.fromUrl () model.url))
                 |> List.map Main.Pages.Msg.NotFound_
                 |> List.map Page
                 |> toCommands

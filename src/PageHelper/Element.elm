@@ -7,21 +7,21 @@ import Render.Msg
 import Scripta
 
 
-article : Document -> Element Render.Msg.MarkupMsg
-article document =
+article : Document -> { width : Int, height : Int } -> Element Render.Msg.MarkupMsg
+article document window =
     column [ spacing 24, paddingXY 24 24 ]
         [ title document.title
         , header document
 
         --, compile document.content |> column [ Font.size 14, spacing 12, width (px 500) ]
-        , element document.content
+        , element window document.content
         ]
 
 
-element src =
+element window src =
     row [ centerX ]
         [ Scripta.katexCSS
-        , Scripta.display Config.articleWidth 600 src -- |> Element.map Render
+        , Scripta.display Config.articleWidth window.height src -- |> Element.map Render
         ]
 
 

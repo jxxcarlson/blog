@@ -7,6 +7,7 @@ import Element.Font as Font
 import Page exposing (Page)
 import Render.Msg exposing (MarkupMsg)
 import Scripta
+import Shared
 import View exposing (View)
 
 
@@ -25,6 +26,10 @@ page =
 
 type alias Model =
     {}
+
+
+
+--{ window { width : Int, height : Int }
 
 
 init : Model
