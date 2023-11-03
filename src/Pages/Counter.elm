@@ -1,15 +1,15 @@
-module Pages.Counter exposing (Model, Msg, page)
+module Pages.Counter exposing (Model, Msg(..), page)
 
-import Html exposing (Html)
-import Page exposing (Page)
-import View exposing (View)
-import Element exposing(..)
-import Element.Input as Input
+import Color
+import Components.Sidebar
+import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
-import Color
+import Element.Input as Input
+import Html exposing (Html)
+import Page exposing (Page)
 import Style
-import Components.Sidebar
+import View exposing (View)
 
 
 
@@ -33,10 +33,12 @@ type alias Model =
     { counter : Int
     }
 
+
 init : Model
 init =
     { counter = 0
     }
+
 
 
 -- UPDATE
@@ -61,20 +63,18 @@ update msg model =
 -- VIEW
 
 
-
 view : Model -> View Msg
 view model =
-   Components.Sidebar.view
-    { title = "Counter" 
-    , attributes = []
-    , element =
-      column [width (px 400), height (px 400), Border.width 1, moveDown 20, moveRight 20] [
-       row [spacing 12, centerX, centerY, Background.color Color.applet, Border.width 1, padding 24] [
-         Input.button (Style.button (px 40) (px 40) []) { onPress =  Just UserClickedIncrement, label = el [centerX] (text "+") }
-        , el [] 
-            ( text (String.fromInt model.counter) )
-        ,Input.button (Style.button (px 40) (px 40) []) { onPress =  Just UserClickedDecrement, label = el [centerX] (text "-") }
-        
-       ]
-       ]
-    }
+    Components.Sidebar.view
+        { title = "Counter"
+        , attributes = []
+        , element =
+            column [ width (px 400), height (px 400), Border.width 1, moveDown 20, moveRight 20 ]
+                [ row [ spacing 12, centerX, centerY, Background.color Color.applet, Border.width 1, padding 24 ]
+                    [ Input.button (Style.button (px 40) (px 40) []) { onPress = Just UserClickedIncrement, label = el [ centerX ] (text "+") }
+                    , el []
+                        (text (String.fromInt model.counter))
+                    , Input.button (Style.button (px 40) (px 40) []) { onPress = Just UserClickedDecrement, label = el [ centerX ] (text "-") }
+                    ]
+                ]
+        }

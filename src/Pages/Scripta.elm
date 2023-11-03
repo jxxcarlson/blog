@@ -1,14 +1,14 @@
-module Pages.Scripta exposing (Model, Msg, page)
+module Pages.Scripta exposing (Model, Msg(..), page)
 
-
+import Components.Sidebar
 import Config
+import Element exposing (..)
 import Element.Font as Font
 import Page exposing (Page)
-import Element exposing(..)
-import View exposing (View)
 import Render.Msg exposing (MarkupMsg)
 import Scripta
-import Components.Sidebar
+import View exposing (View)
+
 
 page : Page Model Msg
 page =
@@ -43,7 +43,8 @@ type Msg
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        Render _ -> model
+        Render _ ->
+            model
 
 
 
@@ -53,16 +54,18 @@ update msg model =
 view : Model -> View Msg
 view model =
     Components.Sidebar.view
-     { title = "Scripta"
-     , attributes = []
-     , element = row [centerX] [
-          Scripta.katexCSS
-        , Scripta.display Config.articleWidth  700 src |> Element.map Render
-     ]
-     }
+        { title = "Scripta"
+        , attributes = []
+        , element =
+            row [ centerX ]
+                [ Scripta.katexCSS
+                , Scripta.display Config.articleWidth 700 src |> Element.map Render
+                ]
+        }
 
 
-src = """
+src =
+    """
 | title
 Scripta Test
 
