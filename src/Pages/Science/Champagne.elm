@@ -8,6 +8,10 @@ import View exposing (View)
 
 page : View msg
 page =
+    --let
+    --    foo =
+    --        shared.window.width
+    --in
     Sidebar.view
         { title = "Science.Champagne"
         , attributes = []

@@ -1,6 +1,6 @@
 module Shared.Msg exposing (Msg(..))
 
-{-| -}
+import Browser.Dom
 
 
 {-| Normally, this value would live in "Shared.elm"
@@ -12,3 +12,4 @@ own file, so they can be imported by `Effect.elm`
 -}
 type Msg
     = GotNewSmashedLikes Int
+    | WindowResized Int Int

@@ -12,12 +12,19 @@ module Shared exposing
 
 -}
 
+import Browser.Dom as Dom
+import Browser.Events
 import Effect exposing (Effect)
 import Json.Decode
 import Route exposing (Route)
 import Route.Path
 import Shared.Model
 import Shared.Msg
+import Task
+
+
+type alias Model =
+    Shared.Model.Model
 
 
 
@@ -25,30 +32,56 @@ import Shared.Msg
 
 
 type alias Flags =
-    {}
+    { width : Int, height : Int }
 
 
 decoder : Json.Decode.Decoder Flags
 decoder =
-    Json.Decode.succeed {}
+    Json.Decode.map2 Flags
+        (Json.Decode.field "width" Json.Decode.int)
+        (Json.Decode.field "height" Json.Decode.int)
 
 
 
 -- INIT
 
 
-type alias Model =
-    Shared.Model.Model
-
-
 init : Result Json.Decode.Error Flags -> Route () -> ( Model, Effect Msg )
 init flagsResult route =
-    ( { smashedLikes = 0 }
+    let
+        flags : Flags
+        flags =
+            case flagsResult of
+                Ok value ->
+                    value
+
+                Err reason ->
+                    { width = 0
+                    , height = 0
+                    }
+    in
+    ( { smashedLikes = 0
+      , window =
+            { width = flags.width
+            , height = flags.height
+            }
+      }
     , Effect.none
     )
 
 
 
+--type alias Model =
+--    { smashedLikes : Int
+--    , window :
+--        { smashedLikes : Int
+--        , window : Window
+--        }
+--    }
+--
+--
+--type alias Window =
+--    { width : Int, height : Int }
 -- UPDATE
 
 
@@ -64,6 +97,13 @@ update route msg model =
             , Effect.none
             )
 
+        Shared.Msg.WindowResized width height ->
+            ( { model
+                | window = { width = width, height = height }
+              }
+            , Effect.none
+            )
+
 
 
 -- SUBSCRIPTIONS
@@ -71,4 +111,4 @@ update route msg model =
 
 subscriptions : Route () -> Model -> Sub Msg
 subscriptions route model =
-    Sub.none
+    Browser.Events.onResize Shared.Msg.WindowResized
