@@ -56,8 +56,8 @@ init flagsResult route =
                     value
 
                 Err reason ->
-                    { width = 0
-                    , height = 0
+                    { width = 700
+                    , height = 1100
                     }
     in
     ( { smashedLikes = 0
@@ -65,6 +65,7 @@ init flagsResult route =
             { width = flags.width
             , height = flags.height
             }
+                |> Debug.log "@@INIT WINDOW"
       }
     , Effect.none
     )
@@ -99,7 +100,7 @@ update route msg model =
 
         Shared.Msg.WindowResized width height ->
             ( { model
-                | window = { width = width, height = height }
+                | window = { width = width, height = height } |> Debug.log "@@Resize WINDOW"
               }
             , Effect.none
             )

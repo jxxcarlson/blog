@@ -3,6 +3,7 @@ module PageHelper.Element exposing (article)
 import Config
 import Element exposing (..)
 import Element.Font as Font
+import Geometry
 import Render.Msg
 import Scripta
 
@@ -21,7 +22,7 @@ article document window =
 element window src =
     row [ centerX ]
         [ Scripta.katexCSS
-        , Scripta.display Config.articleWidth window.height src -- |> Element.map Render
+        , Scripta.display (Geometry.articleWidth window) window.height src -- |> Element.map Render
         ]
 
 
