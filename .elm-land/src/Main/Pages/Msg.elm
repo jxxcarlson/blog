@@ -6,6 +6,7 @@ import Pages.Apps
 import Pages.Counter
 import Pages.Photos.Paris
 import Pages.Science.Champagne
+import Pages.Science.ReasonWhy
 import Pages.Scripta
 import Pages.NotFound_
 
@@ -17,5 +18,6 @@ type Msg
     | Counter Pages.Counter.Msg
     | Photos_Paris
     | Science_Champagne
+    | Science_ReasonWhy Pages.Science.ReasonWhy.Msg
     | Scripta Pages.Scripta.Msg
     | NotFound_ Pages.NotFound_.Msg

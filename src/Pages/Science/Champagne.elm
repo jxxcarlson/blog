@@ -1,77 +1,39 @@
 module Pages.Science.Champagne exposing (page)
 
 import Components.Sidebar as Sidebar
-import Element exposing (..)
-import Element.Font as Font
+import PageHelper.Element
 import View exposing (View)
 
 
 page : View msg
 page =
-    --let
-    --    foo =
-    --        shared.window.width
-    --in
     Sidebar.view
         { title = "Science.Champagne"
         , attributes = []
-        , element = article "Champagne and the Experimental Method" text
+        , element = PageHelper.Element.article document
         }
 
 
-article : String -> String -> Element msg
-article title_ content_ =
-    column [ spacing 24, paddingXY 24 24 ]
-        [ title title_
-        , header header_
-        , compile content_ |> column [ Font.size 14, spacing 12, width (px 500) ]
-        ]
-
-
-header_ =
-    { content = "There is a belief, common in France anyway, that the fizziness of an opened bottle of champagne can be preserved by placing a metal spoon, handle down, in the mouth of the bottle. Both my wife and brother-in-law, both French, believe that this a sure way to better enjoy an opened bottle the next morning, or even the morning after that.\n\nBut is this belief true? Examining it critically is an excellent, non-technical way of understanding the experimental method. In brief, the method is a way of separating the possibly true from the definitely false. We, as citizens, need to do this just as much as does the scientist in the laboratory.\n\nSo let’s have at it. What arguments pro and con are there for the spoon-the-bottle hypothesis?"
+document =
+    { title = "Champagne and the Experimental Method"
+    , content = content
     , imageUrl = "https://jxxcarlsonblog.files.wordpress.com/2020/05/winebottle.jpeg"
     , imageDescription = "A glass of champagne"
+    , contentHeader = contentHeader
     }
 
 
-header : Header -> Element msg
-header headerData =
-    row [ spacing 12 ]
-        [ image [ width (px 250) ] { src = headerData.imageUrl, description = headerData.imageDescription }
-        , column [ width (px 250), alignTop ]
-            [ column [ Font.size 14, spacing 12 ] (compile headerData.content)
-            ]
-        ]
+contentHeader =
+    """
+There is a belief, common in France anyway, that the fizziness of an opened bottle of champagne can be preserved by placing a metal spoon, handle down, in the mouth of the bottle. Both my wife and brother-in-law, both French, believe that this a sure way to better enjoy an opened bottle the next morning, or even the morning after that.
+
+But is this belief true? Examining it critically is an excellent, non-technical way of understanding the experimental method. In brief, the method is a way of separating the possibly true from the definitely false. We, as citizens, need to do this just as much as does the scientist in the laboratory.
+
+So let’s have at it. What arguments pro and con are there for the spoon-the-bottle hypothesis?
+"""
 
 
-type alias Header =
-    { content : String
-    , imageUrl : String
-    , imageDescription : String
-    }
-
-
-title : String -> Element msg
-title str =
-    el [ Font.size 24 ] (Element.text str)
-
-
-compile : String -> List (Element msg)
-compile str =
-    List.map transform (String.split "\n\n" str)
-
-
-transform : String -> Element msg
-transform str =
-    if String.left 12 str == "@subheading " then
-        paragraph [ Font.bold ] [ Element.text (String.dropLeft 12 str) ]
-
-    else
-        paragraph [] [ Element.text str ]
-
-
-text =
+content =
     """
 On the pro side of the ledger is that people I know and respect believe the hypothesis. Also in favor is that the belief is shared by many others, and has been around for a long time.  This is a version of the Argument from Authority.
 

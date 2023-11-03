@@ -13,6 +13,7 @@ type Path
     | Counter
     | Photos_Paris
     | Science_Champagne
+    | Science_ReasonWhy
     | Scripta
     | NotFound_
 
@@ -51,6 +52,9 @@ fromString urlPath =
         "science" :: "champagne" :: [] ->
             Just Science_Champagne
 
+        "science" :: "reason-why" :: [] ->
+            Just Science_ReasonWhy
+
         "scripta" :: [] ->
             Just Scripta
 
@@ -86,6 +90,9 @@ toString path =
 
                 Science_Champagne ->
                     [ "science", "champagne" ]
+
+                Science_ReasonWhy ->
+                    [ "science", "reason-why" ]
 
                 Scripta ->
                     [ "scripta" ]
