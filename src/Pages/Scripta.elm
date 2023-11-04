@@ -64,7 +64,7 @@ view model =
         { title = "Jim's Blog"
         , attributes = []
         , element =
-            row [ centerX ]
+            row [ centerX, clipY ]
                 [ Scripta.katexCSS
                 , Scripta.display model.window src |> Element.map Render
                 ]

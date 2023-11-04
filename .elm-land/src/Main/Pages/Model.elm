@@ -17,7 +17,7 @@ type Model
     | About Pages.About.Model
     | Apps Pages.Apps.Model
     | Counter Pages.Counter.Model
-    | Photos_Paris
+    | Photos_Paris Pages.Photos.Paris.Model
     | Science_Champagne Pages.Science.Champagne.Model
     | Science_ReasonWhy Pages.Science.ReasonWhy.Model
     | Scripta Pages.Scripta.Model

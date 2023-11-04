@@ -16,7 +16,7 @@ type Msg
     | About Pages.About.Msg
     | Apps Pages.Apps.Msg
     | Counter Pages.Counter.Msg
-    | Photos_Paris
+    | Photos_Paris Pages.Photos.Paris.Msg
     | Science_Champagne Pages.Science.Champagne.Msg
     | Science_ReasonWhy Pages.Science.ReasonWhy.Msg
     | Scripta Pages.Scripta.Msg
