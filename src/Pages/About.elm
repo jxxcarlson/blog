@@ -77,34 +77,34 @@ src =
 About this blog
 
 This blog is a mishmash of things that have accumulated over
-the years and were then subjected to extreme winnowing.  This blog
-is  written the as yet unpublished Scripta compiler — it will be
-released when I am satisfied with it.
+the years and were then subjected to extreme winnowing.  The text
+written in the Lambda markup language
+and is rendered by  Scripta compiler (see also [link Scripta.io https://scripta.io/]).
 
 [vspace 15]
 [b [large The Scripta Compiler]]
 
 The Scripta compiler transforms markup text into HTML.
 The markup languages it handles are MiniLaTeX (like LaTeX),
-XMarkdown (like Markdown), and L0, a simple markup language
+XMarkdown (like Markdown), and Lambda, a simple markup language
 whose syntax is inspired by Lisp, but with square brackets
 in place of parentheses.  Most articles in this blog
-are written in L0.
+are written in Lambda.
 
 
-L0 has block structure where the body of each block
+Lambda has block structure where the body of each block
 is composed of ordinary text and elements of the form `[function-name a b c ...]`
 where `function-name` is the name of a function and `a b c ...` are its arguments:
 words separated by spaced. Below is an example with a quotation block:
 
 || code
 | quotation
-This is a [italic really, [bold really]] important theorem.
+This is a [italic really, [bold really]] basic theorem.
 
 It renders like this:
 
 | quotation
-This is a [italic really, [bold really]] important theorem.
+This is a [italic really, [bold really]] basic theorem.
 Many commonly used functions have alias, e.g., `i` for `italic`
 and `b` for bold.
 
@@ -112,14 +112,16 @@ and `b` for bold.
 [b [large Mathematics]]
 
 Scripta can also handle mathematics, as in the following example
-which has a `$$` block containing `TeX` source":
+which has a `$$` block containing `TeX` source:
 
 || code
 $$
 \\int_0^1 x^n dx = \\frac{1}{n+1}
 
 
-and render it like this:
+No final `$$` is needed, since Scripta recognizes it as
+complete once it sees the trailing blank line.
+Here is the rendered text:
 
 $$
 \\int_0^1 x^n dx = \\frac{1}{n+1}
@@ -134,6 +136,35 @@ There are infinitely many primes.
 
 | theorem
 There are infinitely many primes.
+
+
+[vspace 15]
+[b [large Code]]
+
+Scripta handles code with a code block, like this
+
+|| code
+|| code
+... Your code here ...
+
+
+Here is an example,
+a [i very] crude algorithm for factoring integers into primes:
+
+|| code
+factor n = factorHelper n 2 [] |> List.reverse
+
+|| code
+factorHelper : Int -> Int -> List Int -> List Int
+factorHelper n divisor factors =
+  if modBy divisor n == 0
+       then factorHelper (n // divisor) divisor (divisor::factors)
+  else if n < 2 then factors
+  else factorHelper n (divisor + 1) factors
+
+
+
+
 
 [vspace 15]
 [b [large Images]]
