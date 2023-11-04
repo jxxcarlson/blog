@@ -1,7 +1,6 @@
 module Pages.Apps exposing (Model, Msg(..), page)
 
 import Components.Sidebar
-import Config
 import Effect exposing (Effect)
 import Element exposing (..)
 import Page exposing (Page)
@@ -15,7 +14,7 @@ import View exposing (View)
 page : Shared.Model -> Route () -> Page Model Msg
 page shared route =
     Page.new
-        { init = init
+        { init = init shared route
         , update = update
         , view = view
         , subscriptions = subscriptions
@@ -27,12 +26,12 @@ page shared route =
 
 
 type alias Model =
-    {}
+    { window : { width : Int, height : Int } }
 
 
-init : () -> ( Model, Effect Msg )
-init _ =
-    ( {}, Effect.none )
+init : Shared.Model -> Route () -> () -> ( Model, Effect Msg )
+init shared route _ =
+    ( { window = shared.window }, Effect.none )
 
 
 subscriptions : Model -> Sub Msg
@@ -62,12 +61,12 @@ update msg model =
 view : Model -> View Msg
 view model =
     Components.Sidebar.view
-        { title = "Ap"
+        { title = "Jim's Blog"
         , attributes = []
         , element =
             row [ centerX ]
                 [ Scripta.katexCSS
-                , Scripta.display Config.articleWidth 700 src |> Element.map Render
+                , Scripta.display model.window src |> Element.map Render
                 ]
         }
 

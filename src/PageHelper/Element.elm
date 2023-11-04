@@ -22,7 +22,7 @@ article document window =
 element window src =
     row [ centerX ]
         [ Scripta.katexCSS
-        , Scripta.display (Geometry.articleWidth window) window.height src -- |> Element.map Render
+        , Scripta.display window src -- |> Element.map Render
         ]
 
 

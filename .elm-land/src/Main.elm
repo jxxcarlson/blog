@@ -88,20 +88,36 @@ initPageAndLayout : { key : Browser.Navigation.Key, url : Url, shared : Shared.M
 initPageAndLayout model =
     case Route.Path.fromUrl model.url of
         Route.Path.Home_ ->
+            let
+                page : Page.Page Pages.Home_.Model Pages.Home_.Msg
+                page =
+                    Pages.Home_.page model.shared (Route.fromUrl () model.url)
+
+                ( pageModel, pageEffect ) =
+                    Page.init page ()
+            in
             { page = 
                 Tuple.mapBoth
                     Main.Pages.Model.Home_
                     (Effect.map Main.Pages.Msg.Home_ >> fromPageEffect model)
-                    (Page.init (Pages.Home_.page) ())
+                    ( pageModel, pageEffect )
             , layout = Nothing
             }
 
         Route.Path.About ->
+            let
+                page : Page.Page Pages.About.Model Pages.About.Msg
+                page =
+                    Pages.About.page model.shared (Route.fromUrl () model.url)
+
+                ( pageModel, pageEffect ) =
+                    Page.init page ()
+            in
             { page = 
                 Tuple.mapBoth
                     Main.Pages.Model.About
                     (Effect.map Main.Pages.Msg.About >> fromPageEffect model)
-                    (Page.init (Pages.About.page) ())
+                    ( pageModel, pageEffect )
             , layout = Nothing
             }
 
@@ -414,13 +430,13 @@ updateFromPage msg model =
             Tuple.mapBoth
                 Main.Pages.Model.Home_
                 (Effect.map Main.Pages.Msg.Home_ >> fromPageEffect model)
-                (Page.update (Pages.Home_.page) pageMsg pageModel)
+                (Page.update (Pages.Home_.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
 
         ( Main.Pages.Msg.About pageMsg, Main.Pages.Model.About pageModel ) ->
             Tuple.mapBoth
                 Main.Pages.Model.About
                 (Effect.map Main.Pages.Msg.About >> fromPageEffect model)
-                (Page.update (Pages.About.page) pageMsg pageModel)
+                (Page.update (Pages.About.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
 
         ( Main.Pages.Msg.Apps pageMsg, Main.Pages.Model.Apps pageModel ) ->
             Tuple.mapBoth
@@ -487,10 +503,16 @@ toLayoutFromPage : Model -> Maybe (Layouts.Layout Msg)
 toLayoutFromPage model =
     case model.page of
         Main.Pages.Model.Home_ pageModel ->
-            Nothing
+            Route.fromUrl () model.url
+                |> Pages.Home_.page model.shared
+                |> Page.layout pageModel
+                |> Maybe.map (Layouts.map (Main.Pages.Msg.Home_ >> Page))
 
         Main.Pages.Model.About pageModel ->
-            Nothing
+            Route.fromUrl () model.url
+                |> Pages.About.page model.shared
+                |> Page.layout pageModel
+                |> Maybe.map (Layouts.map (Main.Pages.Msg.About >> Page))
 
         Main.Pages.Model.Apps pageModel ->
             Route.fromUrl () model.url
@@ -574,12 +596,12 @@ subscriptions model =
         subscriptionsFromPage =
             case model.page of
                 Main.Pages.Model.Home_ pageModel ->
-                    Page.subscriptions Pages.Home_.page pageModel
+                    Page.subscriptions (Pages.Home_.page model.shared (Route.fromUrl () model.url)) pageModel
                         |> Sub.map Main.Pages.Msg.Home_
                         |> Sub.map Page
 
                 Main.Pages.Model.About pageModel ->
-                    Page.subscriptions Pages.About.page pageModel
+                    Page.subscriptions (Pages.About.page model.shared (Route.fromUrl () model.url)) pageModel
                         |> Sub.map Main.Pages.Msg.About
                         |> Sub.map Page
 
@@ -671,12 +693,12 @@ viewPage : Model -> View Msg
 viewPage model =
     case model.page of
         Main.Pages.Model.Home_ pageModel ->
-            Page.view Pages.Home_.page pageModel
+            Page.view (Pages.Home_.page model.shared (Route.fromUrl () model.url)) pageModel
                 |> View.map Main.Pages.Msg.Home_
                 |> View.map Page
 
         Main.Pages.Model.About pageModel ->
-            Page.view Pages.About.page pageModel
+            Page.view (Pages.About.page model.shared (Route.fromUrl () model.url)) pageModel
                 |> View.map Main.Pages.Msg.About
                 |> View.map Page
 
@@ -778,13 +800,13 @@ toPageUrlHookCmd model routes =
     in
     case model.page of
         Main.Pages.Model.Home_ pageModel ->
-            Page.toUrlMessages routes Pages.Home_.page 
+            Page.toUrlMessages routes (Pages.Home_.page model.shared (Route.fromUrl () model.url)) 
                 |> List.map Main.Pages.Msg.Home_
                 |> List.map Page
                 |> toCommands
 
         Main.Pages.Model.About pageModel ->
-            Page.toUrlMessages routes Pages.About.page 
+            Page.toUrlMessages routes (Pages.About.page model.shared (Route.fromUrl () model.url)) 
                 |> List.map Main.Pages.Msg.About
                 |> List.map Page
                 |> toCommands

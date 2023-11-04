@@ -1,11 +1,8 @@
 module Pages.Scripta exposing (Model, Msg(..), page)
 
 import Components.Sidebar as Sidebar
-import Config
 import Effect exposing (Effect)
 import Element exposing (..)
-import Element.Font as Font
-import Layouts
 import Page exposing (Page)
 import Render.Msg exposing (MarkupMsg)
 import Route exposing (Route)
@@ -64,12 +61,12 @@ update msg model =
 view : Model -> View Msg
 view model =
     Sidebar.view
-        { title = "Scripta"
+        { title = "Jim's Blog"
         , attributes = []
         , element =
             row [ centerX ]
                 [ Scripta.katexCSS
-                , Scripta.display model.window.width model.window.height src |> Element.map Render
+                , Scripta.display model.window src |> Element.map Render
                 ]
         }
 

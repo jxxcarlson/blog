@@ -9,7 +9,7 @@ import View exposing (View)
 
 page : View msg
 page =
-    { title = "Photos.Paris"
+    { title = "Jim's Blog"
     , attributes = []
     , element = photoList "Paris" parisPhotos
     }

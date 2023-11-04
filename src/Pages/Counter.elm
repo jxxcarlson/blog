@@ -66,7 +66,7 @@ update msg model =
 view : Model -> View Msg
 view model =
     Components.Sidebar.view
-        { title = "Counter"
+        { title = "Jim's Blog"
         , attributes = []
         , element =
             column [ width (px 400), height (px 400), Border.width 1, moveDown 20, moveRight 20 ]

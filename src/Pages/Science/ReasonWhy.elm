@@ -1,11 +1,8 @@
 module Pages.Science.ReasonWhy exposing (Model, Msg(..), page)
 
 import Components.Sidebar as Sidebar
-import Config
 import Effect exposing (Effect)
 import Element exposing (..)
-import Element.Font as Font
-import Layouts
 import Page exposing (Page)
 import PageHelper.Element
 import Render.Msg exposing (MarkupMsg)
@@ -60,14 +57,14 @@ update msg model =
 view : Model -> View Msg
 view model =
     Sidebar.view
-        { title = "Scripta"
+        { title = "Jim's Blog"
         , attributes = []
         , element = PageHelper.Element.article document model.window |> Element.map Render
         }
 
 
 document =
-    { title = "The Reason Why"
+    { title = "Blog: The Reason Why"
     , content = content
     , imageUrl = "https://jxxcarlsonblog.files.wordpress.com/2020/04/merlin_171584709_5ddc217b-264c-41ac-8bca-8e1b90794d4c-superjumbo.jpg"
     , imageDescription = "A glass of champagne"

@@ -1,20 +1,23 @@
 module Pages.About exposing (Model, Msg(..), page)
 
 import Components.Sidebar
-import Config
+import Effect exposing (Effect)
 import Element exposing (..)
 import Page exposing (Page)
 import Render.Msg exposing (MarkupMsg)
+import Route exposing (Route)
 import Scripta
+import Shared
 import View exposing (View)
 
 
-page : Page Model Msg
-page =
-    Page.sandbox
-        { init = init
+page : Shared.Model -> Route () -> Page Model Msg
+page shared route =
+    Page.new
+        { init = init shared route
         , update = update
         , view = view
+        , subscriptions = subscriptions
         }
 
 
@@ -23,12 +26,17 @@ page =
 
 
 type alias Model =
-    {}
+    { window : { width : Int, height : Int } }
 
 
-init : Model
-init =
-    {}
+init : Shared.Model -> Route () -> () -> ( Model, Effect Msg )
+init shared route _ =
+    ( { window = shared.window }, Effect.none )
+
+
+subscriptions : Model -> Sub Msg
+subscriptions _ =
+    Sub.none
 
 
 
@@ -39,11 +47,11 @@ type Msg
     = Render MarkupMsg
 
 
-update : Msg -> Model -> Model
+update : Msg -> Model -> ( Model, Effect Msg )
 update msg model =
     case msg of
         Render _ ->
-            model
+            ( model, Effect.none )
 
 
 
@@ -53,12 +61,12 @@ update msg model =
 view : Model -> View Msg
 view model =
     Components.Sidebar.view
-        { title = "Scripta"
+        { title = "Jim's Blog"
         , attributes = []
         , element =
             row [ centerX ]
                 [ Scripta.katexCSS
-                , Scripta.display Config.articleWidth 700 src |> Element.map Render
+                , Scripta.display model.window src |> Element.map Render
                 ]
         }
 
