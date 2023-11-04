@@ -74,10 +74,80 @@ view model =
 src =
     """
 | title
-About
+About this blog
 
-At the moment, this is just a test to see if I can use Elm Land + Lamdera with
-the Scripta compiler to make a blog.  So far, so good.
+This blog is a mishmash of things that have accumulated over
+the years and were then subjected to extreme winnowing.  This blog
+is  written the as yet unpublished Scripta compiler — it will be
+released when I am satisfied with it.
 
-Elm Land's design, power, and ease of use are impressive.
+[vspace 15]
+[b [large The Scripta Compiler]]
+
+The Scripta compiler transforms markup text into HTML.
+The markup languages it handles are MiniLaTeX (like LaTeX),
+XMarkdown (like Markdown), and L0, a simple markup language
+whose syntax is inspired by Lisp, but with square brackets
+in place of parentheses.  Most articles in this blog
+are written in L0.
+
+
+L0 has block structure where the body of each block
+is composed of ordinary text and elements of the form `[function-name a b c ...]`
+where `function-name` is the name of a function and `a b c ...` are its arguments:
+words separated by spaced. Below is an example with a quotation block:
+
+|| code
+| quotation
+This is a [italic really, [bold really]] important theorem.
+
+It renders like this:
+
+| quotation
+This is a [italic really, [bold really]] important theorem.
+Many commonly used functions have alias, e.g., `i` for `italic`
+and `b` for bold.
+
+[vspace 15]
+[b [large Mathematics]]
+
+Scripta can also handle mathematics, as in the following example
+which has a `$$` block containing `TeX` source":
+
+|| code
+$$
+\\int_0^1 x^n dx = \\frac{1}{n+1}
+
+
+and render it like this:
+
+$$
+\\int_0^1 x^n dx = \\frac{1}{n+1}
+
+
+The following theorem was known to Euclid.  It is composed
+with a theorem block:
+
+|| code
+| theorem
+There are infinitely many primes.
+
+| theorem
+There are infinitely many primes.
+
+[vspace 15]
+[b [large Images]]
+
+The image below is
+rendered by an [i image element]:
+
+|| code
+[image URL]
+
+It was made by a human (me), talking to an AI (openAI's Dall-E) using
+[link imagemachine.io https://imagemachine.io/].  Making images likes this takes
+both luck and messing with the prompts to get satisfying results.
+
+[image https://imagedelivery.net/9U-0Y4sEzXlO6BXzTnQnYQ/9afa89fd-821b-4f60-05e0-99bd659fea00/public]
+
 """

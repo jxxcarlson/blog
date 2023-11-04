@@ -7,7 +7,6 @@ import Pages.Counter
 import Pages.Photos.Paris
 import Pages.Science.Champagne
 import Pages.Science.ReasonWhy
-import Pages.Scripta
 import Pages.NotFound_
 import View exposing (View)
 
@@ -20,7 +19,6 @@ type Model
     | Photos_Paris Pages.Photos.Paris.Model
     | Science_Champagne Pages.Science.Champagne.Model
     | Science_ReasonWhy Pages.Science.ReasonWhy.Model
-    | Scripta Pages.Scripta.Model
     | NotFound_ Pages.NotFound_.Model
     | Redirecting_
     | Loading_

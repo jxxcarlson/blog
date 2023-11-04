@@ -14,7 +14,6 @@ type Path
     | Photos_Paris
     | Science_Champagne
     | Science_ReasonWhy
-    | Scripta
     | NotFound_
 
 
@@ -55,9 +54,6 @@ fromString urlPath =
         "science" :: "reason-why" :: [] ->
             Just Science_ReasonWhy
 
-        "scripta" :: [] ->
-            Just Scripta
-
         _ ->
             Nothing
 
@@ -93,9 +89,6 @@ toString path =
 
                 Science_ReasonWhy ->
                     [ "science", "reason-why" ]
-
-                Scripta ->
-                    [ "scripta" ]
 
                 NotFound_ ->
                     [ "404" ]

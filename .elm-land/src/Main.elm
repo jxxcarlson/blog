@@ -21,7 +21,6 @@ import Pages.Counter
 import Pages.Photos.Paris
 import Pages.Science.Champagne
 import Pages.Science.ReasonWhy
-import Pages.Scripta
 import Pages.NotFound_
 import Pages.NotFound_
 import Route exposing (Route)
@@ -202,23 +201,6 @@ initPageAndLayout model =
                 Tuple.mapBoth
                     Main.Pages.Model.Science_ReasonWhy
                     (Effect.map Main.Pages.Msg.Science_ReasonWhy >> fromPageEffect model)
-                    ( pageModel, pageEffect )
-            , layout = Nothing
-            }
-
-        Route.Path.Scripta ->
-            let
-                page : Page.Page Pages.Scripta.Model Pages.Scripta.Msg
-                page =
-                    Pages.Scripta.page model.shared (Route.fromUrl () model.url)
-
-                ( pageModel, pageEffect ) =
-                    Page.init page ()
-            in
-            { page = 
-                Tuple.mapBoth
-                    Main.Pages.Model.Scripta
-                    (Effect.map Main.Pages.Msg.Scripta >> fromPageEffect model)
                     ( pageModel, pageEffect )
             , layout = Nothing
             }
@@ -488,12 +470,6 @@ updateFromPage msg model =
                 (Effect.map Main.Pages.Msg.Science_ReasonWhy >> fromPageEffect model)
                 (Page.update (Pages.Science.ReasonWhy.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
 
-        ( Main.Pages.Msg.Scripta pageMsg, Main.Pages.Model.Scripta pageModel ) ->
-            Tuple.mapBoth
-                Main.Pages.Model.Scripta
-                (Effect.map Main.Pages.Msg.Scripta >> fromPageEffect model)
-                (Page.update (Pages.Scripta.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
-
         ( Main.Pages.Msg.NotFound_ pageMsg, Main.Pages.Model.NotFound_ pageModel ) ->
             Tuple.mapBoth
                 Main.Pages.Model.NotFound_
@@ -564,12 +540,6 @@ toLayoutFromPage model =
                 |> Pages.Science.ReasonWhy.page model.shared
                 |> Page.layout pageModel
                 |> Maybe.map (Layouts.map (Main.Pages.Msg.Science_ReasonWhy >> Page))
-
-        Main.Pages.Model.Scripta pageModel ->
-            Route.fromUrl () model.url
-                |> Pages.Scripta.page model.shared
-                |> Page.layout pageModel
-                |> Maybe.map (Layouts.map (Main.Pages.Msg.Scripta >> Page))
 
         Main.Pages.Model.NotFound_ pageModel ->
             Route.fromUrl () model.url
@@ -655,11 +625,6 @@ subscriptions model =
                 Main.Pages.Model.Science_ReasonWhy pageModel ->
                     Page.subscriptions (Pages.Science.ReasonWhy.page model.shared (Route.fromUrl () model.url)) pageModel
                         |> Sub.map Main.Pages.Msg.Science_ReasonWhy
-                        |> Sub.map Page
-
-                Main.Pages.Model.Scripta pageModel ->
-                    Page.subscriptions (Pages.Scripta.page model.shared (Route.fromUrl () model.url)) pageModel
-                        |> Sub.map Main.Pages.Msg.Scripta
                         |> Sub.map Page
 
                 Main.Pages.Model.NotFound_ pageModel ->
@@ -754,11 +719,6 @@ viewPage model =
         Main.Pages.Model.Science_ReasonWhy pageModel ->
             Page.view (Pages.Science.ReasonWhy.page model.shared (Route.fromUrl () model.url)) pageModel
                 |> View.map Main.Pages.Msg.Science_ReasonWhy
-                |> View.map Page
-
-        Main.Pages.Model.Scripta pageModel ->
-            Page.view (Pages.Scripta.page model.shared (Route.fromUrl () model.url)) pageModel
-                |> View.map Main.Pages.Msg.Scripta
                 |> View.map Page
 
         Main.Pages.Model.NotFound_ pageModel ->
@@ -872,12 +832,6 @@ toPageUrlHookCmd model routes =
                 |> List.map Page
                 |> toCommands
 
-        Main.Pages.Model.Scripta pageModel ->
-            Page.toUrlMessages routes (Pages.Scripta.page model.shared (Route.fromUrl () model.url)) 
-                |> List.map Main.Pages.Msg.Scripta
-                |> List.map Page
-                |> toCommands
-
         Main.Pages.Model.NotFound_ pageModel ->
             Page.toUrlMessages routes (Pages.NotFound_.page model.shared (Route.fromUrl () model.url)) 
                 |> List.map Main.Pages.Msg.NotFound_
@@ -953,9 +907,6 @@ isAuthProtected routePath =
             False
 
         Route.Path.Science_ReasonWhy ->
-            False
-
-        Route.Path.Scripta ->
             False
 
         Route.Path.NotFound_ ->

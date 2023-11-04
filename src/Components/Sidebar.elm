@@ -42,5 +42,4 @@ sidebar_ =
         , link [] { url = "/science/reason-why", label = el [] (text "Science: The Reason Why") }
         , link [] { url = "/apps", label = el [] (text "Apps") }
         , link [] { url = "/counter", label = el [] (text "Counter") }
-        , link [] { url = "/scripta", label = el [] (text "Scripta") }
         ]
