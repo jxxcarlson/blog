@@ -105,6 +105,9 @@ update route msg model =
             , Effect.none
             )
 
+        Shared.Msg.Render _ ->
+            ( model, Effect.none )
+
 
 
 -- SUBSCRIPTIONS

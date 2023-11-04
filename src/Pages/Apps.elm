@@ -2,19 +2,23 @@ module Pages.Apps exposing (Model, Msg(..), page)
 
 import Components.Sidebar
 import Config
+import Effect exposing (Effect)
 import Element exposing (..)
 import Page exposing (Page)
 import Render.Msg exposing (MarkupMsg)
+import Route exposing (Route)
 import Scripta
+import Shared
 import View exposing (View)
 
 
-page : Page Model Msg
-page =
-    Page.sandbox
+page : Shared.Model -> Route () -> Page Model Msg
+page shared route =
+    Page.new
         { init = init
         , update = update
         , view = view
+        , subscriptions = subscriptions
         }
 
 
@@ -26,9 +30,14 @@ type alias Model =
     {}
 
 
-init : Model
-init =
-    {}
+init : () -> ( Model, Effect Msg )
+init _ =
+    ( {}, Effect.none )
+
+
+subscriptions : Model -> Sub Msg
+subscriptions _ =
+    Sub.none
 
 
 
@@ -39,11 +48,11 @@ type Msg
     = Render MarkupMsg
 
 
-update : Msg -> Model -> Model
+update : Msg -> Model -> ( Model, Effect Msg )
 update msg model =
     case msg of
         Render _ ->
-            model
+            ( model, Effect.none )
 
 
 
@@ -53,7 +62,7 @@ update msg model =
 view : Model -> View Msg
 view model =
     Components.Sidebar.view
-        { title = "Scripta"
+        { title = "Ap"
         , attributes = []
         , element =
             row [ centerX ]

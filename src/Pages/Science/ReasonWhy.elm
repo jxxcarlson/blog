@@ -2,6 +2,7 @@ module Pages.Science.ReasonWhy exposing (Model, Msg(..), page)
 
 import Components.Sidebar as Sidebar
 import Config
+import Effect exposing (Effect)
 import Element exposing (..)
 import Element.Font as Font
 import Layouts
@@ -15,10 +16,11 @@ import View exposing (View)
 
 page : Shared.Model -> Route () -> Page Model Msg
 page shared route =
-    Page.sandbox
+    Page.new
         { init = init shared route
-        , update = update shared route
+        , update = update
         , view = view
+        , subscriptions = subscriptions
         }
 
 
@@ -30,9 +32,14 @@ type alias Model =
     { window : { width : Int, height : Int } }
 
 
-init : Shared.Model -> Route () -> Model
-init shared _ =
-    { window = shared.window }
+init : Shared.Model -> Route () -> () -> ( Model, Effect Msg )
+init shared route _ =
+    ( { window = shared.window }, Effect.none )
+
+
+subscriptions : Model -> Sub Msg
+subscriptions _ =
+    Sub.none
 
 
 
@@ -43,11 +50,11 @@ type Msg
     = Render MarkupMsg
 
 
-update : Shared.Model -> Route () -> Msg -> Model -> Model
-update shared route msg model =
+update : Msg -> Model -> ( Model, Effect Msg )
+update msg model =
     case msg of
         Render _ ->
-            model
+            ( model, Effect.none )
 
 
 view : Model -> View Msg
