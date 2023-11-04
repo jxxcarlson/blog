@@ -139,11 +139,19 @@ initPageAndLayout model =
             }
 
         Route.Path.Counter ->
+            let
+                page : Page.Page Pages.Counter.Model Pages.Counter.Msg
+                page =
+                    Pages.Counter.page model.shared (Route.fromUrl () model.url)
+
+                ( pageModel, pageEffect ) =
+                    Page.init page ()
+            in
             { page = 
                 Tuple.mapBoth
                     Main.Pages.Model.Counter
                     (Effect.map Main.Pages.Msg.Counter >> fromPageEffect model)
-                    (Page.init (Pages.Counter.page) ())
+                    ( pageModel, pageEffect )
             , layout = Nothing
             }
 
@@ -448,7 +456,7 @@ updateFromPage msg model =
             Tuple.mapBoth
                 Main.Pages.Model.Counter
                 (Effect.map Main.Pages.Msg.Counter >> fromPageEffect model)
-                (Page.update (Pages.Counter.page) pageMsg pageModel)
+                (Page.update (Pages.Counter.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
 
         ( Main.Pages.Msg.Photos_Paris, Main.Pages.Model.Photos_Paris ) ->
             ( model.page
@@ -521,7 +529,10 @@ toLayoutFromPage model =
                 |> Maybe.map (Layouts.map (Main.Pages.Msg.Apps >> Page))
 
         Main.Pages.Model.Counter pageModel ->
-            Nothing
+            Route.fromUrl () model.url
+                |> Pages.Counter.page model.shared
+                |> Page.layout pageModel
+                |> Maybe.map (Layouts.map (Main.Pages.Msg.Counter >> Page))
 
         Main.Pages.Model.Photos_Paris ->
             Nothing
@@ -611,7 +622,7 @@ subscriptions model =
                         |> Sub.map Page
 
                 Main.Pages.Model.Counter pageModel ->
-                    Page.subscriptions Pages.Counter.page pageModel
+                    Page.subscriptions (Pages.Counter.page model.shared (Route.fromUrl () model.url)) pageModel
                         |> Sub.map Main.Pages.Msg.Counter
                         |> Sub.map Page
 
@@ -708,7 +719,7 @@ viewPage model =
                 |> View.map Page
 
         Main.Pages.Model.Counter pageModel ->
-            Page.view Pages.Counter.page pageModel
+            Page.view (Pages.Counter.page model.shared (Route.fromUrl () model.url)) pageModel
                 |> View.map Main.Pages.Msg.Counter
                 |> View.map Page
 
@@ -818,7 +829,7 @@ toPageUrlHookCmd model routes =
                 |> toCommands
 
         Main.Pages.Model.Counter pageModel ->
-            Page.toUrlMessages routes Pages.Counter.page 
+            Page.toUrlMessages routes (Pages.Counter.page model.shared (Route.fromUrl () model.url)) 
                 |> List.map Main.Pages.Msg.Counter
                 |> List.map Page
                 |> toCommands
