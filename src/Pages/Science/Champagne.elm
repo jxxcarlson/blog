@@ -1,14 +1,11 @@
 module Pages.Science.Champagne exposing (Model, Msg(..), page)
 
 import Components.Sidebar as Sidebar
-import Config
 import Element exposing (..)
-import Element.Font as Font
 import Page exposing (Page)
 import PageHelper.Element
 import Render.Msg exposing (MarkupMsg)
 import Route exposing (Route)
-import Scripta
 import Shared
 import View exposing (View)
 
@@ -53,7 +50,7 @@ update shared route msg model =
 view : Model -> View Msg
 view model =
     Sidebar.view
-        { title = "Scripta"
+        { title = "Jxxcarlson's Blog"
         , attributes = []
         , element = PageHelper.Element.article document model.window |> Element.map Render
         }
