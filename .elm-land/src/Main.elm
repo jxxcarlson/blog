@@ -150,7 +150,7 @@ initPageAndLayout model =
                 Tuple.mapBoth
                     Main.Pages.Model.Scripta
                     (Effect.map Main.Pages.Msg.Scripta >> fromPageEffect model)
-                    (Page.init Pages.Scripta.page ())
+                    (Page.init (Pages.Scripta.page model.shared (Route.fromUrl () model.url)) ())
             , layout = Nothing
             }
 
@@ -424,7 +424,7 @@ updateFromPage msg model =
             Tuple.mapBoth
                 Main.Pages.Model.Scripta
                 (Effect.map Main.Pages.Msg.Scripta >> fromPageEffect model)
-                (Page.update Pages.Scripta.page pageMsg pageModel)
+                (Page.update (Pages.Scripta.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
 
         ( Main.Pages.Msg.NotFound_ pageMsg, Main.Pages.Model.NotFound_ pageModel ) ->
             Tuple.mapBoth
@@ -564,7 +564,7 @@ subscriptions model =
                         |> Sub.map Page
 
                 Main.Pages.Model.Scripta pageModel ->
-                    Page.subscriptions Pages.Scripta.page pageModel
+                    Page.subscriptions (Pages.Scripta.page model.shared (Route.fromUrl () model.url)) pageModel
                         |> Sub.map Main.Pages.Msg.Scripta
                         |> Sub.map Page
 
@@ -661,7 +661,7 @@ viewPage model =
                 |> View.map Page
 
         Main.Pages.Model.Scripta pageModel ->
-            Page.view Pages.Scripta.page pageModel
+            Page.view (Pages.Scripta.page model.shared (Route.fromUrl () model.url)) pageModel
                 |> View.map Main.Pages.Msg.Scripta
                 |> View.map Page
 
@@ -774,7 +774,7 @@ toPageUrlHookCmd model routes =
                 |> toCommands
 
         Main.Pages.Model.Scripta pageModel ->
-            Page.toUrlMessages routes Pages.Scripta.page
+            Page.toUrlMessages routes (Pages.Scripta.page model.shared (Route.fromUrl () model.url))
                 |> List.map Main.Pages.Msg.Scripta
                 |> List.map Page
                 |> toCommands
