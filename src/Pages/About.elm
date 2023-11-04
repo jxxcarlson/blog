@@ -163,7 +163,11 @@ factorHelper n divisor factors =
   else factorHelper n (divisor + 1) factors
 
 
+Let's try it out:
 
+|| code
+> factor 123456789
+[3,3,3607,3803]
 
 
 [vspace 15]
