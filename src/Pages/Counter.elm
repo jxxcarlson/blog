@@ -78,6 +78,7 @@ view model =
     Components.Sidebar.view
         { title = "Jim's Blog"
         , attributes = []
+        , currentRoute = model.routeString
         , element =
             column [ width (px model.window.width), height (px model.window.height), Border.width 1 ]
                 [ row

@@ -62,6 +62,7 @@ view model =
         { title = "Jim's Blog"
         , attributes = []
         , element = PageHelper.Element.article document model.window |> Element.map Render
+        , currentRoute = model.routeString
         }
 
 

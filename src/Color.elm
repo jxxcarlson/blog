@@ -3,6 +3,7 @@ module Color exposing
     , black
     , buttonBG
     , buttonFG
+    , red
     , sidebar
     , white
     )
@@ -36,3 +37,7 @@ white =
 
 gray c =
     rgb c c c
+
+
+red =
+    rgb 0.99 0.5 0.5

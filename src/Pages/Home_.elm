@@ -33,7 +33,7 @@ type alias Model =
 
 init : Shared.Model -> Route () -> () -> ( Model, Effect Msg )
 init shared route _ =
-    ( { window = shared.window, routeString = "/home" }, Effect.none )
+    ( { window = shared.window, routeString = "/" }, Effect.none )
 
 
 subscriptions : Model -> Sub Msg
@@ -65,6 +65,7 @@ view model =
     Components.Sidebar.view
         { title = "Jim's Blog"
         , attributes = []
+        , currentRoute = model.routeString
         , element =
             row [ centerX ]
                 [ Scripta.katexCSS

@@ -11,20 +11,25 @@ view :
     { title : String
     , attributes : List (Element msg)
     , element : Element msg
+    , currentRoute : String
     }
     -> View msg
 view props =
+    let
+        _ =
+            Debug.log "@@routeString" props.currentRoute
+    in
     { title = props.title
     , attributes = []
     , element =
         row [ centerX ]
-            [ sidebar_
+            [ sidebar_ props.currentRoute
             , props.element
             ]
     }
 
 
-sidebar_ =
+sidebar_ currentRoute =
     column
         [ alignTop
         , Font.size 14
@@ -35,12 +40,20 @@ sidebar_ =
         , Font.color Color.white
         , Background.color Color.sidebar
         ]
-        [ link [] { url = "/", label = el [] (text "Home") }
-        , link [] { url = "/about", label = el [] (text "About") }
-        , link [] { url = "/art/experiment-chatgpt", label = el [] (text "Art: Chat GPT") }
-        , link [] { url = "/photos/paris", label = el [] (text "Paris: Photos") }
-        , link [] { url = "/science/champagne", label = el [] (text "Science: Champagne") }
-        , link [] { url = "/science/reason-why", label = el [] (text "Science: The Reason Why") }
-        , link [] { url = "/apps", label = el [] (text "Apps") }
-        , link [] { url = "/counter", label = el [] (text "Counter") }
+        [ item currentRoute "/" "Home"
+        , item currentRoute "/about" "About"
+        , item currentRoute "/art/experiment-chatgpt" "Art: ChatGPT"
+        , item currentRoute "/photos/paris" "Photos: Paris"
+        , item currentRoute "/science/champagne" "Science: Champagne"
+        , item currentRoute "/science/reason-why" "Science: The Reason Why"
+        , item currentRoute "/apps" "Apps"
+        , item currentRoute "/counter" "Counter"
         ]
+
+
+item currentRoute url title =
+    if currentRoute == url then
+        link [] { url = url, label = el [ Font.color Color.red ] (text title) }
+
+    else
+        link [] { url = url, label = el [] (text title) }

@@ -70,6 +70,7 @@ view model =
                 [ Scripta.katexCSS
                 , Scripta.display model.window src |> Element.map Render
                 ]
+        , currentRoute = model.routeString
         }
 
 

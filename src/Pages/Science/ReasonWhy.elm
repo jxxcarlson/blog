@@ -61,6 +61,7 @@ view model =
     Sidebar.view
         { title = "Jim's Blog ***"
         , attributes = []
+        , currentRoute = model.routeString
         , element = PageHelper.Element.article document model.window |> Element.map Render
         }
 
