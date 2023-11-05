@@ -65,6 +65,7 @@ sidebar_ dimensions currentRoute =
         , item currentRoute "/science/reason-why" "Science: The Reason Why"
         , item currentRoute "/math/entropy" "Math: Entropy"
         , item currentRoute "/apps" "Apps"
+        , el [ Font.size (fontSize dimensions), Font.color Color.red ] (text <| "w = " ++ String.fromInt (Geometry.articleWidth dimensions))
 
         --, item currentRoute "/counter" "Counter"
         ]

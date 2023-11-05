@@ -46,7 +46,7 @@ display window src =
         [ spacing 4
         , Background.color (Element.rgb 1 1 1)
         , clipX
-        , width (px (Geometry.articleWidth window))
+        , width (px (Geometry.articleWidth window |> Debug.log "@@@@ articleWidth"))
         , height (px window.height)
         , Font.size 14
         , paddingXY 16 32

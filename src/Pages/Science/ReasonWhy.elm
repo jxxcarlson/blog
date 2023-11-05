@@ -4,7 +4,6 @@ import Components.Sidebar as Sidebar
 import Effect exposing (Effect)
 import Element exposing (..)
 import Page exposing (Page)
-import PageHelper.Element
 import Render.Msg exposing (MarkupMsg)
 import Route exposing (Route)
 import Scripta
