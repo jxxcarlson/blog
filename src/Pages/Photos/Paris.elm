@@ -105,7 +105,11 @@ displayImage model imageData =
 
 
 parisPhotos =
-    [ concordeMarch2020
+    [ louvreJan2020
+    , leonardoJan2020
+    , jardinaDesPlantesJan2020
+    , metroMuralJan2020
+    , concordeMarch2020
     , paris1
     , paris2
     , paris3
@@ -113,6 +117,46 @@ parisPhotos =
     , paris5
     , paris6
     ]
+
+
+jardinaDesPlantesJan2020 =
+    { url = "https://imagedelivery.net/9U-0Y4sEzXlO6BXzTnQnYQ/468cf6a3-e29f-4a9b-dc82-aec6af9b8b00/public"
+    , caption = "Jardin des Plantes"
+    , details = "Jardin des Plantes, January 2020"
+    , year = Just 2020
+    , month = Just 1
+    , location = Just "Paris"
+    }
+
+
+leonardoJan2020 =
+    { url = "https://imagedelivery.net/9U-0Y4sEzXlO6BXzTnQnYQ/49bacaa4-d925-4bb7-6f2a-57eb8e511400/public"
+    , caption = "Leonardo da Vinci"
+    , details = "Leonardo da Vinci, January 2020"
+    , year = Just 2020
+    , month = Just 1
+    , location = Just "Paris"
+    }
+
+
+louvreJan2020 =
+    { url = "https://imagedelivery.net/9U-0Y4sEzXlO6BXzTnQnYQ/76cd0c50-b9a7-494f-f363-0119054e4600/public"
+    , caption = "Louvre"
+    , details = "Louvre, January 2020"
+    , year = Just 2020
+    , month = Just 1
+    , location = Just "Paris"
+    }
+
+
+metroMuralJan2020 =
+    { url = "https://imagedelivery.net/9U-0Y4sEzXlO6BXzTnQnYQ/234f0b27-6641-436f-62ff-fd0a7d2d8200/public"
+    , caption = "Metro Mural"
+    , details = "Metro Mural, January 2020"
+    , year = Just 2020
+    , month = Just 1
+    , location = Just "Paris"
+    }
 
 
 concordeMarch2020 =
