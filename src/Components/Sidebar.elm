@@ -42,6 +42,7 @@ sidebar_ currentRoute =
         , item currentRoute "/photos/paris" "Photos: Paris"
         , item currentRoute "/science/champagne" "Science: Champagne"
         , item currentRoute "/science/reason-why" "Science: The Reason Why"
+        , item currentRoute "/math/entropy" "Math: Entropy"
         , item currentRoute "/apps" "Apps"
 
         --, item currentRoute "/counter" "Counter"

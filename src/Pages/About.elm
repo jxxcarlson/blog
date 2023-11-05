@@ -85,11 +85,15 @@ About this blog
 [image https://jxxcarlsonblog.files.wordpress.com/2020/04/ganymede_sepia.jpg]
 
 This blog is a collection of random musings, writings, images,
- and occasional rantings which provides me with a kind of searchable notebook.
- I like to think of it as a magical box full of sheets of manuscript paper written
- in longhand, mostly in pencil, where each sheet can be found in an instant by
- pronouncing the correct google-like spell.  The blog is therefore primarily
- for myself, though others may occasionally find something of interest.
+and occasional rantings which provides me with a kind of searchable notebook.
+I like to think of it as a magical box full of sheets of manuscript paper written
+in longhand, mostly in pencil, where each sheet can be found in an instant by
+pronouncing the correct google-like spell.  The blog is therefore primarily
+for myself, though others may occasionally find something of interest.
+
+[b Note.] [i I am restructuring the blog using Ryan Haskell-Glatz's [link Elm Land https://elm.land/]
+framework running on [link Lamdera https://lamdera.com/], with text rendered using the Scripta compiler (see below).
+Consequently much is missing in terms content, features, and polish — Work in Progress!]
 
 About the image above.  It presents a view of Ganymede,
 not the lover of Zeus, but rather the third and largest
