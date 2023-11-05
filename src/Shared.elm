@@ -126,7 +126,7 @@ setupWindow =
 
 viewportTask : Task.Task x Dom.Viewport
 viewportTask =
-    Process.sleep 500 |> Task.andThen (\_ -> Dom.getViewport)
+    Process.sleep 40 |> Task.andThen (\_ -> Dom.getViewport)
 
 
 foo : Task.Task x Dom.Viewport
