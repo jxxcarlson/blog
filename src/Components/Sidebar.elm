@@ -43,7 +43,8 @@ sidebar_ currentRoute =
         , item currentRoute "/science/champagne" "Science: Champagne"
         , item currentRoute "/science/reason-why" "Science: The Reason Why"
         , item currentRoute "/apps" "Apps"
-        , item currentRoute "/counter" "Counter"
+
+        --, item currentRoute "/counter" "Counter"
         ]
 
 
