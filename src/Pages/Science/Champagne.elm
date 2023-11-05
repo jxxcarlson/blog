@@ -83,6 +83,8 @@ But is this belief true? Examining it critically is an excellent, non-technical 
 
 So let’s have at it. What arguments pro and con are there for the spoon-the-bottle hypothesis? On the pro side of the ledger is that people I know and respect believe the hypothesis. Also in favor is that the belief is shared by many others, and has been around for a long time.  This is a version of the Argument from Authority.
 
+What about the con side?  When I first heard about this use of a spoon — after half-finishing the second bottle of champagne with friends — I objected that “it just didn’t seem right.”  Pressed to explain, I questioned the mechanism: how could the spoon stop bubbles from forming in the liquid below, then escaping though the neck, passing around the spoon, which “obviously” did not form real barrier.
+
 """
 
 
@@ -90,7 +92,6 @@ content =
     """
 | title
 
-What about the con side?  When I first heard about this use of a spoon — after half-finishing the second bottle of champagne with friends — I objected that “it just didn’t seem right.”  Pressed to explain, I questioned the mechanism: how could the spoon stop bubbles from forming in the liquid below, then escaping though the neck, passing around the spoon, which “obviously” did not form real barrier.
 
 We argued back and forth, but these theoretical arguments failed to convince my drinking companions. To decide the issue, I proposed an experiment.  We would half-drink two more bottles of champagne so as to have three identical bottles, A, B, and C, then proceed a follows:  re-cork bottle A, put a spoon in the neck of bottle B, and do nothing to bottle C.  All would be placed in the refrigerator.  We would test the three bottles the next morning and for two mornings thereafter.
 

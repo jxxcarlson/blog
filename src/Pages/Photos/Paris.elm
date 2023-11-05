@@ -66,15 +66,23 @@ photoList model title images =
     column
         [ paddingXY 36 36
         , spacing 36
-        , width (px 1500)
         , Font.color Color.white
         , Background.color Color.black
         ]
-        [ row [ width (px model.window.width), spacing 24 ]
+        [ row
+            [ spacing 24
+            ]
             [ el [ Font.color (rgb 0.6 0.6 0.6) ] (link [] { url = "/", label = el [] (text "Home") })
             , el [] (text title)
             ]
-        , row [ spacing 24 ] (List.map (displayImage model) images)
+        , row
+            [ height (px <| 40 + Geometry.photoHeight model.window)
+            , width (px <| Debug.log "@@PHOTO WW" <| model.window.width)
+            , paddingXY 24 0
+            , spacing 24
+            , scrollbarX
+            ]
+            (List.map (displayImage model) images)
         ]
 
 
@@ -90,8 +98,8 @@ type alias ImageData =
 
 displayImage : Model -> ImageData -> Element msg
 displayImage model imageData =
-    column []
-        [ image [ height (px (Geometry.affineT 0.585 0 model.window.height)) ] { src = imageData.url, description = imageData.caption }
+    column [ spacing 8 ]
+        [ image [ height (px <| Geometry.photoHeight model.window) ] { src = imageData.url, description = imageData.caption }
         , paragraph [ Font.size 14 ] [ text imageData.details ]
         ]
 
@@ -100,7 +108,22 @@ parisPhotos =
     [ paris1
     , paris2
     , paris3
+    , paris4
     ]
+
+
+paris4 =
+    { url = "https://imagedelivery.net/9U-0Y4sEzXlO6BXzTnQnYQ/b447efe8-7df0-4070-6533-00f42ef18f00/public"
+    , caption = "Rue Claude Monet"
+    , details = "Paris, 2020"
+    , year = Just 2020
+    , month = Just 6
+    , location = Just "Paris"
+    }
+
+
+
+-- https://imagedelivery.net/9U-0Y4sEzXlO6BXzTnQnYQ/1a038709-7478-41a8-4e85-13eaf26a7e00/public
 
 
 paris1 =

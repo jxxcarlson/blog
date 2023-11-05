@@ -49,7 +49,7 @@ splitHeader window doc str =
 
 imageHeader : { width : Int, height : Int } -> Document -> Element msg
 imageHeader window doc =
-    image [ width (px <| Geometry.scale 1.4 (Geometry.articleWidth window)) ] { src = doc.imageUrl, description = doc.imageDescription }
+    image [ width (px <| Geometry.scale 0.7 <| Geometry.articleWidth window) ] { src = doc.imageUrl, description = doc.imageDescription }
 
 
 type alias Document =

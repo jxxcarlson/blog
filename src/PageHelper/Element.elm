@@ -10,47 +10,45 @@ import Scripta
 
 article : Document -> { width : Int, height : Int } -> Element Render.Msg.MarkupMsg
 article document window =
-    column [ spacing 24, paddingXY 24 24 ]
+    column [ spacing 24, paddingXY 24 24, width (px <| Geometry.articleWidth window) ]
         [ title document.title
-        , header document
-
-        --, compile document.content |> column [ Font.size 14, spacing 12, width (px 500) ]
+        , header window document
         , element window document.content
         ]
 
 
 element window src =
-    row [ centerX ]
+    row []
         [ Scripta.katexCSS
-        , Scripta.display window src -- |> Element.map Render
+        , Scripta.display window src
         ]
 
 
-header : Document -> Element msg
-header doc =
+header : { width : Int, height : Int } -> Document -> Element msg
+header window doc =
     case
         doc.contentHeader
     of
         Just str ->
-            splitHeader doc str
+            splitHeader window doc str
 
         Nothing ->
-            imageHeader doc
+            imageHeader window doc
 
 
-splitHeader : Document -> String -> Element msg
-splitHeader doc str =
+splitHeader : { width : Int, height : Int } -> Document -> String -> Element msg
+splitHeader window doc str =
     row [ spacing 12 ]
-        [ image [ width (px 300) ] { src = doc.imageUrl, description = doc.imageDescription }
-        , column [ width (px 300), alignTop ]
+        [ image [ width (px <| Geometry.splitArticleWidth window) ] { src = doc.imageUrl, description = doc.imageDescription }
+        , column [ width (px <| Geometry.splitArticleWidth window), alignTop ]
             [ column [ Font.size 14, spacing 12 ] (compile str)
             ]
         ]
 
 
-imageHeader : Document -> Element msg
-imageHeader doc =
-    image [ width (px 600) ] { src = doc.imageUrl, description = doc.imageDescription }
+imageHeader : { width : Int, height : Int } -> Document -> Element msg
+imageHeader window doc =
+    image [ width (px (Geometry.articleWidth window)) ] { src = doc.imageUrl, description = doc.imageDescription }
 
 
 type alias Document =

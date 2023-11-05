@@ -56,8 +56,8 @@ init flagsResult route =
                     value
 
                 Err reason ->
-                    { width = 700
-                    , height = 1100
+                    { width = 1130
+                    , height = 790
                     }
     in
     ( { smashedLikes = 0
@@ -65,23 +65,13 @@ init flagsResult route =
             { width = flags.width
             , height = flags.height
             }
+                |> Debug.log "@@SHARED_INIT"
       }
     , Effect.none
     )
 
 
 
---type alias Model =
---    { smashedLikes : Int
---    , window :
---        { smashedLikes : Int
---        , window : Window
---        }
---    }
---
---
---type alias Window =
---    { width : Int, height : Int }
 -- UPDATE
 
 
@@ -99,7 +89,7 @@ update route msg model =
 
         Shared.Msg.WindowResized width height ->
             ( { model
-                | window = { width = width, height = height }
+                | window = { width = width, height = height } |> Debug.log "@@RESIZED"
               }
             , Effect.none
             )

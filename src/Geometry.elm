@@ -1,9 +1,31 @@
-module Geometry exposing (affineT, articleWidth, scale)
+module Geometry exposing
+    ( affineT
+    , articleWidth
+    , photoHeight
+    , scale
+    , scriptaArticleWidth
+    , splitArticleWidth
+    )
 
 
 articleWidth : { width : Int, height : Int } -> Int
 articleWidth { width, height } =
-    min 700 (width // 2)
+    min 700 (scale 0.5 width) |> Debug.log "@@ARTICLE WIDTH"
+
+
+scriptaArticleWidth : { width : Int, height : Int } -> Int
+scriptaArticleWidth { width, height } =
+    min 700 (scale 0.3 width) |> Debug.log "@@SCRIPTA ARTICLE WIDTH"
+
+
+splitArticleWidth : { width : Int, height : Int } -> Int
+splitArticleWidth window =
+    articleWidth window // 2 - 15
+
+
+photoHeight : { width : Int, height : Int } -> Int
+photoHeight { width, height } =
+    affineT 0.9 -80 height
 
 
 scale : Float -> Int -> Int

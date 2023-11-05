@@ -22,7 +22,7 @@ page shared route =
 
 
 
--- INIT
+-- MODEL & MSG
 
 
 type alias Model =
@@ -31,9 +31,21 @@ type alias Model =
     }
 
 
+type Msg
+    = Render MarkupMsg
+
+
+
+-- INIT
+
+
 init : Shared.Model -> Route () -> () -> ( Model, Effect Msg )
 init shared route _ =
     ( { window = shared.window, routeString = "/math/entropy" }, Effect.none )
+
+
+
+-- SUBSCRIPTIONS
 
 
 subscriptions : Model -> Sub Msg
@@ -43,10 +55,6 @@ subscriptions _ =
 
 
 -- UPDATE
-
-
-type Msg
-    = Render MarkupMsg
 
 
 update : Msg -> Model -> ( Model, Effect Msg )
