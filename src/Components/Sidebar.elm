@@ -15,10 +15,6 @@ view :
     }
     -> View msg
 view props =
-    let
-        _ =
-            Debug.log "@@routeString" props.currentRoute
-    in
     { title = props.title
     , attributes = []
     , element =

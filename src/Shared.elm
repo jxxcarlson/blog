@@ -65,7 +65,6 @@ init flagsResult route =
             { width = flags.width
             , height = flags.height
             }
-                |> Debug.log "@@INIT WINDOW"
       }
     , Effect.none
     )
@@ -100,7 +99,7 @@ update route msg model =
 
         Shared.Msg.WindowResized width height ->
             ( { model
-                | window = { width = width, height = height } |> Debug.log "@@Resize WINDOW"
+                | window = { width = width, height = height }
               }
             , Effect.none
             )
