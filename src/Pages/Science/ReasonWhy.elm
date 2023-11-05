@@ -7,6 +7,7 @@ import Page exposing (Page)
 import PageHelper.Element
 import Render.Msg exposing (MarkupMsg)
 import Route exposing (Route)
+import Scripta
 import Shared
 import View exposing (View)
 
@@ -59,25 +60,19 @@ update msg model =
 view : Model -> View Msg
 view model =
     Sidebar.view model.window
-        { title = "Jim's Blog ***"
+        { title = "Jim's Blog"
         , attributes = []
+        , element = Scripta.element model.window content |> Element.map Render
         , currentRoute = model.routeString
-        , element = PageHelper.Element.article document model.window |> Element.map Render
         }
-
-
-document =
-    { title = "Blog: The Reason Why"
-    , content = content
-    , imageUrl = "https://jxxcarlsonblog.files.wordpress.com/2020/04/merlin_171584709_5ddc217b-264c-41ac-8bca-8e1b90794d4c-superjumbo.jpg"
-    , imageDescription = "A glass of champagne"
-    , contentHeader = Nothing
-    }
 
 
 content =
     """
 | title
+The Reason Why
+
+[image https://jxxcarlsonblog.files.wordpress.com/2020/04/merlin_171584709_5ddc217b-264c-41ac-8bca-8e1b90794d4c-superjumbo.jpg]
 
 In the beginning, at the instant of creation, there came into being numerous particles:
 quarks and antiquarks, protons and and antiprotons, electrons and antielectrons,

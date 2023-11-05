@@ -1,5 +1,6 @@
-module Scripta exposing (display, katexCSS)
+module Scripta exposing (display, element, katexCSS)
 
+import Components.Sidebar as Sidebar
 import Element exposing (..)
 import Element.Background as Background
 import Element.Font as Font
@@ -9,6 +10,15 @@ import Html.Attributes
 import Render.Msg exposing (MarkupMsg)
 import ScriptaV2.API
 import ScriptaV2.Language
+import Shared.Msg
+import View
+
+
+element window content =
+    row []
+        [ katexCSS
+        , display window content
+        ]
 
 
 katexCSS =
@@ -31,7 +41,8 @@ compile width src =
 
 display : { width : Int, height : Int } -> String -> Element MarkupMsg
 display window src =
-    column [ Font.size 18, width (px <| Geometry.articleWidth window) ]
+    -- column [ Font.size 18, width (px <| Geometry.articleWidth window) ]
+    column [ Font.size 18 ]
         [ column
             [ spacing 4
             , Background.color (Element.rgb 1 1 1)
@@ -40,7 +51,8 @@ display window src =
             , Font.size 14
             , paddingXY 16 32
             , htmlId "rendered-text"
-            , scrollbarY
+
+            -- , scrollbarY
             ]
             (compile (Geometry.articleWidth window - 80) src)
         ]
@@ -48,3 +60,28 @@ display window src =
 
 htmlId str =
     Element.htmlAttribute (Html.Attributes.id str)
+
+
+
+--view : { a | window : { width : Int, height : Int }, title : String, content : String, routeString : String } -> View.View MarkupMsg
+--view data =
+--    Sidebar.view data.window
+--        { title = data.title
+--        , attributes = []
+--        , element =
+--            row []
+--                [ katexCSS
+--                , display data.window data.content
+--                ]
+--        , currentRoute = data.routeString
+--        }
+--view window routeString title content =
+--    { title = title
+--    , attributes = []
+--    , element =
+--        row []
+--            [ katexCSS
+--            , display window content
+--            ]
+--    , currentRoute = routeString
+--    }

@@ -32,10 +32,24 @@ view dimensions props =
     }
 
 
+fontSize dimensions =
+    if dimensions.width < 600 then
+        8
+
+    else if dimensions.width < 800 then
+        10
+
+    else if dimensions.width < 1000 then
+        12
+
+    else
+        14
+
+
 sidebar_ dimensions currentRoute =
     column
         [ alignTop
-        , Font.size 14
+        , Font.size (fontSize dimensions)
         , spacing 8
         , width (px <| Geometry.sidebarWidth dimensions)
         , height fill

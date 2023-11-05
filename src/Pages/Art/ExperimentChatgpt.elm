@@ -1,15 +1,12 @@
 module Pages.Art.ExperimentChatgpt exposing (Model, Msg(..), page)
 
-import Color
 import Components.Sidebar as Sidebar
 import Effect exposing (Effect)
 import Element exposing (..)
-import Element.Background as Background
-import Element.Font as Font
 import Page exposing (Page)
-import PageHelper.Art
 import Render.Msg exposing (MarkupMsg)
 import Route exposing (Route)
+import Scripta
 import Shared
 import View exposing (View)
 
@@ -64,23 +61,17 @@ view model =
     Sidebar.view model.window
         { title = "Jim's Blog"
         , attributes = []
+        , element = Scripta.element model.window content |> Element.map Render
         , currentRoute = model.routeString
-        , element = el [] (PageHelper.Art.article document model.window) |> Element.map Render
         }
-
-
-document =
-    { title = "Art: Experiments with ChatGPT"
-    , content = content
-    , imageUrl = "https://imagedelivery.net/9U-0Y4sEzXlO6BXzTnQnYQ/37615bff-b1d1-43d8-6ce3-adcf1ddfb600/public"
-    , imageDescription = "A glass of champagne"
-    , contentHeader = Nothing
-    }
 
 
 content =
     """
 | title
+Art: Experiments with ChatGPT
+
+[image https://imagedelivery.net/9U-0Y4sEzXlO6BXzTnQnYQ/37615bff-b1d1-43d8-6ce3-adcf1ddfb600/public]
 
 The past few weeks I’ve been drawn to experiment with GPT, asking it to help
 write or revise or make poems, songs, and code, talk about physics, etc.

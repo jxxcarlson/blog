@@ -22,7 +22,7 @@ article document window =
 element window src =
     row []
         [ Scripta.katexCSS
-        , Scripta.display window src
+        , Scripta.display { window | height = window.height - 600 } src
         ]
 
 

@@ -43,7 +43,8 @@ sidebarWidth window =
 articleWidth : { width : Int, height : Int } -> Int
 articleWidth window =
     --min 700 (scale 0.5 window.width) |> Debug.log "@@ARTICLE WIDTH"
-    ramp 550 700 (window.width |> Debug.log "@@WW") - sidebarWidth window |> Debug.log "@@WW:A"
+    -- ramp 550 900 (window.width |> Debug.log "@@WW") - sidebarWidth window |> Debug.log "@@WW:A"
+    ramp 550 700 (window.width |> Debug.log "@@WW") |> Debug.log "@@WW:A"
 
 
 scriptaArticleWidth : { width : Int, height : Int } -> Int

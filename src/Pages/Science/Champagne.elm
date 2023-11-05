@@ -4,9 +4,9 @@ import Components.Sidebar as Sidebar
 import Effect exposing (Effect)
 import Element exposing (..)
 import Page exposing (Page)
-import PageHelper.Element
 import Render.Msg exposing (MarkupMsg)
 import Route exposing (Route)
+import Scripta
 import Shared
 import View exposing (View)
 
@@ -61,29 +61,17 @@ view model =
     Sidebar.view model.window
         { title = "Jim's Blog"
         , attributes = []
-        , element = PageHelper.Element.article document model.window |> Element.map Render
+        , element = Scripta.element model.window content |> Element.map Render
         , currentRoute = model.routeString
         }
-
-
-document =
-    { title = "Champagne and the Experimental Method"
-    , content = content
-    , imageUrl = "https://jxxcarlsonblog.files.wordpress.com/2020/05/winebottle.jpeg"
-    , imageDescription = "A glass of champagne"
-    , contentHeader = Just contentHeader
-    }
-
-
-contentHeader =
-    """
-Preparing for the experiment: One of three bottles of champagne, glasses
-"""
 
 
 content =
     """
 | title
+Champagne and the Experimental Method
+
+[image https://jxxcarlsonblog.files.wordpress.com/2020/05/winebottle.jpeg width:200]
 
 There is a belief, common in France anyway, that the fizziness of an opened bottle of champagne can be preserved by placing a metal spoon, handle down, in the mouth of the bottle. Both my wife and brother-in-law, both French, believe that this a sure way to better enjoy an opened bottle the next morning, or even the morning after that.
 
