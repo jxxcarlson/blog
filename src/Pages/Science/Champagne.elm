@@ -26,12 +26,14 @@ page shared route =
 
 
 type alias Model =
-    { window : { width : Int, height : Int } }
+    { window : { width : Int, height : Int }
+    , routeString : String
+    }
 
 
 init : Shared.Model -> Route () -> () -> ( Model, Effect Msg )
 init shared route _ =
-    ( { window = shared.window }, Effect.none )
+    ( { window = shared.window, routeString = "/science/champagne" }, Effect.none )
 
 
 subscriptions : Model -> Sub Msg

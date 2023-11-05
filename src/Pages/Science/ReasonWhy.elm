@@ -26,12 +26,14 @@ page shared route =
 
 
 type alias Model =
-    { window : { width : Int, height : Int } }
+    { window : { width : Int, height : Int }
+    , routeString : String
+    }
 
 
 init : Shared.Model -> Route () -> () -> ( Model, Effect Msg )
 init shared route _ =
-    ( { window = shared.window }, Effect.none )
+    ( { window = shared.window, routeString = "/science/reason-why" }, Effect.none )
 
 
 subscriptions : Model -> Sub Msg
@@ -57,7 +59,7 @@ update msg model =
 view : Model -> View Msg
 view model =
     Sidebar.view
-        { title = "Jim's Blog"
+        { title = "Jim's Blog ***"
         , attributes = []
         , element = PageHelper.Element.article document model.window |> Element.map Render
         }
