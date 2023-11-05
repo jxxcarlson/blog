@@ -41,7 +41,6 @@ compile width src =
 
 display : { width : Int, height : Int } -> String -> Element MarkupMsg
 display window src =
-    -- column [ Font.size 18, width (px <| Geometry.articleWidth window) ]
     column [ Font.size 18 ]
         [ column
             [ spacing 4
@@ -51,10 +50,9 @@ display window src =
             , Font.size 14
             , paddingXY 16 32
             , htmlId "rendered-text"
-
-            -- , scrollbarY
+            , scrollbarY
             ]
-            (compile (Geometry.articleWidth window - 80) src)
+            (compile (Geometry.scriptaArticleWidth window) src)
         ]
 
 

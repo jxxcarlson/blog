@@ -44,13 +44,13 @@ articleWidth : { width : Int, height : Int } -> Int
 articleWidth window =
     --min 700 (scale 0.5 window.width) |> Debug.log "@@ARTICLE WIDTH"
     -- ramp 550 900 (window.width |> Debug.log "@@WW") - sidebarWidth window |> Debug.log "@@WW:A"
-    ramp 550 700 (window.width |> Debug.log "@@WW") |> Debug.log "@@WW:A"
+    ramp 550 900 (window.width |> Debug.log "@@WW") - sidebarWidth window |> Debug.log "@@WW:A"
 
 
 scriptaArticleWidth : { width : Int, height : Int } -> Int
 scriptaArticleWidth window =
     -- min 700 (scale 0.3 window.width) |> Debug.log "@@SCRIPTA ARTICLE WIDTH"
-    articleWidth window - 50 |> Debug.log "@@SCRIPTA ARTICLE WIDTH"
+    articleWidth window - 70 |> Debug.log "@@SCRIPTA ARTICLE WIDTH"
 
 
 splitArticleWidth : { width : Int, height : Int } -> Int
