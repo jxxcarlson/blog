@@ -16,7 +16,7 @@ page shared route =
     Page.new
         { init = init shared route
         , update = update
-        , view = view
+        , view = view shared.dimensions
         , subscriptions = subscriptions
         }
 
@@ -60,17 +60,13 @@ update msg model =
 -- VIEW
 
 
-view : Model -> View Msg
-view model =
-    Components.Sidebar.view model.window
+view : { width : Int, height : Int } -> Model -> View Msg
+view window model =
+    Components.Sidebar.view window
         { title = "Jim's Blog"
         , attributes = []
+        , element = Scripta.element window src |> Element.map Render
         , currentRoute = model.routeString
-        , element =
-            row [ centerX ]
-                [ Scripta.katexCSS
-                , Scripta.display model.window src |> Element.map Render
-                ]
         }
 
 

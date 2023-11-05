@@ -16,7 +16,7 @@ page shared route =
     Page.new
         { init = init shared route
         , update = update
-        , view = view
+        , view = view shared.dimensions
         , subscriptions = subscriptions
         }
 
@@ -56,12 +56,12 @@ update msg model =
             ( model, Effect.none )
 
 
-view : Model -> View Msg
-view model =
-    Sidebar.view model.window
+view : { width : Int, height : Int } -> Model -> View Msg
+view window model =
+    Sidebar.view window
         { title = "Jim's Blog"
         , attributes = []
-        , element = Scripta.element model.window content |> Element.map Render
+        , element = Scripta.element window content |> Element.map Render
         , currentRoute = model.routeString
         }
 

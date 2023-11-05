@@ -13,10 +13,14 @@ import View exposing (View)
 
 page : Shared.Model -> Route () -> Page Model Msg
 page shared route =
+    let
+        _ =
+            Debug.log "@@@!SH: @Page New" shared.dimensions
+    in
     Page.new
         { init = init shared route
         , update = update
-        , view = view
+        , view = view shared.dimensions
         , subscriptions = subscriptions
         }
 
@@ -33,7 +37,7 @@ type alias Model =
 
 init : Shared.Model -> Route () -> () -> ( Model, Effect Msg )
 init shared route _ =
-    ( { window = shared.dimensions, routeString = "/science/reason-why" }, Effect.none )
+    ( { window = shared.dimensions |> Debug.log "@@@!SH: INIT MODEL", routeString = "/science/reason-why" }, Effect.none )
 
 
 subscriptions : Model -> Sub Msg
@@ -56,12 +60,12 @@ update msg model =
             ( model, Effect.none )
 
 
-view : Model -> View Msg
-view model =
-    Sidebar.view model.window
+view : { width : Int, height : Int } -> Model -> View Msg
+view window model =
+    Sidebar.view window
         { title = "Jim's Blog"
         , attributes = []
-        , element = Scripta.element model.window content |> Element.map Render
+        , element = Scripta.element window content |> Element.map Render
         , currentRoute = model.routeString
         }
 

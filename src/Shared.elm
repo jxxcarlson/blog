@@ -16,6 +16,7 @@ import Browser.Dom as Dom
 import Browser.Events
 import Effect exposing (Effect)
 import Json.Decode
+import Process
 import Route exposing (Route)
 import Route.Path
 import Shared.Model
@@ -67,7 +68,7 @@ init flagsResult route =
             }
                 |> Debug.log "@@SHARED_INIT"
       }
-    , Effect.none
+    , setupWindow
     )
 
 
@@ -89,7 +90,7 @@ update route msg model =
 
         Shared.Msg.WindowResized width height ->
             ( { model
-                | dimensions = { width = width, height = height } |> Debug.log "@@RESIZED"
+                | dimensions = { width = width, height = height } |> Debug.log "@@@!RESIZED"
               }
             , Effect.none
             )
@@ -101,6 +102,36 @@ update route msg model =
             ( { model | dimensions = { height = dimensions.height, width = dimensions.width } }
             , Effect.none
             )
+
+        Shared.Msg.GotViewport vp ->
+            let
+                w =
+                    round vp.viewport.width
+
+                h =
+                    round vp.viewport.height
+            in
+            ( { model
+                | dimensions = { width = w, height = h } |> Debug.log "@@@!DIMENSIONS_VIA_VIEWPORT"
+              }
+            , Effect.none
+            )
+
+
+setupWindow : Effect Shared.Msg.Msg
+setupWindow =
+    -- Task.perform Shared.Msg.GotViewport Dom.getViewport |> Effect.sendCmd
+    Task.perform Shared.Msg.GotViewport viewportTask |> Effect.sendCmd
+
+
+viewportTask : Task.Task x Dom.Viewport
+viewportTask =
+    Process.sleep 500 |> Task.andThen (\_ -> Dom.getViewport)
+
+
+foo : Task.Task x Dom.Viewport
+foo =
+    Dom.getViewport
 
 
 

@@ -17,3 +17,4 @@ type Msg
     | WindowResized Int Int
     | Render MarkupMsg
     | DimensionsChanged Ports.Dimensions
+    | GotViewport Browser.Dom.Viewport
