@@ -33,7 +33,7 @@ type alias Model =
 
 init : Shared.Model -> Route () -> () -> ( Model, Effect Msg )
 init shared route _ =
-    ( { window = shared.window, routeString = "/about" }, Effect.none )
+    ( { window = shared.dimensions, routeString = "/about" }, Effect.none )
 
 
 subscriptions : Model -> Sub Msg

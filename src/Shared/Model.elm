@@ -12,5 +12,5 @@ own file, so they can be imported by `Effect.elm`
 -}
 type alias Model =
     { smashedLikes : Int
-    , window : { width : Int, height : Int }
+    , dimensions : { width : Int, height : Int }
     }

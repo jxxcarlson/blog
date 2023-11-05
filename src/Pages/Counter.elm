@@ -42,7 +42,7 @@ type alias Model =
 
 init : Shared.Model -> Route () -> () -> ( Model, Effect Msg )
 init shared route _ =
-    ( { window = shared.window, routeString = "/counter", counter = 0 }, Effect.none )
+    ( { window = shared.dimensions, routeString = "/counter", counter = 0 }, Effect.none )
 
 
 subscriptions : Model -> Sub Msg

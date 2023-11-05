@@ -1,6 +1,7 @@
 module Shared.Msg exposing (Msg(..))
 
 import Browser.Dom
+import Ports
 import Render.Msg exposing (MarkupMsg)
 
 
@@ -15,3 +16,4 @@ type Msg
     = GotNewSmashedLikes Int
     | WindowResized Int Int
     | Render MarkupMsg
+    | DimensionsChanged Ports.Dimensions

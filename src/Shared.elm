@@ -61,7 +61,7 @@ init flagsResult route =
                     }
     in
     ( { smashedLikes = 0
-      , window =
+      , dimensions =
             { width = flags.width
             , height = flags.height
             }
@@ -89,13 +89,18 @@ update route msg model =
 
         Shared.Msg.WindowResized width height ->
             ( { model
-                | window = { width = width, height = height } |> Debug.log "@@RESIZED"
+                | dimensions = { width = width, height = height } |> Debug.log "@@RESIZED"
               }
             , Effect.none
             )
 
         Shared.Msg.Render _ ->
             ( model, Effect.none )
+
+        Shared.Msg.DimensionsChanged dimensions ->
+            ( { model | dimensions = { height = dimensions.height, width = dimensions.width } }
+            , Effect.none
+            )
 
 
 

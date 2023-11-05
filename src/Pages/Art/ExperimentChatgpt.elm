@@ -36,7 +36,7 @@ type alias Model =
 
 init : Shared.Model -> Route () -> () -> ( Model, Effect Msg )
 init shared route _ =
-    ( { window = shared.window, routeString = "/art/experiment-chatgpt" }, Effect.none )
+    ( { window = shared.dimensions, routeString = "/art/experiment-chatgpt" }, Effect.none )
 
 
 subscriptions : Model -> Sub Msg

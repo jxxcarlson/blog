@@ -38,7 +38,7 @@ type Msg
 
 init : Shared.Model -> Route () -> () -> ( Model, Effect Msg )
 init shared route _ =
-    ( { window = shared.window, routeString = "/photos/paris" }, Effect.none )
+    ( { window = shared.dimensions, routeString = "/photos/paris" }, Effect.none )
 
 
 subscriptions : Model -> Sub Msg

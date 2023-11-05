@@ -41,7 +41,7 @@ type Msg
 
 init : Shared.Model -> Route () -> () -> ( Model, Effect Msg )
 init shared route _ =
-    ( { window = shared.window, routeString = "/math/entropy" }, Effect.none )
+    ( { window = shared.dimensions, routeString = "/math/entropy" }, Effect.none )
 
 
 
