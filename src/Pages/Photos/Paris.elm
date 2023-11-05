@@ -105,17 +105,17 @@ displayImage model imageData =
 
 
 parisPhotos =
-    [ paris1
+    [ concordeMarch2020
+    , paris1
     , paris2
     , paris3
     , paris4
     , paris5
     , paris6
-    , paris7
     ]
 
 
-paris7 =
+concordeMarch2020 =
     { url = "https://imagedelivery.net/9U-0Y4sEzXlO6BXzTnQnYQ/cd204c51-5c26-45f3-c2b6-2b00cf525600/public"
     , caption = "Place de la Concorde"
     , details = "Place de la Concorde, March 2020"
