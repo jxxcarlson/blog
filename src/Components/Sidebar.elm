@@ -37,6 +37,7 @@ sidebar_ =
         ]
         [ link [] { url = "/", label = el [] (text "Home") }
         , link [] { url = "/about", label = el [] (text "About") }
+        , link [] { url = "/art/experiment-chatgpt", label = el [] (text "Art: Chat GPT") }
         , link [] { url = "/photos/paris", label = el [] (text "Paris: Photos") }
         , link [] { url = "/science/champagne", label = el [] (text "Science: Champagne") }
         , link [] { url = "/science/reason-why", label = el [] (text "Science: The Reason Why") }

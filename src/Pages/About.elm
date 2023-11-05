@@ -76,10 +76,38 @@ src =
 | title
 About this blog
 
-This blog is a mishmash of things that have accumulated over
-the years and were then subjected to extreme winnowing.  The text
-written in the Lambda markup language
-and is rendered by  Scripta compiler (see also [link Scripta.io https://scripta.io/]).
+[image https://imagedelivery.net/9U-0Y4sEzXlO6BXzTnQnYQ/71c96394-214f-4607-7853-4f6bd1f88b00/public]
+
+|| hide
+[image https://jxxcarlsonblog.files.wordpress.com/2020/04/ganymede_sepia.jpg]
+
+This blog is a collection of random musings, writings, images,
+ and occasional rantings which provides me with a kind of searchable notebook.
+ I like to think of it as a magical box full of sheets of manuscript paper written
+ in longhand, mostly in pencil, where each sheet can be found in an instant by
+ pronouncing the correct google-like spell.  The blog is therefore primarily
+ for myself, though others may occasionally find something of interest.
+
+About the image above.  It presents a view of Ganymede,
+not the lover of Zeus, but rather the third and largest
+moon of Jupiter. You can find the original at the US Geological Survey.
+This version has been processed several times, first for
+square-the-circle.com, an old blog of mine, and more recently for this page.
+
+Why an image of Ganymede? The real reason is for no particular reason
+at all, though of course one can find many after the fact. It was convenient,
+and I could crop it to a 9:2 aspect ratio, so it would serve well as a
+header for this document.  Or, I could say that it represents man’s drive to
+explore, to forge into the unknown, whether in the physical world or the world of ideas.
+But, returning to a more honest plane of discourse, it was simply a random choice,
+a way of pleasantly filling space.
+
+[vspace 30][hrule]
+
+The text of the articles here is
+written in the [i Lambda] markup language
+and is rendered by the [i Scripta] compiler
+See below for more details. See also  [link Scripta.io https://scripta.io/].
 
 [vspace 15]
 [b [large The Scripta Compiler]]
@@ -95,18 +123,20 @@ are written in Lambda.
 Lambda has block structure where the body of each block
 is composed of ordinary text and elements of the form `[function-name a b c ...]`
 where `function-name` is the name of a function and `a b c ...` are its arguments:
-words separated by spaced. Below is an example with a quotation block:
+words separated by spaces. Below is an example with a quotation block:
 
 || code
-| quotation
-This is a [italic really, [bold really]] basic theorem.
+| indent
+[italic This is a [italic really, [bold really]] basic theorem.]
 
 It renders like this:
 
-| quotation
-This is a [italic really, [bold really]] basic theorem.
+| indent
+[italic This is a [italic really, [bold really]] basic theorem.]
+
+
 Many commonly used functions have alias, e.g., `i` for `italic`
-and `b` for bold.
+and `b` for `bold`.
 
 [vspace 15]
 [b [large Mathematics]]

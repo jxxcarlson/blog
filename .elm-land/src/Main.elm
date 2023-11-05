@@ -17,6 +17,7 @@ import Page
 import Pages.Home_
 import Pages.About
 import Pages.Apps
+import Pages.Art.ExperimentChatgpt
 import Pages.Counter
 import Pages.Photos.Paris
 import Pages.Science.Champagne
@@ -133,6 +134,23 @@ initPageAndLayout model =
                 Tuple.mapBoth
                     Main.Pages.Model.Apps
                     (Effect.map Main.Pages.Msg.Apps >> fromPageEffect model)
+                    ( pageModel, pageEffect )
+            , layout = Nothing
+            }
+
+        Route.Path.Art_ExperimentChatgpt ->
+            let
+                page : Page.Page Pages.Art.ExperimentChatgpt.Model Pages.Art.ExperimentChatgpt.Msg
+                page =
+                    Pages.Art.ExperimentChatgpt.page model.shared (Route.fromUrl () model.url)
+
+                ( pageModel, pageEffect ) =
+                    Page.init page ()
+            in
+            { page = 
+                Tuple.mapBoth
+                    Main.Pages.Model.Art_ExperimentChatgpt
+                    (Effect.map Main.Pages.Msg.Art_ExperimentChatgpt >> fromPageEffect model)
                     ( pageModel, pageEffect )
             , layout = Nothing
             }
@@ -446,6 +464,12 @@ updateFromPage msg model =
                 (Effect.map Main.Pages.Msg.Apps >> fromPageEffect model)
                 (Page.update (Pages.Apps.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
 
+        ( Main.Pages.Msg.Art_ExperimentChatgpt pageMsg, Main.Pages.Model.Art_ExperimentChatgpt pageModel ) ->
+            Tuple.mapBoth
+                Main.Pages.Model.Art_ExperimentChatgpt
+                (Effect.map Main.Pages.Msg.Art_ExperimentChatgpt >> fromPageEffect model)
+                (Page.update (Pages.Art.ExperimentChatgpt.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
+
         ( Main.Pages.Msg.Counter pageMsg, Main.Pages.Model.Counter pageModel ) ->
             Tuple.mapBoth
                 Main.Pages.Model.Counter
@@ -516,6 +540,12 @@ toLayoutFromPage model =
                 |> Pages.Apps.page model.shared
                 |> Page.layout pageModel
                 |> Maybe.map (Layouts.map (Main.Pages.Msg.Apps >> Page))
+
+        Main.Pages.Model.Art_ExperimentChatgpt pageModel ->
+            Route.fromUrl () model.url
+                |> Pages.Art.ExperimentChatgpt.page model.shared
+                |> Page.layout pageModel
+                |> Maybe.map (Layouts.map (Main.Pages.Msg.Art_ExperimentChatgpt >> Page))
 
         Main.Pages.Model.Counter pageModel ->
             Route.fromUrl () model.url
@@ -605,6 +635,11 @@ subscriptions model =
                 Main.Pages.Model.Apps pageModel ->
                     Page.subscriptions (Pages.Apps.page model.shared (Route.fromUrl () model.url)) pageModel
                         |> Sub.map Main.Pages.Msg.Apps
+                        |> Sub.map Page
+
+                Main.Pages.Model.Art_ExperimentChatgpt pageModel ->
+                    Page.subscriptions (Pages.Art.ExperimentChatgpt.page model.shared (Route.fromUrl () model.url)) pageModel
+                        |> Sub.map Main.Pages.Msg.Art_ExperimentChatgpt
                         |> Sub.map Page
 
                 Main.Pages.Model.Counter pageModel ->
@@ -699,6 +734,11 @@ viewPage model =
         Main.Pages.Model.Apps pageModel ->
             Page.view (Pages.Apps.page model.shared (Route.fromUrl () model.url)) pageModel
                 |> View.map Main.Pages.Msg.Apps
+                |> View.map Page
+
+        Main.Pages.Model.Art_ExperimentChatgpt pageModel ->
+            Page.view (Pages.Art.ExperimentChatgpt.page model.shared (Route.fromUrl () model.url)) pageModel
+                |> View.map Main.Pages.Msg.Art_ExperimentChatgpt
                 |> View.map Page
 
         Main.Pages.Model.Counter pageModel ->
@@ -808,6 +848,12 @@ toPageUrlHookCmd model routes =
                 |> List.map Page
                 |> toCommands
 
+        Main.Pages.Model.Art_ExperimentChatgpt pageModel ->
+            Page.toUrlMessages routes (Pages.Art.ExperimentChatgpt.page model.shared (Route.fromUrl () model.url)) 
+                |> List.map Main.Pages.Msg.Art_ExperimentChatgpt
+                |> List.map Page
+                |> toCommands
+
         Main.Pages.Model.Counter pageModel ->
             Page.toUrlMessages routes (Pages.Counter.page model.shared (Route.fromUrl () model.url)) 
                 |> List.map Main.Pages.Msg.Counter
@@ -895,6 +941,9 @@ isAuthProtected routePath =
             False
 
         Route.Path.Apps ->
+            False
+
+        Route.Path.Art_ExperimentChatgpt ->
             False
 
         Route.Path.Counter ->

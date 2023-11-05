@@ -1,6 +1,5 @@
 module Scripta exposing (display, katexCSS)
 
-import Components.Sidebar
 import Element exposing (..)
 import Element.Background as Background
 import Element.Font as Font
@@ -8,7 +7,6 @@ import Html
 import Html.Attributes
 import Render.Msg exposing (MarkupMsg)
 import ScriptaV2.API
-import ScriptaV2.Compiler
 import ScriptaV2.Language
 
 
@@ -26,18 +24,17 @@ compile width src =
         ScriptaV2.Language.L0Lang
         width
         0
-        -- count
         "no selected Id"
         (String.lines src)
 
 
 display : { width : Int, height : Int } -> String -> Element MarkupMsg
 display window src =
-    column [ Font.size 18 ]
+    column [ Font.size 18, width (px window.width) ]
         [ column
             [ spacing 4
             , Background.color (Element.rgb 1 1 1)
-            , width (px window.width)
+            , centerX
             , height (px window.height)
             , Font.size 14
             , paddingXY 16 32

@@ -5,6 +5,7 @@ import Effect exposing (Effect)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Font as Font
+import Geometry
 import Page exposing (Page)
 import Route exposing (Route)
 import Shared
@@ -88,18 +89,9 @@ type alias ImageData =
 displayImage : Model -> ImageData -> Element msg
 displayImage model imageData =
     column []
-        [ image [ height (px (affineT 0.585 0 model.window.height)) ] { src = imageData.url, description = imageData.caption }
+        [ image [ height (px (Geometry.affineT 0.585 0 model.window.height)) ] { src = imageData.url, description = imageData.caption }
         , paragraph [ Font.size 14 ] [ text imageData.details ]
         ]
-
-
-scale : Float -> Int -> Int
-scale factor x =
-    round <| factor * toFloat x
-
-
-affineT factor delta x =
-    round <| factor * (toFloat x + delta)
 
 
 parisPhotos =

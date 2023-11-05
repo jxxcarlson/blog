@@ -10,6 +10,7 @@ type Path
     = Home_
     | About
     | Apps
+    | Art_ExperimentChatgpt
     | Counter
     | Photos_Paris
     | Science_Champagne
@@ -41,6 +42,9 @@ fromString urlPath =
 
         "apps" :: [] ->
             Just Apps
+
+        "art" :: "experiment-chatgpt" :: [] ->
+            Just Art_ExperimentChatgpt
 
         "counter" :: [] ->
             Just Counter
@@ -77,6 +81,9 @@ toString path =
 
                 Apps ->
                     [ "apps" ]
+
+                Art_ExperimentChatgpt ->
+                    [ "art", "experiment-chatgpt" ]
 
                 Counter ->
                     [ "counter" ]
