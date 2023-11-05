@@ -50,7 +50,7 @@ articleWidth window =
 scriptaArticleWidth : { width : Int, height : Int } -> Int
 scriptaArticleWidth window =
     -- min 700 (scale 0.3 window.width) |> Debug.log "@@SCRIPTA ARTICLE WIDTH"
-    articleWidth window - 70 |> Debug.log "@@SCRIPTA ARTICLE WIDTH"
+    articleWidth window - 140 |> Debug.log "@@SCRIPTA ARTICLE WIDTH"
 
 
 splitArticleWidth : { width : Int, height : Int } -> Int

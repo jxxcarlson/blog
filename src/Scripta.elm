@@ -30,6 +30,7 @@ katexCSS =
             []
 
 
+compile : Int -> String -> List (Element MarkupMsg)
 compile width src =
     ScriptaV2.API.compile
         ScriptaV2.Language.L0Lang
@@ -41,19 +42,18 @@ compile width src =
 
 display : { width : Int, height : Int } -> String -> Element MarkupMsg
 display window src =
-    column [ Font.size 18 ]
-        [ column
-            [ spacing 4
-            , Background.color (Element.rgb 1 1 1)
-            , clipX
-            , height (px window.height)
-            , Font.size 14
-            , paddingXY 16 32
-            , htmlId "rendered-text"
-            , scrollbarY
-            ]
-            (compile (Geometry.scriptaArticleWidth window) src)
+    column
+        [ spacing 4
+        , Background.color (Element.rgb 1 1 1)
+        , clipX
+        , width (px (Geometry.articleWidth window))
+        , height (px window.height)
+        , Font.size 14
+        , paddingXY 16 32
+        , htmlId "rendered-text"
+        , scrollbarY
         ]
+        (compile (Geometry.scriptaArticleWidth window) src)
 
 
 htmlId str =
