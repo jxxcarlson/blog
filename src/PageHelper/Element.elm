@@ -1,7 +1,9 @@
 module PageHelper.Element exposing (article)
 
+import Color
 import Config
 import Element exposing (..)
+import Element.Background as Background
 import Element.Font as Font
 import Geometry
 import Render.Msg
@@ -38,10 +40,10 @@ header window doc =
 
 splitHeader : { width : Int, height : Int } -> Document -> String -> Element msg
 splitHeader window doc str =
-    row [ spacing 12 ]
+    row [ spacing 12, Background.color Color.black, Font.color Color.white ]
         [ image [ width (px <| Geometry.splitArticleWidth window) ] { src = doc.imageUrl, description = doc.imageDescription }
         , column [ width (px <| Geometry.splitArticleWidth window), alignTop ]
-            [ column [ Font.size 14, spacing 12 ] (compile str)
+            [ column [ Font.size 12, spacing 12, paddingXY 8 18 ] (compile str)
             ]
         ]
 

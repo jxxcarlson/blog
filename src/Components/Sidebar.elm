@@ -39,7 +39,7 @@ sidebar_ dimensions currentRoute =
         , spacing 8
         , width (px <| Geometry.sidebarWidth dimensions)
         , height fill
-        , paddingXY 24 12
+        , paddingXY 12 12
         , Font.color Color.white
         , Background.color Color.sidebar
         ]
