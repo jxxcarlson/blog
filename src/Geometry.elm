@@ -4,8 +4,14 @@ module Geometry exposing
     , photoHeight
     , scale
     , scriptaArticleWidth
+    , sidebarWidth
     , splitArticleWidth
     )
+
+
+sidebarWidth : { width : Int, height : Int } -> Int
+sidebarWidth window =
+    min 220 (scale 0.17 window.width)
 
 
 articleWidth : { width : Int, height : Int } -> Int

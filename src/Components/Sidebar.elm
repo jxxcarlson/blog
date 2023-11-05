@@ -4,33 +4,40 @@ import Color
 import Element exposing (..)
 import Element.Background as Background
 import Element.Font as Font
+import Geometry
 import View exposing (View)
 
 
 view :
-    { title : String
-    , attributes : List (Element msg)
-    , element : Element msg
-    , currentRoute : String
-    }
+    { width : Int, height : Int }
+    ->
+        { title : String
+        , attributes : List (Element msg)
+        , element : Element msg
+        , currentRoute : String
+        }
     -> View msg
-view props =
+view dimensions props =
+    let
+        _ =
+            Debug.log "@@S, DIM" dimensions
+    in
     { title = props.title
     , attributes = []
     , element =
-        row [ centerX ]
-            [ sidebar_ props.currentRoute
+        row []
+            [ sidebar_ dimensions props.currentRoute
             , props.element
             ]
     }
 
 
-sidebar_ currentRoute =
+sidebar_ dimensions currentRoute =
     column
         [ alignTop
         , Font.size 14
         , spacing 8
-        , width (px 260)
+        , width (px <| Geometry.sidebarWidth dimensions)
         , height fill
         , paddingXY 24 12
         , Font.color Color.white

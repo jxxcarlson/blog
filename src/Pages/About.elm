@@ -62,11 +62,11 @@ update msg model =
 
 view : Model -> View Msg
 view model =
-    Components.Sidebar.view
+    Components.Sidebar.view model.window
         { title = "Jim's Blog"
         , attributes = []
         , element =
-            row [ centerX ]
+            row []
                 [ Scripta.katexCSS
                 , Scripta.display model.window src |> Element.map Render
                 ]

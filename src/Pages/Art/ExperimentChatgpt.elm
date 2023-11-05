@@ -61,7 +61,7 @@ update msg model =
 
 view : Model -> View Msg
 view model =
-    Sidebar.view
+    Sidebar.view model.window
         { title = "Jim's Blog"
         , attributes = []
         , currentRoute = model.routeString

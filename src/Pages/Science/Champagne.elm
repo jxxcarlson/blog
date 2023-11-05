@@ -58,7 +58,7 @@ update msg model =
 
 view : Model -> View Msg
 view model =
-    Sidebar.view
+    Sidebar.view model.window
         { title = "Jim's Blog"
         , attributes = []
         , element = PageHelper.Element.article document model.window |> Element.map Render
