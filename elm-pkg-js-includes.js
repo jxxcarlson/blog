@@ -2,6 +2,7 @@
 // For now, its presence will mean Lamdera detects the extra JS and packages
 // In future this will be more structured + restricted once the design is done
 const elm_katex= require('./elm-pkg-js/elm-katex.js')
+const flags = require('./elm-pkg-js/flagss.js')
 // const mhchem_package= require('./elm-pkg-js/mhchem.js')
 
 exports.init = async function init(app) {
@@ -10,5 +11,6 @@ exports.init = async function init(app) {
   // automatically generated in Local Development for every file in elm-pkg-js/
   // mhchem_package.init(app)
   elm_katex.init(app)
+  flags.init(app)  
 
 }

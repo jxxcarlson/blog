@@ -5,7 +5,7 @@ exports.init =  async function(app) {
   
     var katexJs = document.createElement('script')
     katexJs.type = 'text/javascript'
-katexJs.src ="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    katexJs.src ="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
   
     katexJs.onload = initKatex
   
