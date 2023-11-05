@@ -70,7 +70,7 @@ photoList model title images =
         , Background.color Color.black
         ]
         [ row
-            [ spacing 24
+            [ spacing 48
             ]
             [ el [ Font.color (rgb 0.6 0.6 0.6) ] (link [] { url = "/", label = el [] (text "Home") })
             , el [] (text title)
@@ -79,7 +79,7 @@ photoList model title images =
             [ height (px <| 40 + Geometry.photoHeight model.window)
             , width (px <| Debug.log "@@PHOTO WW" <| model.window.width)
             , paddingXY 24 0
-            , spacing 24
+            , spacing 72
             , scrollbarX
             ]
             (List.map (displayImage model) images)
