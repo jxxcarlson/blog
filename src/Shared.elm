@@ -56,7 +56,7 @@ init flagsResult route =
                     value
 
                 Err reason ->
-                    { width = 1130
+                    { width = 1424
                     , height = 790
                     }
     in

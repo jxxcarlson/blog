@@ -109,13 +109,46 @@ parisPhotos =
     , paris2
     , paris3
     , paris4
+    , paris5
+    , paris6
+    , paris7
     ]
+
+
+paris7 =
+    { url = "https://imagedelivery.net/9U-0Y4sEzXlO6BXzTnQnYQ/cd204c51-5c26-45f3-c2b6-2b00cf525600/public"
+    , caption = "Place de la Concorde"
+    , details = "Place de la Concorde, March 2020"
+    , year = Just 2020
+    , month = Just 3
+    , location = Just "Paris"
+    }
+
+
+paris6 =
+    { url = "https://imagedelivery.net/9U-0Y4sEzXlO6BXzTnQnYQ/364100de-5ef8-47e1-9a91-c527f84a2600/public"
+    , caption = "Monet gardens"
+    , details = "Giverny, June 2020"
+    , year = Just 2020
+    , month = Just 6
+    , location = Just "Paris"
+    }
+
+
+paris5 =
+    { url = "https://imagedelivery.net/9U-0Y4sEzXlO6BXzTnQnYQ/34c3e4ab-3e3b-4709-4aff-0628aa08fb00/public"
+    , caption = "Monet gardens"
+    , details = "Giverny, June 2020"
+    , year = Just 2020
+    , month = Just 6
+    , location = Just "Paris"
+    }
 
 
 paris4 =
     { url = "https://imagedelivery.net/9U-0Y4sEzXlO6BXzTnQnYQ/b447efe8-7df0-4070-6533-00f42ef18f00/public"
     , caption = "Rue Claude Monet"
-    , details = "Paris, 2020"
+    , details = "Giverny, June 2020"
     , year = Just 2020
     , month = Just 6
     , location = Just "Paris"
