@@ -105,12 +105,11 @@ displayImage model imageData =
 
 
 parisPhotos =
-    [ louvreJan2020
-
-    --, leonardoJan2020
-    , jardinaDesPlantesJan2020
-    , metroMuralJan2020
-    , concordeMarch2020
+    [ --louvreJan2020
+      --, leonardoJan2020
+      --, jardinaDesPlantesJan2020
+      -- , metroMuralJan2020
+      concordeMarch2020
     , paris1
     , paris2
     , paris3
