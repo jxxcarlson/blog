@@ -87,6 +87,7 @@ sidebar_ dimensions currentRoute =
         [ item currentRoute "/" "Home"
         , item currentRoute "/about" "About"
         , item currentRoute "/art/experiment-chatgpt" "Art: ChatGPT"
+        , item currentRoute "/photos/n-y-c" "Photos: New York City"
         , item currentRoute "/photos/paris" "Photos: Paris"
         , item currentRoute "/science/champagne" "Science: Champagne"
         , item currentRoute "/science/reason-why" "Science: The Reason Why"

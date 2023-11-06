@@ -6,6 +6,7 @@ import Pages.Apps
 import Pages.Art.ExperimentChatgpt
 import Pages.Counter
 import Pages.Math.Entropy
+import Pages.Photos.NYC
 import Pages.Photos.Paris
 import Pages.Science.Champagne
 import Pages.Science.ReasonWhy
@@ -19,6 +20,7 @@ type Msg
     | Art_ExperimentChatgpt Pages.Art.ExperimentChatgpt.Msg
     | Counter Pages.Counter.Msg
     | Math_Entropy Pages.Math.Entropy.Msg
+    | Photos_NYC Pages.Photos.NYC.Msg
     | Photos_Paris Pages.Photos.Paris.Msg
     | Science_Champagne Pages.Science.Champagne.Msg
     | Science_ReasonWhy Pages.Science.ReasonWhy.Msg

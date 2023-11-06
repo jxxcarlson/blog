@@ -20,6 +20,7 @@ import Pages.Apps
 import Pages.Art.ExperimentChatgpt
 import Pages.Counter
 import Pages.Math.Entropy
+import Pages.Photos.NYC
 import Pages.Photos.Paris
 import Pages.Science.Champagne
 import Pages.Science.ReasonWhy
@@ -186,6 +187,23 @@ initPageAndLayout model =
                 Tuple.mapBoth
                     Main.Pages.Model.Math_Entropy
                     (Effect.map Main.Pages.Msg.Math_Entropy >> fromPageEffect model)
+                    ( pageModel, pageEffect )
+            , layout = Nothing
+            }
+
+        Route.Path.Photos_NYC ->
+            let
+                page : Page.Page Pages.Photos.NYC.Model Pages.Photos.NYC.Msg
+                page =
+                    Pages.Photos.NYC.page model.shared (Route.fromUrl () model.url)
+
+                ( pageModel, pageEffect ) =
+                    Page.init page ()
+            in
+            { page = 
+                Tuple.mapBoth
+                    Main.Pages.Model.Photos_NYC
+                    (Effect.map Main.Pages.Msg.Photos_NYC >> fromPageEffect model)
                     ( pageModel, pageEffect )
             , layout = Nothing
             }
@@ -500,6 +518,12 @@ updateFromPage msg model =
                 (Effect.map Main.Pages.Msg.Math_Entropy >> fromPageEffect model)
                 (Page.update (Pages.Math.Entropy.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
 
+        ( Main.Pages.Msg.Photos_NYC pageMsg, Main.Pages.Model.Photos_NYC pageModel ) ->
+            Tuple.mapBoth
+                Main.Pages.Model.Photos_NYC
+                (Effect.map Main.Pages.Msg.Photos_NYC >> fromPageEffect model)
+                (Page.update (Pages.Photos.NYC.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
+
         ( Main.Pages.Msg.Photos_Paris pageMsg, Main.Pages.Model.Photos_Paris pageModel ) ->
             Tuple.mapBoth
                 Main.Pages.Model.Photos_Paris
@@ -582,6 +606,12 @@ toLayoutFromPage model =
                 |> Pages.Math.Entropy.page model.shared
                 |> Page.layout pageModel
                 |> Maybe.map (Layouts.map (Main.Pages.Msg.Math_Entropy >> Page))
+
+        Main.Pages.Model.Photos_NYC pageModel ->
+            Route.fromUrl () model.url
+                |> Pages.Photos.NYC.page model.shared
+                |> Page.layout pageModel
+                |> Maybe.map (Layouts.map (Main.Pages.Msg.Photos_NYC >> Page))
 
         Main.Pages.Model.Photos_Paris pageModel ->
             Route.fromUrl () model.url
@@ -680,6 +710,11 @@ subscriptions model =
                 Main.Pages.Model.Math_Entropy pageModel ->
                     Page.subscriptions (Pages.Math.Entropy.page model.shared (Route.fromUrl () model.url)) pageModel
                         |> Sub.map Main.Pages.Msg.Math_Entropy
+                        |> Sub.map Page
+
+                Main.Pages.Model.Photos_NYC pageModel ->
+                    Page.subscriptions (Pages.Photos.NYC.page model.shared (Route.fromUrl () model.url)) pageModel
+                        |> Sub.map Main.Pages.Msg.Photos_NYC
                         |> Sub.map Page
 
                 Main.Pages.Model.Photos_Paris pageModel ->
@@ -784,6 +819,11 @@ viewPage model =
         Main.Pages.Model.Math_Entropy pageModel ->
             Page.view (Pages.Math.Entropy.page model.shared (Route.fromUrl () model.url)) pageModel
                 |> View.map Main.Pages.Msg.Math_Entropy
+                |> View.map Page
+
+        Main.Pages.Model.Photos_NYC pageModel ->
+            Page.view (Pages.Photos.NYC.page model.shared (Route.fromUrl () model.url)) pageModel
+                |> View.map Main.Pages.Msg.Photos_NYC
                 |> View.map Page
 
         Main.Pages.Model.Photos_Paris pageModel ->
@@ -906,6 +946,12 @@ toPageUrlHookCmd model routes =
                 |> List.map Page
                 |> toCommands
 
+        Main.Pages.Model.Photos_NYC pageModel ->
+            Page.toUrlMessages routes (Pages.Photos.NYC.page model.shared (Route.fromUrl () model.url)) 
+                |> List.map Main.Pages.Msg.Photos_NYC
+                |> List.map Page
+                |> toCommands
+
         Main.Pages.Model.Photos_Paris pageModel ->
             Page.toUrlMessages routes (Pages.Photos.Paris.page model.shared (Route.fromUrl () model.url)) 
                 |> List.map Main.Pages.Msg.Photos_Paris
@@ -996,6 +1042,9 @@ isAuthProtected routePath =
             False
 
         Route.Path.Math_Entropy ->
+            False
+
+        Route.Path.Photos_NYC ->
             False
 
         Route.Path.Photos_Paris ->
