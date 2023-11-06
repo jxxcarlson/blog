@@ -18,7 +18,17 @@ element window content =
     row []
         [ katexCSS
         , display window content
+        , rhs window
         ]
+
+
+rhs window =
+    column
+        [ width (px (Geometry.rhsWidth window))
+        , height (px window.height)
+        , Background.color (Element.rgb 0.2 0.2 0.2)
+        ]
+        []
 
 
 katexCSS =

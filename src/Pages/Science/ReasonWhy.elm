@@ -75,7 +75,7 @@ content =
 | title
 The Reason Why
 
-[image https://jxxcarlsonblog.files.wordpress.com/2020/04/merlin_171584709_5ddc217b-264c-41ac-8bca-8e1b90794d4c-superjumbo.jpg]
+[image https://jxxcarlsonblog.files.wordpress.com/2020/04/merlin_171584709_5ddc217b-264c-41ac-8bca-8e1b90794d4c-superjumbo.jpg width:fill]
 
 In the beginning, at the instant of creation, there came into being numerous particles:
 quarks and antiquarks, protons and and antiprotons, electrons and antielectrons,

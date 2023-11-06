@@ -33,10 +33,7 @@ view dimensions props =
 
 
 fontSize dimensions =
-    if dimensions.width < 600 then
-        8
-
-    else if dimensions.width < 800 then
+    if dimensions.width < 800 then
         10
 
     else if dimensions.width < 1000 then

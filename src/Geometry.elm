@@ -4,10 +4,10 @@ module Geometry exposing
     , photoHeight
     , ramp
     , ramp_
+    , rhsWidth
     , scale
     , scriptaArticleWidth
     , sidebarWidth
-    , splitArticleWidth
     )
 
 
@@ -44,7 +44,7 @@ articleWidth : { width : Int, height : Int } -> Int
 articleWidth window =
     --min 700 (scale 0.5 window.width) |> Debug.log "@@ARTICLE WIDTH"
     -- ramp 550 900 (window.width |> Debug.log "@@WW") - sidebarWidth window |> Debug.log "@@WW:A"
-    ramp 550 900 (window.width |> Debug.log "@@WW") - sidebarWidth window |> Debug.log "@@WW:A"
+    ramp 550 812 (window.width |> Debug.log "@@WW") - sidebarWidth window |> Debug.log "@@WW:A"
 
 
 scriptaArticleWidth : { width : Int, height : Int } -> Int
@@ -53,9 +53,9 @@ scriptaArticleWidth window =
     articleWidth window - 140 |> Debug.log "@@SCRIPTA ARTICLE WIDTH"
 
 
-splitArticleWidth : { width : Int, height : Int } -> Int
-splitArticleWidth window =
-    articleWidth window // 2 - 15
+rhsWidth : { width : Int, height : Int } -> Int
+rhsWidth window =
+    300
 
 
 photoHeight : { width : Int, height : Int } -> Int
