@@ -1,6 +1,7 @@
 module Geometry exposing
     ( affineT
     , articleWidth
+    , lhsWidth
     , photoHeight
     , ramp
     , ramp_
@@ -35,16 +36,30 @@ ramp_ min max x =
     round <| factor * toFloat (x - min)
 
 
+minContentWidth : Int
+minContentWidth =
+    400
+
+
+maxContentWidth : Int
+maxContentWidth =
+    800
+
+
+contentWidth : { width : Int, height : Int } -> Int
+contentWidth window =
+    ramp minContentWidth maxContentWidth window.width
+
+
 sidebarWidth : { width : Int, height : Int } -> Int
 sidebarWidth window =
-    min 220 (scale 0.17 window.width)
+    -- ramp 200 300 window.width
+    scale 0.25 (contentWidth window)
 
 
 articleWidth : { width : Int, height : Int } -> Int
 articleWidth window =
-    --min 700 (scale 0.5 window.width) |> Debug.log "@@ARTICLE WIDTH"
-    -- ramp 550 900 (window.width |> Debug.log "@@WW") - sidebarWidth window |> Debug.log "@@WW:A"
-    ramp 550 812 (window.width |> Debug.log "@@WW") - sidebarWidth window |> Debug.log "@@WW:A"
+    scale 0.75 (contentWidth window)
 
 
 scriptaArticleWidth : { width : Int, height : Int } -> Int
@@ -55,7 +70,20 @@ scriptaArticleWidth window =
 
 rhsWidth : { width : Int, height : Int } -> Int
 rhsWidth window =
-    300
+    if window.width < 810 then
+        0
+
+    else
+        scale 0.5 (window.width - contentWidth window)
+
+
+lhsWidth : { width : Int, height : Int } -> Int
+lhsWidth window =
+    if window.width < 810 then
+        0
+
+    else
+        scale 0.5 (window.width - contentWidth window)
 
 
 photoHeight : { width : Int, height : Int } -> Int

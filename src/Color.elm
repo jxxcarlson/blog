@@ -1,6 +1,7 @@
 module Color exposing
     ( applet
     , black
+    , borderColor
     , buttonBG
     , buttonFG
     , red
@@ -11,16 +12,33 @@ module Color exposing
 import Element exposing (..)
 
 
+gray_ : Float -> Color
+gray_ g =
+    Element.rgb g g (1.2 * g)
+
+
+wgray_ : Float -> Color
+wgray_ g =
+    Element.rgb (1.05 * g) g g
+
+
+sidebar : Color
+sidebar =
+    gray_ 0.2
+
+
+borderColor : Color
+borderColor =
+    wgray_ 0.5
+
+
+applet : Color
 applet =
     rgb 0.9 0.9 1.0
 
 
 black =
     rgb 0.1 0.1 0.1
-
-
-sidebar =
-    rgb 0.3 0.3 0.35
 
 
 buttonBG =

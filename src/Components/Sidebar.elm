@@ -26,10 +26,20 @@ view dimensions props =
     , attributes = []
     , element =
         row []
-            [ sidebar_ dimensions props.currentRoute
+            [ lhs dimensions
+            , sidebar_ dimensions props.currentRoute
             , props.element
             ]
     }
+
+
+lhs window =
+    column
+        [ width (px (Geometry.lhsWidth window))
+        , height (px window.height)
+        , Background.color Color.borderColor
+        ]
+        []
 
 
 fontSize dimensions =
@@ -50,7 +60,8 @@ sidebar_ dimensions currentRoute =
         , spacing 8
         , width (px <| Geometry.sidebarWidth dimensions)
         , height fill
-        , paddingXY 12 12
+        , Font.size 12
+        , paddingXY 18 18
         , Font.color Color.white
         , Background.color Color.sidebar
         ]

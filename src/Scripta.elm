@@ -1,5 +1,6 @@
 module Scripta exposing (display, element, katexCSS)
 
+import Color
 import Components.Sidebar as Sidebar
 import Element exposing (..)
 import Element.Background as Background
@@ -26,7 +27,7 @@ rhs window =
     column
         [ width (px (Geometry.rhsWidth window))
         , height (px window.height)
-        , Background.color (Element.rgb 0.2 0.2 0.2)
+        , Background.color Color.borderColor
         ]
         []
 
