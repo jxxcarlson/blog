@@ -1,5 +1,6 @@
-module Config exposing (..)
+module Config exposing (mobileWidth)
 
-articleWidth : Int
-articleWidth =
-    600
+
+mobileWidth : Int
+mobileWidth =
+    500

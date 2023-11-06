@@ -75,7 +75,7 @@ src =
 | title
 About this blog
 
-[image https://imagedelivery.net/9U-0Y4sEzXlO6BXzTnQnYQ/71c96394-214f-4607-7853-4f6bd1f88b00/public]
+[image https://imagedelivery.net/9U-0Y4sEzXlO6BXzTnQnYQ/71c96394-214f-4607-7853-4f6bd1f88b00/public  width:to-edge]
 
 || hide
 [image https://jxxcarlsonblog.files.wordpress.com/2020/04/ganymede_sepia.jpg]

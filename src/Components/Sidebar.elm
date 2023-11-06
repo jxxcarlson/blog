@@ -1,10 +1,12 @@
 module Components.Sidebar exposing (view)
 
 import Color
+import Config
 import Element exposing (..)
 import Element.Background as Background
 import Element.Font as Font
 import Geometry
+import Html.Attributes
 import View exposing (View)
 
 
@@ -18,10 +20,27 @@ view :
         }
     -> View msg
 view dimensions props =
-    let
-        _ =
-            Debug.log "@@S, DIM" dimensions
-    in
+    if dimensions.width < Config.mobileWidth then
+        mobileView dimensions props
+
+    else
+        desktopView dimensions props
+
+
+mobileView dimensions props =
+    { title = props.title
+    , attributes = []
+    , element =
+        row []
+            [ lhs dimensions
+
+            --, sidebar_ dimensions props.currentRoute
+            , props.element
+            ]
+    }
+
+
+desktopView dimensions props =
     { title = props.title
     , attributes = []
     , element =
@@ -73,7 +92,7 @@ sidebar_ dimensions currentRoute =
         , item currentRoute "/science/reason-why" "Science: The Reason Why"
         , item currentRoute "/math/entropy" "Math: Entropy"
         , item currentRoute "/apps" "Apps"
-        , el [ Font.size (fontSize dimensions), Font.color Color.red ] (text <| "w = " ++ String.fromInt dimensions.width ++ ", h = " ++ String.fromInt dimensions.height)
+        , el [ alignBottom, Font.size (fontSize dimensions), Font.color Color.red ] (text <| "w = " ++ String.fromInt dimensions.width ++ ", h = " ++ String.fromInt dimensions.height)
 
         --, item currentRoute "/counter" "Counter"
         ]

@@ -11,6 +11,8 @@ module Geometry exposing
     , sidebarWidth
     )
 
+import Config
+
 
 ramp : Int -> Int -> Int -> Int
 ramp min max x =
@@ -53,19 +55,26 @@ contentWidth window =
 
 sidebarWidth : { width : Int, height : Int } -> Int
 sidebarWidth window =
-    -- ramp 200 300 window.width
-    scale 0.25 (contentWidth window)
+    if window.width < Config.mobileWidth then
+        0
+
+    else
+        scale 0.25 (contentWidth window)
 
 
 articleWidth : { width : Int, height : Int } -> Int
 articleWidth window =
-    scale 0.75 (contentWidth window)
+    if window.width < Config.mobileWidth then
+        contentWidth window
+
+    else
+        scale 0.75 (contentWidth window)
 
 
 scriptaArticleWidth : { width : Int, height : Int } -> Int
 scriptaArticleWidth window =
     -- min 700 (scale 0.3 window.width) |> Debug.log "@@SCRIPTA ARTICLE WIDTH"
-    articleWidth window - 140 |> Debug.log "@@SCRIPTA ARTICLE WIDTH"
+    articleWidth window - 40 |> Debug.log "@@SCRIPTA ARTICLE WIDTH"
 
 
 rhsWidth : { width : Int, height : Int } -> Int
