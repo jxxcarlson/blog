@@ -1,4 +1,4 @@
-module Scripta exposing (display, element, katexCSS, view)
+module Blog.Scripta exposing (display, element, katexCSS, view)
 
 import Blog.Msg
 import Color

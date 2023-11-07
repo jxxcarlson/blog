@@ -2,10 +2,10 @@ module Pages.Apps exposing (Model, Msg, page)
 
 import Blog.Model
 import Blog.Msg
+import Blog.Scripta as Scripta
 import Effect exposing (Effect)
 import Page exposing (Page)
 import Route exposing (Route)
-import Scripta
 import Shared
 
 
