@@ -3,8 +3,6 @@ module Geometry exposing
     , articleWidth
     , lhsWidth
     , photoHeight
-    , ramp
-    , ramp_
     , rhsWidth
     , scale
     , scriptaArticleWidth
@@ -14,35 +12,6 @@ module Geometry exposing
 import Config
 
 
-ramp : Int -> Int -> Int -> Int
-ramp min max x =
-    if x < min then
-        min
-
-    else if x > max then
-        max
-
-    else
-        ramp_ min max x + min
-
-
-ramp_ : Int -> Int -> Int -> Int
-ramp_ min max x =
-    let
-        range =
-            max - min
-
-        factor =
-            toFloat (x - min) / toFloat range
-    in
-    round <| factor * toFloat (x - min)
-
-
-minContentWidth : Int
-minContentWidth =
-    400
-
-
 maxContentWidth : Int
 maxContentWidth =
     800
@@ -50,7 +19,11 @@ maxContentWidth =
 
 contentWidth : { width : Int, height : Int } -> Int
 contentWidth window =
-    ramp minContentWidth maxContentWidth window.width
+    if window.width < maxContentWidth then
+        window.width
+
+    else
+        800
 
 
 sidebarWidth : { width : Int, height : Int } -> Int
@@ -65,16 +38,15 @@ sidebarWidth window =
 articleWidth : { width : Int, height : Int } -> Int
 articleWidth window =
     if window.width < Config.mobileWidth then
-        contentWidth window
+        contentWidth window |> Debug.log "@@!!ARTICLE WIDTH (1)"
 
     else
-        scale 0.75 (contentWidth window)
+        scale 0.75 (contentWidth window) |> Debug.log "@@!!ARTICLE WIDTH (2)"
 
 
 scriptaArticleWidth : { width : Int, height : Int } -> Int
 scriptaArticleWidth window =
-    -- min 700 (scale 0.3 window.width) |> Debug.log "@@SCRIPTA ARTICLE WIDTH"
-    articleWidth window - 40 |> Debug.log "@@SCRIPTA ARTICLE WIDTH"
+    articleWidth window - 40
 
 
 rhsWidth : { width : Int, height : Int } -> Int
