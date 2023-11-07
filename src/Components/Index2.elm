@@ -178,10 +178,6 @@ mobileIndexView :
     -> { b | currentRoute : String }
     -> Element (Msg msg)
 mobileIndexView inner props =
-    let
-        foo =
-            1
-    in
     case inner.state of
         Desktop ->
             Element.none
