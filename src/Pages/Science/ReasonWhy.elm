@@ -1,14 +1,31 @@
-module Pages.Science.ReasonWhy exposing (Model, Msg(..), page)
+module Pages.Science.ReasonWhy exposing (Model, Msg, page)
 
-import Components.Index as Index
+import Blog.Model
+import Blog.Msg
 import Effect exposing (Effect)
-import Element exposing (..)
 import Page exposing (Page)
-import Render.Msg exposing (MarkupMsg)
 import Route exposing (Route)
 import Scripta
 import Shared
-import View exposing (View)
+
+
+type alias Model =
+    Blog.Model.Model
+
+
+type alias Msg =
+    Blog.Msg.Msg
+
+
+update : Msg -> Model -> ( Model, Effect Msg )
+update msg model =
+    case msg of
+        Blog.Msg.Render _ ->
+            ( model, Effect.none )
+
+
+view window model =
+    Scripta.view content window model
 
 
 page : Shared.Model -> Route () -> Page Model Msg
@@ -25,12 +42,6 @@ page shared route =
 -- INIT
 
 
-type alias Model =
-    { window : { width : Int, height : Int }
-    , routeString : String
-    }
-
-
 init : Shared.Model -> Route () -> () -> ( Model, Effect Msg )
 init shared route _ =
     ( { window = shared.dimensions, routeString = "/science/reason-why" }, Effect.none )
@@ -43,27 +54,6 @@ subscriptions _ =
 
 
 -- UPDATE
-
-
-type Msg
-    = Render MarkupMsg
-
-
-update : Msg -> Model -> ( Model, Effect Msg )
-update msg model =
-    case msg of
-        Render _ ->
-            ( model, Effect.none )
-
-
-view : { width : Int, height : Int } -> Model -> View Msg
-view window model =
-    Index.view window
-        { title = "Jim's Blog"
-        , attributes = []
-        , element = Scripta.element window content |> Element.map Render
-        , currentRoute = model.routeString
-        }
 
 
 content =

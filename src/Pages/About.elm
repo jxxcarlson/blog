@@ -1,34 +1,31 @@
-module Pages.About exposing (Model, Msg(..), page)
+module Pages.About exposing (Model, Msg, page)
 
-import Components.Index
+import Blog.Model
+import Blog.Msg
 import Effect exposing (Effect)
-import Element exposing (..)
 import Page exposing (Page)
-import Render.Msg exposing (MarkupMsg)
 import Route exposing (Route)
 import Scripta
 import Shared
-import View exposing (View)
-
-
-page : Shared.Model -> Route () -> Page Model Msg
-page shared route =
-    Page.new
-        { init = init shared route
-        , update = update
-        , view = view shared.dimensions
-        , subscriptions = subscriptions
-        }
-
-
-
--- INIT
 
 
 type alias Model =
-    { window : { width : Int, height : Int }
-    , routeString : String
-    }
+    Blog.Model.Model
+
+
+type alias Msg =
+    Blog.Msg.Msg
+
+
+update : Msg -> Model -> ( Model, Effect Msg )
+update msg model =
+    case msg of
+        Blog.Msg.Render _ ->
+            ( model, Effect.none )
+
+
+view window model =
+    Scripta.view content window model
 
 
 init : Shared.Model -> Route () -> () -> ( Model, Effect Msg )
@@ -41,36 +38,17 @@ subscriptions _ =
     Sub.none
 
 
-
--- UPDATE
-
-
-type Msg
-    = Render MarkupMsg
-
-
-update : Msg -> Model -> ( Model, Effect Msg )
-update msg model =
-    case msg of
-        Render _ ->
-            ( model, Effect.none )
-
-
-
--- VIEW
-
-
-view : { width : Int, height : Int } -> Model -> View Msg
-view window model =
-    Components.Index.view window
-        { title = "Jim's Blog"
-        , attributes = []
-        , element = Scripta.element window src |> Element.map Render
-        , currentRoute = model.routeString
+page : Shared.Model -> Route () -> Page Model Msg
+page shared route =
+    Page.new
+        { init = init shared route
+        , update = update
+        , view = view shared.dimensions
+        , subscriptions = subscriptions
         }
 
 
-src =
+content =
     """
 | title
 About this blog
