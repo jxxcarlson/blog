@@ -7,10 +7,7 @@ import Effect exposing (Effect)
 import Page exposing (Page)
 import Route exposing (Route)
 import Shared
-
-
-view window model =
-    Scripta.view content window model
+import View exposing (View)
 
 
 type alias Model =
@@ -31,10 +28,6 @@ page shared route =
         }
 
 
-
--- INIT
-
-
 init : Shared.Model -> Route () -> () -> ( Model, Effect Msg )
 init shared route _ =
     ( { window = shared.dimensions, routeString = "/science/champagne" }, Effect.none )
@@ -45,15 +38,16 @@ subscriptions _ =
     Sub.none
 
 
-
--- UPDATE
-
-
 update : Msg -> Model -> ( Model, Effect Msg )
 update msg model =
     case msg of
         Blog.Msg.Render _ ->
             ( model, Effect.none )
+
+
+view : { width : Int, height : Int } -> Model -> View Blog.Msg.Msg
+view window model =
+    Scripta.view content window model
 
 
 content =

@@ -1,32 +1,82 @@
 module Blog.Scripta2 exposing (display, element, katexCSS, view)
 
+import Blog.Model
 import Blog.Msg
 import Color
 import Components.Index
 import Components.Index2
+import Effect exposing (Effect)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Font as Font
 import Geometry
 import Html
 import Html.Attributes
+import Page exposing (Page)
 import Render.Msg exposing (MarkupMsg)
+import Route exposing (Route)
 import ScriptaV2.API
 import ScriptaV2.Language
+import Shared
 import View exposing (View)
+
+
+view content window model =
+    view content window model
+
+
+type alias Model =
+    Blog.Model.Model
+
+
+type alias Msg =
+    Blog.Msg.Msg
+
+
+page : String -> Shared.Model -> Route () -> Page Model Msg
+page src shared route =
+    Page.new
+        { init = init shared route
+        , update = update
+        , view = view src shared.dimensions
+        , subscriptions = subscriptions
+        }
+
+
+
+-- INIT
+
+
+init : Shared.Model -> Route () -> () -> ( Model, Effect Msg )
+init shared route _ =
+    ( { window = shared.dimensions, routeString = "/science/champagne" }, Effect.none )
+
+
+subscriptions : Model -> Sub Msg
+subscriptions _ =
+    Sub.none
+
+
+
+-- UPDATE
+
+
+update : Msg -> Model -> ( Model, Effect Msg )
+update msg model =
+    case msg of
+        Blog.Msg.Render _ ->
+            ( model, Effect.none )
 
 
 
 -- view : String -> { width : Int, height : Int } -> { a | routeString : String } -> View Blog.Msg.Msg
-
-
-view src window model =
-    Components.Index.view window
-        { title = "Jim's Blog"
-        , attributes = []
-        , element = element window src |> Element.map Blog.Msg.Render
-        , currentRoute = model.routeString
-        }
+--view src window model =
+--    Components.Index.view window
+--        { title = "Jim's Blog"
+--        , attributes = []
+--        , element = element window src |> Element.map Blog.Msg.Render
+--        , currentRoute = model.routeString
+--        }
 
 
 element : { width : Int, height : Int } -> String -> Element MarkupMsg
