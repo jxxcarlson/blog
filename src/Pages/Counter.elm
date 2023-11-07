@@ -1,7 +1,7 @@
 module Pages.Counter exposing (Model, Msg(..), page)
 
 import Color
-import Components.Sidebar
+import Components.Index
 import Effect exposing (Effect)
 import Element exposing (..)
 import Element.Background as Background
@@ -75,7 +75,7 @@ update msg model =
 
 view : Model -> View Msg
 view model =
-    Components.Sidebar.view model.window
+    Components.Index.view model.window
         { title = "Jim's Blog"
         , attributes = []
         , currentRoute = model.routeString

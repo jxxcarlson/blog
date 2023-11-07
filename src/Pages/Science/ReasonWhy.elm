@@ -1,6 +1,6 @@
 module Pages.Science.ReasonWhy exposing (Model, Msg(..), page)
 
-import Components.Sidebar as Sidebar
+import Components.Index as Sidebar
 import Effect exposing (Effect)
 import Element exposing (..)
 import Page exposing (Page)

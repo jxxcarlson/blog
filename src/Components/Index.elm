@@ -1,4 +1,4 @@
-module Components.Sidebar exposing (view)
+module Components.Index exposing (view)
 
 import Color
 import Config

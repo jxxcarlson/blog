@@ -1,6 +1,6 @@
 module Pages.Apps exposing (Model, Msg(..), page)
 
-import Components.Sidebar
+import Components.Index
 import Effect exposing (Effect)
 import Element exposing (..)
 import Page exposing (Page)
@@ -62,7 +62,7 @@ update msg model =
 
 view : { width : Int, height : Int } -> Model -> View Msg
 view window model =
-    Components.Sidebar.view window
+    Components.Index.view window
         { title = "Jim's Blog"
         , attributes = []
         , element = Scripta.element window src |> Element.map Render

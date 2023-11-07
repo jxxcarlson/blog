@@ -1,7 +1,7 @@
 module Scripta exposing (display, element, katexCSS)
 
 import Color
-import Components.Sidebar as Sidebar
+import Components.Index as Sidebar
 import Element exposing (..)
 import Element.Background as Background
 import Element.Font as Font
