@@ -1,5 +1,7 @@
-module Pages.Science.Champagne exposing (Model, Msg(..), page)
+module Pages.Science.Champagne exposing (Model, Msg, page)
 
+import Blog.Model
+import Blog.Msg
 import Components.Index as Index
 import Effect exposing (Effect)
 import Element exposing (..)
@@ -21,14 +23,16 @@ page shared route =
         }
 
 
+type alias Model =
+    Blog.Model.Model
+
+
+type alias Msg =
+    Blog.Msg.Msg
+
+
 
 -- INIT
-
-
-type alias Model =
-    { window : { width : Int, height : Int }
-    , routeString : String
-    }
 
 
 init : Shared.Model -> Route () -> () -> ( Model, Effect Msg )
@@ -45,25 +49,15 @@ subscriptions _ =
 -- UPDATE
 
 
-type Msg
-    = Render MarkupMsg
-
-
 update : Msg -> Model -> ( Model, Effect Msg )
 update msg model =
     case msg of
-        Render _ ->
+        Blog.Msg.Render _ ->
             ( model, Effect.none )
 
 
-view : { width : Int, height : Int } -> Model -> View Msg
 view window model =
-    Index.view window
-        { title = "Jim's Blog"
-        , attributes = []
-        , element = Scripta.element window content |> Element.map Render
-        , currentRoute = model.routeString
-        }
+    Scripta.view content window model
 
 
 content =

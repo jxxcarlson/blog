@@ -6,6 +6,7 @@ import Effect exposing (Effect)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Font as Font
+import Element.Input
 import Geometry
 import Route exposing (Route)
 import Shared
@@ -156,23 +157,69 @@ view (Settings settings) props =
         Desktop ->
             desktopView inner.window props
 
-        Mobile state ->
-            mobileView inner.window props
+        Mobile _ ->
+            mobileView inner props
 
 
-mobileView dimensions props =
+mobileView inner props =
     { title = props.title
     , attributes = []
     , element =
         row []
-            [ lhs dimensions
-
-            --, sidebar_ dimensions props.currentRoute
+            [ lhs inner.window
+            , mobileIndexView inner props
             , props.element
             ]
     }
 
 
+mobileIndexView :
+    { a | state : State, window : { width : Int, height : Int } }
+    -> { b | currentRoute : String }
+    -> Element (Msg msg)
+mobileIndexView inner props =
+    let
+        foo =
+            1
+    in
+    case inner.state of
+        Desktop ->
+            Element.none
+
+        Mobile IndexOpen ->
+            sidebar_ inner.window props.currentRoute
+
+        Mobile IndexClosed ->
+            tinyIndexView inner
+
+
+tinyIndexView : { a | window : { b | height : Int, width : Int }, state : State } -> Element (Msg msg)
+tinyIndexView inner =
+    column [ width (px 40), height (px inner.window.height), Background.color Color.sidebar ]
+        [ toggleButton inner, el [ alignBottom, Font.size 10, Font.color Color.red ] (text <| "w = " ++ String.fromInt inner.window.width ++ ", h = " ++ String.fromInt inner.window.height) ]
+
+
+toggleButton : { a | state : State } -> Element (Msg msg)
+toggleButton model =
+    let
+        labelText =
+            case model.state of
+                Desktop ->
+                    "Desktop"
+
+                Mobile IndexOpen ->
+                    "Open"
+
+                Mobile IndexClosed ->
+                    "Closed"
+    in
+    Element.Input.button [] { onPress = Just ToggleIndex, label = el [] (text labelText) }
+
+
+desktopView :
+    { width : Int, height : Int }
+    -> { a | title : String, currentRoute : String, element : Element msg }
+    -> View msg
 desktopView dimensions props =
     { title = props.title
     , attributes = []

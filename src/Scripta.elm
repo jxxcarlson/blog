@@ -1,7 +1,8 @@
-module Scripta exposing (display, element, katexCSS)
+module Scripta exposing (display, element, katexCSS, view)
 
+import Blog.Msg
 import Color
-import Components.Index as Sidebar
+import Components.Index
 import Element exposing (..)
 import Element.Background as Background
 import Element.Font as Font
@@ -11,10 +12,20 @@ import Html.Attributes
 import Render.Msg exposing (MarkupMsg)
 import ScriptaV2.API
 import ScriptaV2.Language
-import Shared.Msg
-import View
+import View exposing (View)
 
 
+view : String -> { width : Int, height : Int } -> { a | routeString : String } -> View Blog.Msg.Msg
+view src window model =
+    Components.Index.view window
+        { title = "Jim's Blog"
+        , attributes = []
+        , element = element window src |> Element.map Blog.Msg.Render
+        , currentRoute = model.routeString
+        }
+
+
+element : { width : Int, height : Int } -> String -> Element MarkupMsg
 element window content =
     row []
         [ katexCSS
