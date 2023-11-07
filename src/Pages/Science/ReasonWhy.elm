@@ -1,6 +1,6 @@
 module Pages.Science.ReasonWhy exposing (Model, Msg(..), page)
 
-import Components.Index as Sidebar
+import Components.Index as Index
 import Effect exposing (Effect)
 import Element exposing (..)
 import Page exposing (Page)
@@ -13,10 +13,6 @@ import View exposing (View)
 
 page : Shared.Model -> Route () -> Page Model Msg
 page shared route =
-    let
-        _ =
-            Debug.log "@@@!SH: @Page New" shared.dimensions
-    in
     Page.new
         { init = init shared route
         , update = update
@@ -37,7 +33,7 @@ type alias Model =
 
 init : Shared.Model -> Route () -> () -> ( Model, Effect Msg )
 init shared route _ =
-    ( { window = shared.dimensions |> Debug.log "@@@!SH: INIT MODEL", routeString = "/science/reason-why" }, Effect.none )
+    ( { window = shared.dimensions, routeString = "/science/reason-why" }, Effect.none )
 
 
 subscriptions : Model -> Sub Msg
@@ -62,7 +58,7 @@ update msg model =
 
 view : { width : Int, height : Int } -> Model -> View Msg
 view window model =
-    Sidebar.view window
+    Index.view window
         { title = "Jim's Blog"
         , attributes = []
         , element = Scripta.element window content |> Element.map Render

@@ -1,6 +1,6 @@
 module Pages.Science.Champagne exposing (Model, Msg(..), page)
 
-import Components.Index as Sidebar
+import Components.Index as Index
 import Effect exposing (Effect)
 import Element exposing (..)
 import Page exposing (Page)
@@ -58,7 +58,7 @@ update msg model =
 
 view : { width : Int, height : Int } -> Model -> View Msg
 view window model =
-    Sidebar.view window
+    Index.view window
         { title = "Jim's Blog"
         , attributes = []
         , element = Scripta.element window content |> Element.map Render

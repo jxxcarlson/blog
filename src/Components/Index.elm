@@ -6,7 +6,6 @@ import Element exposing (..)
 import Element.Background as Background
 import Element.Font as Font
 import Geometry
-import Html.Attributes
 import View exposing (View)
 
 

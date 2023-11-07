@@ -7,7 +7,6 @@ import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
 import Element.Input as Input
-import Html exposing (Html)
 import Page exposing (Page)
 import Route exposing (Route)
 import Shared
