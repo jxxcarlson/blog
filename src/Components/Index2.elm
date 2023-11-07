@@ -1,5 +1,6 @@
 module Components.Index2 exposing (..)
 
+import Blog.Msg
 import Color
 import Config
 import Effect exposing (Effect)
@@ -161,6 +162,10 @@ view (Settings settings) props =
             mobileView inner props
 
 
+mobileView :
+    { a | window : { width : Int, height : Int }, state : State }
+    -> { b | title : String, currentRoute : String, element : Element (Msg msg) }
+    -> { title : String, attributes : List (Element.Attribute msg), element : Element (Msg msg) }
 mobileView inner props =
     { title = props.title
     , attributes = []

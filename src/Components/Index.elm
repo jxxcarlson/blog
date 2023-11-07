@@ -32,8 +32,6 @@ mobileView dimensions props =
     , element =
         row []
             [ lhs dimensions
-
-            --, sidebar_ dimensions props.currentRoute
             , props.element
             ]
     }

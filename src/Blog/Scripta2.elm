@@ -1,8 +1,8 @@
-module Blog.Scripta exposing (display, element, katexCSS, view)
+module Blog.Scripta2 exposing (display, element, katexCSS, view)
 
 import Blog.Msg
 import Color
-import Components.Index
+import Components.Index2
 import Element exposing (..)
 import Element.Background as Background
 import Element.Font as Font
@@ -17,7 +17,7 @@ import View exposing (View)
 
 view : String -> { width : Int, height : Int } -> { a | routeString : String } -> View Blog.Msg.Msg
 view src window model =
-    Components.Index.view window
+    Components.Index2.view window
         { title = "Jim's Blog"
         , attributes = []
         , element = element window src |> Element.map Blog.Msg.Render
