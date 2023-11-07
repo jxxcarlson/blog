@@ -141,37 +141,33 @@ update props =
 
 
 view :
-    Index msg
-    ->
-        { title : String
-        , attributes : List (Element msg)
-        , element : Element msg
-        , currentRoute : String
-        }
-    -> View msg
-view (Settings settings) props =
+    Index (Msg msg)
+    -> { a | title : String, currentRoute : String, element : Element (Msg msg) }
+    -> View (Msg msg)
+view ((Settings settings) as index) props =
     let
         (Model inner) =
             settings.model
     in
     case inner.state of
         Desktop ->
-            desktopView inner.window props
+            desktopView_ inner.window props
 
         Mobile _ ->
-            mobileView inner props
+            mobileView_ index inner props
 
 
-mobileView :
-    { a | window : { width : Int, height : Int }, state : State }
-    -> { b | title : String, currentRoute : String, element : Element (Msg msg) }
-    -> { title : String, attributes : List (Element.Attribute msg), element : Element (Msg msg) }
-mobileView inner props =
+mobileView_ :
+    Index (Msg msg)
+    -> { a | window : { width : Int, height : Int }, state : State }
+    -> { b | title : c, currentRoute : String, element : Element (Msg msg) }
+    -> { title : c, attributes : List d, element : Element (Msg msg) }
+mobileView_ (Settings settings) inner props =
     { title = props.title
     , attributes = []
     , element =
         row []
-            [ lhs inner.window
+            [ lhs inner.window |> Element.map settings.toMsg
             , mobileIndexView inner props
             , props.element
             ]
@@ -188,7 +184,7 @@ mobileIndexView inner props =
             Element.none
 
         Mobile IndexOpen ->
-            sidebar_ inner.window props.currentRoute
+            index_ inner.window props.currentRoute
 
         Mobile IndexClosed ->
             tinyIndexView inner
@@ -217,22 +213,23 @@ toggleButton model =
     Element.Input.button [] { onPress = Just ToggleIndex, label = el [] (text labelText) }
 
 
-desktopView :
+desktopView_ :
     { width : Int, height : Int }
     -> { a | title : String, currentRoute : String, element : Element msg }
     -> View msg
-desktopView dimensions props =
+desktopView_ dimensions props =
     { title = props.title
     , attributes = []
     , element =
         row []
             [ lhs dimensions
-            , sidebar_ dimensions props.currentRoute
+            , index_ dimensions props.currentRoute
             , props.element
             ]
     }
 
 
+lhs : { width : Int, height : Int } -> Element msg
 lhs window =
     column
         [ width (px (Geometry.lhsWidth window))
@@ -253,7 +250,11 @@ fontSize dimensions =
         14
 
 
-sidebar_ dimensions currentRoute =
+
+--index_ : { width : Int, height : Int } -> String -> Element msg
+
+
+index_ dimensions currentRoute =
     column
         [ alignTop
         , Font.size (fontSize dimensions)
