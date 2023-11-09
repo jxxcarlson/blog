@@ -83,10 +83,9 @@ sidebar_ dimensions currentRoute =
         ]
         [ item currentRoute "/" "Home"
         , item currentRoute "/about" "About"
-        , item currentRoute "/art/experiment-chatgpt" "Art: ChatGPT"
+        , item currentRoute "/art/experiment-chatgpt" "ChatGPT"
         , item currentRoute "/photos" "Photos"
         , item currentRoute "/science" "Science"
-        , item currentRoute "/math/entropy" "Math: Entropy"
         , item currentRoute "/apps" "Apps"
         , el [ alignBottom, Font.size (fontSize dimensions), Font.color Color.red ] (text <| "w = " ++ String.fromInt dimensions.width ++ ", h = " ++ String.fromInt dimensions.height)
 

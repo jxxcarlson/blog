@@ -19,12 +19,12 @@ import Pages.About
 import Pages.Apps
 import Pages.Art.ExperimentChatgpt
 import Pages.Counter
-import Pages.Math.Entropy
 import Pages.Photos
 import Pages.Photos.NYC
 import Pages.Photos.Paris
 import Pages.Science
 import Pages.Science.Champagne
+import Pages.Science.Entropy
 import Pages.Science.ReasonWhy
 import Pages.NotFound_
 import Pages.NotFound_
@@ -176,23 +176,6 @@ initPageAndLayout model =
             , layout = Nothing
             }
 
-        Route.Path.Math_Entropy ->
-            let
-                page : Page.Page Pages.Math.Entropy.Model Pages.Math.Entropy.Msg
-                page =
-                    Pages.Math.Entropy.page model.shared (Route.fromUrl () model.url)
-
-                ( pageModel, pageEffect ) =
-                    Page.init page ()
-            in
-            { page = 
-                Tuple.mapBoth
-                    Main.Pages.Model.Math_Entropy
-                    (Effect.map Main.Pages.Msg.Math_Entropy >> fromPageEffect model)
-                    ( pageModel, pageEffect )
-            , layout = Nothing
-            }
-
         Route.Path.Photos ->
             let
                 page : Page.Page Pages.Photos.Model Pages.Photos.Msg
@@ -274,6 +257,23 @@ initPageAndLayout model =
                 Tuple.mapBoth
                     Main.Pages.Model.Science_Champagne
                     (Effect.map Main.Pages.Msg.Science_Champagne >> fromPageEffect model)
+                    ( pageModel, pageEffect )
+            , layout = Nothing
+            }
+
+        Route.Path.Science_Entropy ->
+            let
+                page : Page.Page Pages.Science.Entropy.Model Pages.Science.Entropy.Msg
+                page =
+                    Pages.Science.Entropy.page model.shared (Route.fromUrl () model.url)
+
+                ( pageModel, pageEffect ) =
+                    Page.init page ()
+            in
+            { page = 
+                Tuple.mapBoth
+                    Main.Pages.Model.Science_Entropy
+                    (Effect.map Main.Pages.Msg.Science_Entropy >> fromPageEffect model)
                     ( pageModel, pageEffect )
             , layout = Nothing
             }
@@ -548,12 +548,6 @@ updateFromPage msg model =
                 (Effect.map Main.Pages.Msg.Counter >> fromPageEffect model)
                 (Page.update (Pages.Counter.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
 
-        ( Main.Pages.Msg.Math_Entropy pageMsg, Main.Pages.Model.Math_Entropy pageModel ) ->
-            Tuple.mapBoth
-                Main.Pages.Model.Math_Entropy
-                (Effect.map Main.Pages.Msg.Math_Entropy >> fromPageEffect model)
-                (Page.update (Pages.Math.Entropy.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
-
         ( Main.Pages.Msg.Photos pageMsg, Main.Pages.Model.Photos pageModel ) ->
             Tuple.mapBoth
                 Main.Pages.Model.Photos
@@ -583,6 +577,12 @@ updateFromPage msg model =
                 Main.Pages.Model.Science_Champagne
                 (Effect.map Main.Pages.Msg.Science_Champagne >> fromPageEffect model)
                 (Page.update (Pages.Science.Champagne.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
+
+        ( Main.Pages.Msg.Science_Entropy pageMsg, Main.Pages.Model.Science_Entropy pageModel ) ->
+            Tuple.mapBoth
+                Main.Pages.Model.Science_Entropy
+                (Effect.map Main.Pages.Msg.Science_Entropy >> fromPageEffect model)
+                (Page.update (Pages.Science.Entropy.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
 
         ( Main.Pages.Msg.Science_ReasonWhy pageMsg, Main.Pages.Model.Science_ReasonWhy pageModel ) ->
             Tuple.mapBoth
@@ -649,12 +649,6 @@ toLayoutFromPage model =
                 |> Page.layout pageModel
                 |> Maybe.map (Layouts.map (Main.Pages.Msg.Counter >> Page))
 
-        Main.Pages.Model.Math_Entropy pageModel ->
-            Route.fromUrl () model.url
-                |> Pages.Math.Entropy.page model.shared
-                |> Page.layout pageModel
-                |> Maybe.map (Layouts.map (Main.Pages.Msg.Math_Entropy >> Page))
-
         Main.Pages.Model.Photos pageModel ->
             Route.fromUrl () model.url
                 |> Pages.Photos.page model.shared
@@ -684,6 +678,12 @@ toLayoutFromPage model =
                 |> Pages.Science.Champagne.page model.shared
                 |> Page.layout pageModel
                 |> Maybe.map (Layouts.map (Main.Pages.Msg.Science_Champagne >> Page))
+
+        Main.Pages.Model.Science_Entropy pageModel ->
+            Route.fromUrl () model.url
+                |> Pages.Science.Entropy.page model.shared
+                |> Page.layout pageModel
+                |> Maybe.map (Layouts.map (Main.Pages.Msg.Science_Entropy >> Page))
 
         Main.Pages.Model.Science_ReasonWhy pageModel ->
             Route.fromUrl () model.url
@@ -767,11 +767,6 @@ subscriptions model =
                         |> Sub.map Main.Pages.Msg.Counter
                         |> Sub.map Page
 
-                Main.Pages.Model.Math_Entropy pageModel ->
-                    Page.subscriptions (Pages.Math.Entropy.page model.shared (Route.fromUrl () model.url)) pageModel
-                        |> Sub.map Main.Pages.Msg.Math_Entropy
-                        |> Sub.map Page
-
                 Main.Pages.Model.Photos pageModel ->
                     Page.subscriptions (Pages.Photos.page model.shared (Route.fromUrl () model.url)) pageModel
                         |> Sub.map Main.Pages.Msg.Photos
@@ -795,6 +790,11 @@ subscriptions model =
                 Main.Pages.Model.Science_Champagne pageModel ->
                     Page.subscriptions (Pages.Science.Champagne.page model.shared (Route.fromUrl () model.url)) pageModel
                         |> Sub.map Main.Pages.Msg.Science_Champagne
+                        |> Sub.map Page
+
+                Main.Pages.Model.Science_Entropy pageModel ->
+                    Page.subscriptions (Pages.Science.Entropy.page model.shared (Route.fromUrl () model.url)) pageModel
+                        |> Sub.map Main.Pages.Msg.Science_Entropy
                         |> Sub.map Page
 
                 Main.Pages.Model.Science_ReasonWhy pageModel ->
@@ -886,11 +886,6 @@ viewPage model =
                 |> View.map Main.Pages.Msg.Counter
                 |> View.map Page
 
-        Main.Pages.Model.Math_Entropy pageModel ->
-            Page.view (Pages.Math.Entropy.page model.shared (Route.fromUrl () model.url)) pageModel
-                |> View.map Main.Pages.Msg.Math_Entropy
-                |> View.map Page
-
         Main.Pages.Model.Photos pageModel ->
             Page.view (Pages.Photos.page model.shared (Route.fromUrl () model.url)) pageModel
                 |> View.map Main.Pages.Msg.Photos
@@ -914,6 +909,11 @@ viewPage model =
         Main.Pages.Model.Science_Champagne pageModel ->
             Page.view (Pages.Science.Champagne.page model.shared (Route.fromUrl () model.url)) pageModel
                 |> View.map Main.Pages.Msg.Science_Champagne
+                |> View.map Page
+
+        Main.Pages.Model.Science_Entropy pageModel ->
+            Page.view (Pages.Science.Entropy.page model.shared (Route.fromUrl () model.url)) pageModel
+                |> View.map Main.Pages.Msg.Science_Entropy
                 |> View.map Page
 
         Main.Pages.Model.Science_ReasonWhy pageModel ->
@@ -1020,12 +1020,6 @@ toPageUrlHookCmd model routes =
                 |> List.map Page
                 |> toCommands
 
-        Main.Pages.Model.Math_Entropy pageModel ->
-            Page.toUrlMessages routes (Pages.Math.Entropy.page model.shared (Route.fromUrl () model.url)) 
-                |> List.map Main.Pages.Msg.Math_Entropy
-                |> List.map Page
-                |> toCommands
-
         Main.Pages.Model.Photos pageModel ->
             Page.toUrlMessages routes (Pages.Photos.page model.shared (Route.fromUrl () model.url)) 
                 |> List.map Main.Pages.Msg.Photos
@@ -1053,6 +1047,12 @@ toPageUrlHookCmd model routes =
         Main.Pages.Model.Science_Champagne pageModel ->
             Page.toUrlMessages routes (Pages.Science.Champagne.page model.shared (Route.fromUrl () model.url)) 
                 |> List.map Main.Pages.Msg.Science_Champagne
+                |> List.map Page
+                |> toCommands
+
+        Main.Pages.Model.Science_Entropy pageModel ->
+            Page.toUrlMessages routes (Pages.Science.Entropy.page model.shared (Route.fromUrl () model.url)) 
+                |> List.map Main.Pages.Msg.Science_Entropy
                 |> List.map Page
                 |> toCommands
 
@@ -1133,9 +1133,6 @@ isAuthProtected routePath =
         Route.Path.Counter ->
             False
 
-        Route.Path.Math_Entropy ->
-            False
-
         Route.Path.Photos ->
             False
 
@@ -1149,6 +1146,9 @@ isAuthProtected routePath =
             False
 
         Route.Path.Science_Champagne ->
+            False
+
+        Route.Path.Science_Entropy ->
             False
 
         Route.Path.Science_ReasonWhy ->

@@ -1,8 +1,8 @@
-module Pages.Math.Entropy exposing (Model, Msg, page)
+module Pages.Science.Entropy exposing (Model, Msg, page)
 
 import Blog.Model
 import Blog.Msg
-import Blog.Scripta as Scripta
+import Blog.ScriptaScience as Scripta
 import Effect exposing (Effect)
 import Page exposing (Page)
 import Route exposing (Route)

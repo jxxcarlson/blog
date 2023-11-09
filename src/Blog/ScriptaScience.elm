@@ -18,7 +18,7 @@ import View exposing (View)
 view : String -> { width : Int, height : Int } -> { a | routeString : String } -> View Blog.Msg.Msg
 view src window model =
     Index.view window
-        { title = "Jim's Blog"
+        { title = "Jim's Blog: Science"
         , attributes = []
         , element = element window src |> Element.map Blog.Msg.Render
         , currentRoute = model.routeString
