@@ -73,8 +73,9 @@ photoList model title images =
             [ spacing 48
             ]
             [ el [ Font.color (rgb 0.6 0.6 0.6) ] (link [] { url = "/", label = el [] (text "Home") })
-            , el [ Font.color (rgb 0.6 0.6 0.6) ] (link [] { url = "/photos/paris", label = el [] (text "Paris") })
+            , el [ Font.color (rgb 0.6 0.6 0.6) ] (link [] { url = "/photos", label = el [] (text "Photos") })
             , el [] (text title)
+            , el [ Font.color (rgb 0.6 0.6 0.6) ] (link [] { url = "/photos/paris", label = el [] (text "Paris") })
             ]
         , row
             [ height (px <| 40 + Geometry.photoHeight model.window)

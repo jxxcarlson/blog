@@ -13,6 +13,7 @@ type Path
     | Art_ExperimentChatgpt
     | Counter
     | Math_Entropy
+    | Photos
     | Photos_NYC
     | Photos_Paris
     | Science_Champagne
@@ -53,6 +54,9 @@ fromString urlPath =
 
         "math" :: "entropy" :: [] ->
             Just Math_Entropy
+
+        "photos" :: [] ->
+            Just Photos
 
         "photos" :: "n-y-c" :: [] ->
             Just Photos_NYC
@@ -98,6 +102,9 @@ toString path =
 
                 Math_Entropy ->
                     [ "math", "entropy" ]
+
+                Photos ->
+                    [ "photos" ]
 
                 Photos_NYC ->
                     [ "photos", "n-y-c" ]
