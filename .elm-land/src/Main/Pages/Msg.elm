@@ -10,8 +10,8 @@ import Pages.Photos.NYC
 import Pages.Photos.Paris
 import Pages.Science
 import Pages.Science.Champagne
+import Pages.Science.CreationAndAnnihilation
 import Pages.Science.Entropy
-import Pages.Science.ReasonWhy
 import Pages.NotFound_
 
 
@@ -26,6 +26,6 @@ type Msg
     | Photos_Paris Pages.Photos.Paris.Msg
     | Science Pages.Science.Msg
     | Science_Champagne Pages.Science.Champagne.Msg
+    | Science_CreationAndAnnihilation Pages.Science.CreationAndAnnihilation.Msg
     | Science_Entropy Pages.Science.Entropy.Msg
-    | Science_ReasonWhy Pages.Science.ReasonWhy.Msg
     | NotFound_ Pages.NotFound_.Msg

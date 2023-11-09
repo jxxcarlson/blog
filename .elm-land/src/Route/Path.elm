@@ -17,8 +17,8 @@ type Path
     | Photos_Paris
     | Science
     | Science_Champagne
+    | Science_CreationAndAnnihilation
     | Science_Entropy
-    | Science_ReasonWhy
     | NotFound_
 
 
@@ -68,11 +68,11 @@ fromString urlPath =
         "science" :: "champagne" :: [] ->
             Just Science_Champagne
 
+        "science" :: "creation-and-annihilation" :: [] ->
+            Just Science_CreationAndAnnihilation
+
         "science" :: "entropy" :: [] ->
             Just Science_Entropy
-
-        "science" :: "reason-why" :: [] ->
-            Just Science_ReasonWhy
 
         _ ->
             Nothing
@@ -119,11 +119,11 @@ toString path =
                 Science_Champagne ->
                     [ "science", "champagne" ]
 
+                Science_CreationAndAnnihilation ->
+                    [ "science", "creation-and-annihilation" ]
+
                 Science_Entropy ->
                     [ "science", "entropy" ]
-
-                Science_ReasonWhy ->
-                    [ "science", "reason-why" ]
 
                 NotFound_ ->
                     [ "404" ]

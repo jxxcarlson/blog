@@ -1,4 +1,4 @@
-module Pages.Science.ReasonWhy exposing (Model, Msg, page)
+module Pages.Science.CreationAndAnnihilation exposing (Model, Msg, page)
 
 import Blog.Model
 import Blog.Msg
@@ -44,7 +44,7 @@ page shared route =
 
 init : Shared.Model -> Route () -> () -> ( Model, Effect Msg )
 init shared route _ =
-    ( { window = shared.dimensions, routeString = "/science/reason-why" }, Effect.none )
+    ( { window = shared.dimensions, routeString = "/science/creation-and-annihilation" }, Effect.none )
 
 
 subscriptions : Model -> Sub Msg
@@ -59,20 +59,22 @@ subscriptions _ =
 content =
     """
 | title
-The Reason Why
+Creation, Annihilation, and the Neutrino
 
 [image https://jxxcarlsonblog.files.wordpress.com/2020/04/merlin_171584709_5ddc217b-264c-41ac-8bca-8e1b90794d4c-superjumbo.jpg width:fill]
 
 In the beginning, at the instant of creation, there came into being numerous particles:
 quarks and antiquarks, protons and and antiprotons, electrons and antielectrons,
-each kind paired with its opposite. Thus was matter and antimatter created in equal measure.
+each kind paired with its opposite. Thus were matter and antimatter created in equal measure.
 But when particle met antiparticle, an exceedingly frequent occurrence in those early times,
 the encounter was brief, violent, and almost always fatal, as both were destroyed, their substance
-vanishing in a flash of  pure energy. When the great annihilation came to an end, there were
+vanishing in a flash of pure energy. When the great annihilation came to an end, there were
 few survivors of this many-fold decimation: no more than one in a billion remained.
 They were all of one kind, the kind we now call matter.  It is of these particles that
 all we see about us is made, from the grains of sand on the seashore to the trees to the sun,
-the stars, and to the most distant galaxies.  The clue for our improbable and miraculous existence
+the stars, and to the most distant galaxies.
+
+The clue for our improbable and miraculous existence
 is hidden in the image above, an image of muon neutrino traces in a bubble chamber,
 the paradoxically huge microscope that physicists use to probe the smallest realms.
 In the laws that govern us, it turns out, there is a small asymmetry,
@@ -83,7 +85,6 @@ the explosions of stars which create the iron and nickel of which our earth’s 
 of the proton-proton reactions which power our sun,  carry to us the message of this tiny
 discrepancy, the reason for our existence.
 
-(Draft #1)
 
 [link Article by Dennis Overbye https://www.nytimes.com/2020/04/15/science/physics-neutrino-antimatter-ichikawa-t2k.html?smid=tw-share], New York Times
 

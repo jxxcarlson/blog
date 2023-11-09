@@ -57,6 +57,11 @@ Science
 
 [i To your left: essays on science: some playful, some poetic, and others serious.]
 
+[i About the serious essays: these generally start out with material that
+I try to make accessible to non-scientists and non-mathematicians.  The essays
+then move on to more technical material.]
+
+
 [i Below: some links]
 
 - [link Feynman on Physics and Chess https://scripta.io/s/jxxcarlson:feynman-physics-chess]

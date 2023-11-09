@@ -24,8 +24,8 @@ import Pages.Photos.NYC
 import Pages.Photos.Paris
 import Pages.Science
 import Pages.Science.Champagne
+import Pages.Science.CreationAndAnnihilation
 import Pages.Science.Entropy
-import Pages.Science.ReasonWhy
 import Pages.NotFound_
 import Pages.NotFound_
 import Route exposing (Route)
@@ -261,6 +261,23 @@ initPageAndLayout model =
             , layout = Nothing
             }
 
+        Route.Path.Science_CreationAndAnnihilation ->
+            let
+                page : Page.Page Pages.Science.CreationAndAnnihilation.Model Pages.Science.CreationAndAnnihilation.Msg
+                page =
+                    Pages.Science.CreationAndAnnihilation.page model.shared (Route.fromUrl () model.url)
+
+                ( pageModel, pageEffect ) =
+                    Page.init page ()
+            in
+            { page = 
+                Tuple.mapBoth
+                    Main.Pages.Model.Science_CreationAndAnnihilation
+                    (Effect.map Main.Pages.Msg.Science_CreationAndAnnihilation >> fromPageEffect model)
+                    ( pageModel, pageEffect )
+            , layout = Nothing
+            }
+
         Route.Path.Science_Entropy ->
             let
                 page : Page.Page Pages.Science.Entropy.Model Pages.Science.Entropy.Msg
@@ -274,23 +291,6 @@ initPageAndLayout model =
                 Tuple.mapBoth
                     Main.Pages.Model.Science_Entropy
                     (Effect.map Main.Pages.Msg.Science_Entropy >> fromPageEffect model)
-                    ( pageModel, pageEffect )
-            , layout = Nothing
-            }
-
-        Route.Path.Science_ReasonWhy ->
-            let
-                page : Page.Page Pages.Science.ReasonWhy.Model Pages.Science.ReasonWhy.Msg
-                page =
-                    Pages.Science.ReasonWhy.page model.shared (Route.fromUrl () model.url)
-
-                ( pageModel, pageEffect ) =
-                    Page.init page ()
-            in
-            { page = 
-                Tuple.mapBoth
-                    Main.Pages.Model.Science_ReasonWhy
-                    (Effect.map Main.Pages.Msg.Science_ReasonWhy >> fromPageEffect model)
                     ( pageModel, pageEffect )
             , layout = Nothing
             }
@@ -578,17 +578,17 @@ updateFromPage msg model =
                 (Effect.map Main.Pages.Msg.Science_Champagne >> fromPageEffect model)
                 (Page.update (Pages.Science.Champagne.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
 
+        ( Main.Pages.Msg.Science_CreationAndAnnihilation pageMsg, Main.Pages.Model.Science_CreationAndAnnihilation pageModel ) ->
+            Tuple.mapBoth
+                Main.Pages.Model.Science_CreationAndAnnihilation
+                (Effect.map Main.Pages.Msg.Science_CreationAndAnnihilation >> fromPageEffect model)
+                (Page.update (Pages.Science.CreationAndAnnihilation.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
+
         ( Main.Pages.Msg.Science_Entropy pageMsg, Main.Pages.Model.Science_Entropy pageModel ) ->
             Tuple.mapBoth
                 Main.Pages.Model.Science_Entropy
                 (Effect.map Main.Pages.Msg.Science_Entropy >> fromPageEffect model)
                 (Page.update (Pages.Science.Entropy.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
-
-        ( Main.Pages.Msg.Science_ReasonWhy pageMsg, Main.Pages.Model.Science_ReasonWhy pageModel ) ->
-            Tuple.mapBoth
-                Main.Pages.Model.Science_ReasonWhy
-                (Effect.map Main.Pages.Msg.Science_ReasonWhy >> fromPageEffect model)
-                (Page.update (Pages.Science.ReasonWhy.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
 
         ( Main.Pages.Msg.NotFound_ pageMsg, Main.Pages.Model.NotFound_ pageModel ) ->
             Tuple.mapBoth
@@ -679,17 +679,17 @@ toLayoutFromPage model =
                 |> Page.layout pageModel
                 |> Maybe.map (Layouts.map (Main.Pages.Msg.Science_Champagne >> Page))
 
+        Main.Pages.Model.Science_CreationAndAnnihilation pageModel ->
+            Route.fromUrl () model.url
+                |> Pages.Science.CreationAndAnnihilation.page model.shared
+                |> Page.layout pageModel
+                |> Maybe.map (Layouts.map (Main.Pages.Msg.Science_CreationAndAnnihilation >> Page))
+
         Main.Pages.Model.Science_Entropy pageModel ->
             Route.fromUrl () model.url
                 |> Pages.Science.Entropy.page model.shared
                 |> Page.layout pageModel
                 |> Maybe.map (Layouts.map (Main.Pages.Msg.Science_Entropy >> Page))
-
-        Main.Pages.Model.Science_ReasonWhy pageModel ->
-            Route.fromUrl () model.url
-                |> Pages.Science.ReasonWhy.page model.shared
-                |> Page.layout pageModel
-                |> Maybe.map (Layouts.map (Main.Pages.Msg.Science_ReasonWhy >> Page))
 
         Main.Pages.Model.NotFound_ pageModel ->
             Route.fromUrl () model.url
@@ -792,14 +792,14 @@ subscriptions model =
                         |> Sub.map Main.Pages.Msg.Science_Champagne
                         |> Sub.map Page
 
+                Main.Pages.Model.Science_CreationAndAnnihilation pageModel ->
+                    Page.subscriptions (Pages.Science.CreationAndAnnihilation.page model.shared (Route.fromUrl () model.url)) pageModel
+                        |> Sub.map Main.Pages.Msg.Science_CreationAndAnnihilation
+                        |> Sub.map Page
+
                 Main.Pages.Model.Science_Entropy pageModel ->
                     Page.subscriptions (Pages.Science.Entropy.page model.shared (Route.fromUrl () model.url)) pageModel
                         |> Sub.map Main.Pages.Msg.Science_Entropy
-                        |> Sub.map Page
-
-                Main.Pages.Model.Science_ReasonWhy pageModel ->
-                    Page.subscriptions (Pages.Science.ReasonWhy.page model.shared (Route.fromUrl () model.url)) pageModel
-                        |> Sub.map Main.Pages.Msg.Science_ReasonWhy
                         |> Sub.map Page
 
                 Main.Pages.Model.NotFound_ pageModel ->
@@ -911,14 +911,14 @@ viewPage model =
                 |> View.map Main.Pages.Msg.Science_Champagne
                 |> View.map Page
 
+        Main.Pages.Model.Science_CreationAndAnnihilation pageModel ->
+            Page.view (Pages.Science.CreationAndAnnihilation.page model.shared (Route.fromUrl () model.url)) pageModel
+                |> View.map Main.Pages.Msg.Science_CreationAndAnnihilation
+                |> View.map Page
+
         Main.Pages.Model.Science_Entropy pageModel ->
             Page.view (Pages.Science.Entropy.page model.shared (Route.fromUrl () model.url)) pageModel
                 |> View.map Main.Pages.Msg.Science_Entropy
-                |> View.map Page
-
-        Main.Pages.Model.Science_ReasonWhy pageModel ->
-            Page.view (Pages.Science.ReasonWhy.page model.shared (Route.fromUrl () model.url)) pageModel
-                |> View.map Main.Pages.Msg.Science_ReasonWhy
                 |> View.map Page
 
         Main.Pages.Model.NotFound_ pageModel ->
@@ -1050,15 +1050,15 @@ toPageUrlHookCmd model routes =
                 |> List.map Page
                 |> toCommands
 
-        Main.Pages.Model.Science_Entropy pageModel ->
-            Page.toUrlMessages routes (Pages.Science.Entropy.page model.shared (Route.fromUrl () model.url)) 
-                |> List.map Main.Pages.Msg.Science_Entropy
+        Main.Pages.Model.Science_CreationAndAnnihilation pageModel ->
+            Page.toUrlMessages routes (Pages.Science.CreationAndAnnihilation.page model.shared (Route.fromUrl () model.url)) 
+                |> List.map Main.Pages.Msg.Science_CreationAndAnnihilation
                 |> List.map Page
                 |> toCommands
 
-        Main.Pages.Model.Science_ReasonWhy pageModel ->
-            Page.toUrlMessages routes (Pages.Science.ReasonWhy.page model.shared (Route.fromUrl () model.url)) 
-                |> List.map Main.Pages.Msg.Science_ReasonWhy
+        Main.Pages.Model.Science_Entropy pageModel ->
+            Page.toUrlMessages routes (Pages.Science.Entropy.page model.shared (Route.fromUrl () model.url)) 
+                |> List.map Main.Pages.Msg.Science_Entropy
                 |> List.map Page
                 |> toCommands
 
@@ -1148,10 +1148,10 @@ isAuthProtected routePath =
         Route.Path.Science_Champagne ->
             False
 
-        Route.Path.Science_Entropy ->
+        Route.Path.Science_CreationAndAnnihilation ->
             False
 
-        Route.Path.Science_ReasonWhy ->
+        Route.Path.Science_Entropy ->
             False
 
         Route.Path.NotFound_ ->

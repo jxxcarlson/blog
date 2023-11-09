@@ -82,9 +82,11 @@ sidebar_ dimensions currentRoute =
         , Background.color Color.sidebar
         ]
         [ item currentRoute "/" "Home"
+        , item currentRoute "/science" "Science"
+        , text "----------"
         , item currentRoute "/science/champagne" "Champagne & Science"
         , item currentRoute "/science/entropy" "Entropy"
-        , item currentRoute "/science/reason-why" "Reason Why"
+        , item currentRoute "/science/creation-and-annihilation" "Creation, Annihilation ..."
         , el [ alignBottom, Font.size (fontSize dimensions), Font.color Color.red ] (text <| "w = " ++ String.fromInt dimensions.width ++ ", h = " ++ String.fromInt dimensions.height)
 
         --, item currentRoute "/counter" "Counter"

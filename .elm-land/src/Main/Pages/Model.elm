@@ -10,8 +10,8 @@ import Pages.Photos.NYC
 import Pages.Photos.Paris
 import Pages.Science
 import Pages.Science.Champagne
+import Pages.Science.CreationAndAnnihilation
 import Pages.Science.Entropy
-import Pages.Science.ReasonWhy
 import Pages.NotFound_
 import View exposing (View)
 
@@ -27,8 +27,8 @@ type Model
     | Photos_Paris Pages.Photos.Paris.Model
     | Science Pages.Science.Model
     | Science_Champagne Pages.Science.Champagne.Model
+    | Science_CreationAndAnnihilation Pages.Science.CreationAndAnnihilation.Model
     | Science_Entropy Pages.Science.Entropy.Model
-    | Science_ReasonWhy Pages.Science.ReasonWhy.Model
     | NotFound_ Pages.NotFound_.Model
     | Redirecting_
     | Loading_
