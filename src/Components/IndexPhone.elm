@@ -1,4 +1,4 @@
-module Components.Index2 exposing (..)
+module Components.IndexPhone exposing (..)
 
 import Blog.Msg
 import Color
@@ -53,27 +53,13 @@ init shared route _ =
     ( Model
         { window = shared.dimensions
         , routeString = Route.toString route
-        , state = initState shared.dimensions.width
+        , state = IndexClosed
         }
     , Effect.none
     )
 
 
-initState : Int -> State
-initState width =
-    if width < Config.mobileWidth then
-        Mobile IndexClosed
-
-    else
-        Desktop
-
-
 type State
-    = Desktop
-    | Mobile MobileState
-
-
-type MobileState
     = IndexOpen
     | IndexClosed
 
@@ -105,39 +91,11 @@ update props =
 
             ToggleIndex ->
                 case model.state of
-                    Desktop ->
-                        ( Model
-                            { model
-                                | state =
-                                    case model.state of
-                                        Desktop ->
-                                            Desktop
+                    IndexOpen ->
+                        ( Model { model | state = IndexClosed }, Effect.none )
 
-                                        Mobile IndexOpen ->
-                                            Desktop
-
-                                        Mobile IndexClosed ->
-                                            Desktop
-                            }
-                        , Effect.none
-                        )
-
-                    Mobile state ->
-                        ( Model
-                            { model
-                                | state =
-                                    case model.state of
-                                        Mobile IndexOpen ->
-                                            Mobile IndexClosed
-
-                                        Mobile IndexClosed ->
-                                            Mobile IndexOpen
-
-                                        Desktop ->
-                                            Desktop
-                            }
-                        , Effect.none
-                        )
+                    IndexClosed ->
+                        ( Model { model | state = IndexOpen }, Effect.none )
 
 
 view :
@@ -149,12 +107,7 @@ view ((Settings settings) as index) props =
         (Model inner) =
             settings.model
     in
-    case inner.state of
-        Desktop ->
-            desktopView_ inner.window props
-
-        Mobile _ ->
-            mobileView_ index inner props
+    mobileView_ index inner props
 
 
 mobileView_ :
@@ -180,13 +133,10 @@ mobileIndexView :
     -> Element (Msg msg)
 mobileIndexView inner props =
     case inner.state of
-        Desktop ->
-            Element.none
-
-        Mobile IndexOpen ->
+        IndexOpen ->
             index_ inner.window props.currentRoute
 
-        Mobile IndexClosed ->
+        IndexClosed ->
             tinyIndexView inner
 
 
@@ -201,32 +151,13 @@ toggleButton model =
     let
         labelText =
             case model.state of
-                Desktop ->
-                    "Desktop"
+                IndexOpen ->
+                    "O"
 
-                Mobile IndexOpen ->
-                    "Open"
-
-                Mobile IndexClosed ->
-                    "Closed"
+                IndexClosed ->
+                    "C"
     in
     Element.Input.button [] { onPress = Just ToggleIndex, label = el [] (text labelText) }
-
-
-desktopView_ :
-    { width : Int, height : Int }
-    -> { a | title : String, currentRoute : String, element : Element msg }
-    -> View msg
-desktopView_ dimensions props =
-    { title = props.title
-    , attributes = []
-    , element =
-        row []
-            [ lhs dimensions
-            , index_ dimensions props.currentRoute
-            , props.element
-            ]
-    }
 
 
 lhs : { width : Int, height : Int } -> Element msg

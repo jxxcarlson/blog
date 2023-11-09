@@ -4,7 +4,7 @@ import Blog.Model
 import Blog.Msg
 import Color
 import Components.Index
-import Components.Index2
+import Components.IndexPhone
 import Effect exposing (Effect)
 import Element exposing (..)
 import Element.Background as Background
