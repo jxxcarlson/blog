@@ -1,4 +1,4 @@
-module Blog.Scripta2 exposing (display, element, katexCSS, view)
+module Blog.ScriptaPhone exposing (display, element, katexCSS, view)
 
 import Blog.Model
 import Blog.Msg
