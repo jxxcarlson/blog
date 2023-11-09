@@ -1,4 +1,4 @@
-module Components.Index exposing (view)
+module Components.IndexScience exposing (view)
 
 import Color
 import Config
@@ -82,12 +82,8 @@ sidebar_ dimensions currentRoute =
         , Background.color Color.sidebar
         ]
         [ item currentRoute "/" "Home"
-        , item currentRoute "/about" "About"
-        , item currentRoute "/art/experiment-chatgpt" "Art: ChatGPT"
-        , item currentRoute "/photos" "Photos"
-        , item currentRoute "/science" "Science"
-        , item currentRoute "/math/entropy" "Math: Entropy"
-        , item currentRoute "/apps" "Apps"
+        , item currentRoute "/science/champagne" "Champagne & Science"
+        , item currentRoute "/science/reason-why" "Reason Why"
         , el [ alignBottom, Font.size (fontSize dimensions), Font.color Color.red ] (text <| "w = " ++ String.fromInt dimensions.width ++ ", h = " ++ String.fromInt dimensions.height)
 
         --, item currentRoute "/counter" "Counter"

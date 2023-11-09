@@ -9,6 +9,7 @@ import Pages.Math.Entropy
 import Pages.Photos
 import Pages.Photos.NYC
 import Pages.Photos.Paris
+import Pages.Science
 import Pages.Science.Champagne
 import Pages.Science.ReasonWhy
 import Pages.NotFound_
@@ -25,6 +26,7 @@ type Model
     | Photos Pages.Photos.Model
     | Photos_NYC Pages.Photos.NYC.Model
     | Photos_Paris Pages.Photos.Paris.Model
+    | Science Pages.Science.Model
     | Science_Champagne Pages.Science.Champagne.Model
     | Science_ReasonWhy Pages.Science.ReasonWhy.Model
     | NotFound_ Pages.NotFound_.Model

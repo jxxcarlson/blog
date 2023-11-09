@@ -23,6 +23,7 @@ import Pages.Math.Entropy
 import Pages.Photos
 import Pages.Photos.NYC
 import Pages.Photos.Paris
+import Pages.Science
 import Pages.Science.Champagne
 import Pages.Science.ReasonWhy
 import Pages.NotFound_
@@ -239,6 +240,23 @@ initPageAndLayout model =
                 Tuple.mapBoth
                     Main.Pages.Model.Photos_Paris
                     (Effect.map Main.Pages.Msg.Photos_Paris >> fromPageEffect model)
+                    ( pageModel, pageEffect )
+            , layout = Nothing
+            }
+
+        Route.Path.Science ->
+            let
+                page : Page.Page Pages.Science.Model Pages.Science.Msg
+                page =
+                    Pages.Science.page model.shared (Route.fromUrl () model.url)
+
+                ( pageModel, pageEffect ) =
+                    Page.init page ()
+            in
+            { page = 
+                Tuple.mapBoth
+                    Main.Pages.Model.Science
+                    (Effect.map Main.Pages.Msg.Science >> fromPageEffect model)
                     ( pageModel, pageEffect )
             , layout = Nothing
             }
@@ -554,6 +572,12 @@ updateFromPage msg model =
                 (Effect.map Main.Pages.Msg.Photos_Paris >> fromPageEffect model)
                 (Page.update (Pages.Photos.Paris.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
 
+        ( Main.Pages.Msg.Science pageMsg, Main.Pages.Model.Science pageModel ) ->
+            Tuple.mapBoth
+                Main.Pages.Model.Science
+                (Effect.map Main.Pages.Msg.Science >> fromPageEffect model)
+                (Page.update (Pages.Science.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
+
         ( Main.Pages.Msg.Science_Champagne pageMsg, Main.Pages.Model.Science_Champagne pageModel ) ->
             Tuple.mapBoth
                 Main.Pages.Model.Science_Champagne
@@ -648,6 +672,12 @@ toLayoutFromPage model =
                 |> Pages.Photos.Paris.page model.shared
                 |> Page.layout pageModel
                 |> Maybe.map (Layouts.map (Main.Pages.Msg.Photos_Paris >> Page))
+
+        Main.Pages.Model.Science pageModel ->
+            Route.fromUrl () model.url
+                |> Pages.Science.page model.shared
+                |> Page.layout pageModel
+                |> Maybe.map (Layouts.map (Main.Pages.Msg.Science >> Page))
 
         Main.Pages.Model.Science_Champagne pageModel ->
             Route.fromUrl () model.url
@@ -755,6 +785,11 @@ subscriptions model =
                 Main.Pages.Model.Photos_Paris pageModel ->
                     Page.subscriptions (Pages.Photos.Paris.page model.shared (Route.fromUrl () model.url)) pageModel
                         |> Sub.map Main.Pages.Msg.Photos_Paris
+                        |> Sub.map Page
+
+                Main.Pages.Model.Science pageModel ->
+                    Page.subscriptions (Pages.Science.page model.shared (Route.fromUrl () model.url)) pageModel
+                        |> Sub.map Main.Pages.Msg.Science
                         |> Sub.map Page
 
                 Main.Pages.Model.Science_Champagne pageModel ->
@@ -869,6 +904,11 @@ viewPage model =
         Main.Pages.Model.Photos_Paris pageModel ->
             Page.view (Pages.Photos.Paris.page model.shared (Route.fromUrl () model.url)) pageModel
                 |> View.map Main.Pages.Msg.Photos_Paris
+                |> View.map Page
+
+        Main.Pages.Model.Science pageModel ->
+            Page.view (Pages.Science.page model.shared (Route.fromUrl () model.url)) pageModel
+                |> View.map Main.Pages.Msg.Science
                 |> View.map Page
 
         Main.Pages.Model.Science_Champagne pageModel ->
@@ -1004,6 +1044,12 @@ toPageUrlHookCmd model routes =
                 |> List.map Page
                 |> toCommands
 
+        Main.Pages.Model.Science pageModel ->
+            Page.toUrlMessages routes (Pages.Science.page model.shared (Route.fromUrl () model.url)) 
+                |> List.map Main.Pages.Msg.Science
+                |> List.map Page
+                |> toCommands
+
         Main.Pages.Model.Science_Champagne pageModel ->
             Page.toUrlMessages routes (Pages.Science.Champagne.page model.shared (Route.fromUrl () model.url)) 
                 |> List.map Main.Pages.Msg.Science_Champagne
@@ -1097,6 +1143,9 @@ isAuthProtected routePath =
             False
 
         Route.Path.Photos_Paris ->
+            False
+
+        Route.Path.Science ->
             False
 
         Route.Path.Science_Champagne ->

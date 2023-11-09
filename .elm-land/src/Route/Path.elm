@@ -16,6 +16,7 @@ type Path
     | Photos
     | Photos_NYC
     | Photos_Paris
+    | Science
     | Science_Champagne
     | Science_ReasonWhy
     | NotFound_
@@ -64,6 +65,9 @@ fromString urlPath =
         "photos" :: "paris" :: [] ->
             Just Photos_Paris
 
+        "science" :: [] ->
+            Just Science
+
         "science" :: "champagne" :: [] ->
             Just Science_Champagne
 
@@ -111,6 +115,9 @@ toString path =
 
                 Photos_Paris ->
                     [ "photos", "paris" ]
+
+                Science ->
+                    [ "science" ]
 
                 Science_Champagne ->
                     [ "science", "champagne" ]
