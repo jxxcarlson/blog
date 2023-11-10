@@ -55,12 +55,16 @@ content =
 | title
 Apps
 
-[i A small collection of apps made with the [link Elm programming language https://elm-lang.org]]
+[large [i A small collection of apps made with the [link Elm programming language https://elm-lang.org].
+Click on the links on the left to try them out.]]
 
 [vspace 1]
+
+[b Brief descriptions]
 
 - Drum Machine app:
 turns text into drum sounds.
 
-- Random Exchange Model: a radically simplified model of a small economy.
+- Random Exchange Model: a radically simplified model of a small economy. Has some implications
+for distribution and tax policy despite its simplicity.
 """
