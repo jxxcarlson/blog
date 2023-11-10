@@ -3,6 +3,8 @@ module Main.Pages.Model exposing (Model(..))
 import Pages.Home_
 import Pages.About
 import Pages.Apps
+import Pages.Apps.DrumMachine
+import Pages.Apps.RandomExchangeModel
 import Pages.Art.ExperimentChatgpt
 import Pages.Counter
 import Pages.Photos
@@ -20,6 +22,8 @@ type Model
     = Home_ Pages.Home_.Model
     | About Pages.About.Model
     | Apps Pages.Apps.Model
+    | Apps_DrumMachine Pages.Apps.DrumMachine.Model
+    | Apps_RandomExchangeModel Pages.Apps.RandomExchangeModel.Model
     | Art_ExperimentChatgpt Pages.Art.ExperimentChatgpt.Model
     | Counter Pages.Counter.Model
     | Photos Pages.Photos.Model

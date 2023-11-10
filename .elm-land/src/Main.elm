@@ -17,6 +17,8 @@ import Page
 import Pages.Home_
 import Pages.About
 import Pages.Apps
+import Pages.Apps.DrumMachine
+import Pages.Apps.RandomExchangeModel
 import Pages.Art.ExperimentChatgpt
 import Pages.Counter
 import Pages.Photos
@@ -138,6 +140,40 @@ initPageAndLayout model =
                 Tuple.mapBoth
                     Main.Pages.Model.Apps
                     (Effect.map Main.Pages.Msg.Apps >> fromPageEffect model)
+                    ( pageModel, pageEffect )
+            , layout = Nothing
+            }
+
+        Route.Path.Apps_DrumMachine ->
+            let
+                page : Page.Page Pages.Apps.DrumMachine.Model Pages.Apps.DrumMachine.Msg
+                page =
+                    Pages.Apps.DrumMachine.page model.shared (Route.fromUrl () model.url)
+
+                ( pageModel, pageEffect ) =
+                    Page.init page ()
+            in
+            { page = 
+                Tuple.mapBoth
+                    Main.Pages.Model.Apps_DrumMachine
+                    (Effect.map Main.Pages.Msg.Apps_DrumMachine >> fromPageEffect model)
+                    ( pageModel, pageEffect )
+            , layout = Nothing
+            }
+
+        Route.Path.Apps_RandomExchangeModel ->
+            let
+                page : Page.Page Pages.Apps.RandomExchangeModel.Model Pages.Apps.RandomExchangeModel.Msg
+                page =
+                    Pages.Apps.RandomExchangeModel.page model.shared (Route.fromUrl () model.url)
+
+                ( pageModel, pageEffect ) =
+                    Page.init page ()
+            in
+            { page = 
+                Tuple.mapBoth
+                    Main.Pages.Model.Apps_RandomExchangeModel
+                    (Effect.map Main.Pages.Msg.Apps_RandomExchangeModel >> fromPageEffect model)
                     ( pageModel, pageEffect )
             , layout = Nothing
             }
@@ -536,6 +572,18 @@ updateFromPage msg model =
                 (Effect.map Main.Pages.Msg.Apps >> fromPageEffect model)
                 (Page.update (Pages.Apps.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
 
+        ( Main.Pages.Msg.Apps_DrumMachine pageMsg, Main.Pages.Model.Apps_DrumMachine pageModel ) ->
+            Tuple.mapBoth
+                Main.Pages.Model.Apps_DrumMachine
+                (Effect.map Main.Pages.Msg.Apps_DrumMachine >> fromPageEffect model)
+                (Page.update (Pages.Apps.DrumMachine.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
+
+        ( Main.Pages.Msg.Apps_RandomExchangeModel pageMsg, Main.Pages.Model.Apps_RandomExchangeModel pageModel ) ->
+            Tuple.mapBoth
+                Main.Pages.Model.Apps_RandomExchangeModel
+                (Effect.map Main.Pages.Msg.Apps_RandomExchangeModel >> fromPageEffect model)
+                (Page.update (Pages.Apps.RandomExchangeModel.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
+
         ( Main.Pages.Msg.Art_ExperimentChatgpt pageMsg, Main.Pages.Model.Art_ExperimentChatgpt pageModel ) ->
             Tuple.mapBoth
                 Main.Pages.Model.Art_ExperimentChatgpt
@@ -636,6 +684,18 @@ toLayoutFromPage model =
                 |> Pages.Apps.page model.shared
                 |> Page.layout pageModel
                 |> Maybe.map (Layouts.map (Main.Pages.Msg.Apps >> Page))
+
+        Main.Pages.Model.Apps_DrumMachine pageModel ->
+            Route.fromUrl () model.url
+                |> Pages.Apps.DrumMachine.page model.shared
+                |> Page.layout pageModel
+                |> Maybe.map (Layouts.map (Main.Pages.Msg.Apps_DrumMachine >> Page))
+
+        Main.Pages.Model.Apps_RandomExchangeModel pageModel ->
+            Route.fromUrl () model.url
+                |> Pages.Apps.RandomExchangeModel.page model.shared
+                |> Page.layout pageModel
+                |> Maybe.map (Layouts.map (Main.Pages.Msg.Apps_RandomExchangeModel >> Page))
 
         Main.Pages.Model.Art_ExperimentChatgpt pageModel ->
             Route.fromUrl () model.url
@@ -757,6 +817,16 @@ subscriptions model =
                         |> Sub.map Main.Pages.Msg.Apps
                         |> Sub.map Page
 
+                Main.Pages.Model.Apps_DrumMachine pageModel ->
+                    Page.subscriptions (Pages.Apps.DrumMachine.page model.shared (Route.fromUrl () model.url)) pageModel
+                        |> Sub.map Main.Pages.Msg.Apps_DrumMachine
+                        |> Sub.map Page
+
+                Main.Pages.Model.Apps_RandomExchangeModel pageModel ->
+                    Page.subscriptions (Pages.Apps.RandomExchangeModel.page model.shared (Route.fromUrl () model.url)) pageModel
+                        |> Sub.map Main.Pages.Msg.Apps_RandomExchangeModel
+                        |> Sub.map Page
+
                 Main.Pages.Model.Art_ExperimentChatgpt pageModel ->
                     Page.subscriptions (Pages.Art.ExperimentChatgpt.page model.shared (Route.fromUrl () model.url)) pageModel
                         |> Sub.map Main.Pages.Msg.Art_ExperimentChatgpt
@@ -874,6 +944,16 @@ viewPage model =
         Main.Pages.Model.Apps pageModel ->
             Page.view (Pages.Apps.page model.shared (Route.fromUrl () model.url)) pageModel
                 |> View.map Main.Pages.Msg.Apps
+                |> View.map Page
+
+        Main.Pages.Model.Apps_DrumMachine pageModel ->
+            Page.view (Pages.Apps.DrumMachine.page model.shared (Route.fromUrl () model.url)) pageModel
+                |> View.map Main.Pages.Msg.Apps_DrumMachine
+                |> View.map Page
+
+        Main.Pages.Model.Apps_RandomExchangeModel pageModel ->
+            Page.view (Pages.Apps.RandomExchangeModel.page model.shared (Route.fromUrl () model.url)) pageModel
+                |> View.map Main.Pages.Msg.Apps_RandomExchangeModel
                 |> View.map Page
 
         Main.Pages.Model.Art_ExperimentChatgpt pageModel ->
@@ -1008,6 +1088,18 @@ toPageUrlHookCmd model routes =
                 |> List.map Page
                 |> toCommands
 
+        Main.Pages.Model.Apps_DrumMachine pageModel ->
+            Page.toUrlMessages routes (Pages.Apps.DrumMachine.page model.shared (Route.fromUrl () model.url)) 
+                |> List.map Main.Pages.Msg.Apps_DrumMachine
+                |> List.map Page
+                |> toCommands
+
+        Main.Pages.Model.Apps_RandomExchangeModel pageModel ->
+            Page.toUrlMessages routes (Pages.Apps.RandomExchangeModel.page model.shared (Route.fromUrl () model.url)) 
+                |> List.map Main.Pages.Msg.Apps_RandomExchangeModel
+                |> List.map Page
+                |> toCommands
+
         Main.Pages.Model.Art_ExperimentChatgpt pageModel ->
             Page.toUrlMessages routes (Pages.Art.ExperimentChatgpt.page model.shared (Route.fromUrl () model.url)) 
                 |> List.map Main.Pages.Msg.Art_ExperimentChatgpt
@@ -1125,6 +1217,12 @@ isAuthProtected routePath =
             False
 
         Route.Path.Apps ->
+            False
+
+        Route.Path.Apps_DrumMachine ->
+            False
+
+        Route.Path.Apps_RandomExchangeModel ->
             False
 
         Route.Path.Art_ExperimentChatgpt ->

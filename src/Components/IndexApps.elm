@@ -1,4 +1,4 @@
-module Components.Index exposing (view)
+module Components.IndexApps exposing (..)
 
 import Color
 import Config
@@ -82,12 +82,10 @@ sidebar_ dimensions currentRoute =
         , Background.color Color.sidebar
         ]
         [ item currentRoute "/" "Home"
-        , item currentRoute "/about" "About"
-
-        --, item currentRoute "/art/experiment-chatgpt" "ChatGPT"
-        , item currentRoute "/photos" "Photos"
-        , item currentRoute "/science" "Science"
         , item currentRoute "/apps" "Apps"
+        , text "----------"
+        , item currentRoute "/apps/drum-machine" "Drum Machine"
+        , item currentRoute "/apps/random-exchange-model" "Random Exchange Model"
         , el [ alignBottom, Font.size (fontSize dimensions), Font.color Color.red ] (text <| "w = " ++ String.fromInt dimensions.width ++ ", h = " ++ String.fromInt dimensions.height)
 
         --, item currentRoute "/counter" "Counter"

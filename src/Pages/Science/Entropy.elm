@@ -61,9 +61,9 @@ Entropy
 # Introduction and History
 
 Entropy is often characterzed as a measure of the disorder of a system.  Imagine, for
-example, the drawer in which I put my socks. When I first put my socks there,
+example, my sock drawer. When I first put my socks there,
 I laid them out in three rows: hiking socks, every day rows, and dress socks.
-In each row I sort them by color: white and black, four of each. Each day I
+In each row I sorted them by color: white and black, four of each. Each day I
 take out a sock to wear, and every once in a while I do the laundry and
 put the clean socks back in the drawer.  But, being lazy and in a hurry,
 I just throw them in the drawer.  Eventually, the drawer is a mess: the
@@ -72,7 +72,7 @@ socks are all mixed up — they are "at random."
 Let's try to quantify the state of the sock drawer.  There are three
 rows of socks and in each row there are two boxes, one for the
 black socks, one for the white ones.  In each box there are four socks.
-Given four socks of a particular color, there are $4! = 24$ ways to
+Given four socks of a particular color, there are $4! 4\\times 3 \\times 2 \\times 1 = 24$ ways to
 to lay them out in the box.  There are a total of 6 boxes, so there
 are $6 \\times 24 = 144$ ways to lay out the socks in the drawer.
 In the jargon of statistical mechanics, my nicely organized
@@ -80,10 +80,10 @@ sock drawer has 144 microstates.
 
 Now consider the disorganized, "random" drawer.  The 24 socks
 are laid out any old way in the six boxes.  There are $24! = 6.204 \\times 10^{24}$
-ways to do arrange the socks. This is a [i huge] number! It is almost the
+ways to do arrange the socks. This is a [i huge] number of microstates! It is almost the
 same as Avogadro's number, $6.022 \\times 10^{23}$, which is the number of molecules in
 one a mole of a substance. One mole of water takes up 18 cubic centimeters
-(1.2 tablespoons).
+(1.2 tablespoons). Not much water, many atoms.
 
 
 
@@ -108,7 +108,7 @@ The entropy of the messy sock drawer is larger than that of the tidy sock drawer
 
 ## Properties of the Entropy
 
-Suppose that my two children have sock drawers organized in the same as mine is organized.
+Suppose that my two children have sock drawers organized in the same way as mine is organized.
 Because Larry and Suzie do not consult or cooperate on the organization of their sock drawers,
 the microstate of one is independent of the microstate of the other.  Therefore the
 total number of microstates of the sock drawers considered jointly is the product of the number of microstates
@@ -134,16 +134,15 @@ S_{\\text{Larry and Suzie}} = S_{\\text{messy sock drawer}} + S_{\\text{tidy soc
 ## Entropy in Physics
 
 The concept of entropy emerged in the mid-19th century with 
-the development of the second law of thermodynamics. 
+the development of the second law of thermodynamics by Clausius.  It was
+foreshadowed to some extent by the French physicist Sadi Carnot
+(1796–1832), who investigated the efficiency of heat engines.
 
-The term "entropy" was first introduced by Rudolf Clausius in 1865. 
-Clausius was one of the central figures in the formulation of the s
-econd law of thermodynamics.
-He formulated the concept of entropy as a mathematical expression 
+Clausius formulated the concept of entropy in 1865 as a mathematical expression
 of the second law, which states that energy spontaneously tends to 
-flow only from being concentrated in one place to becoming dispersed and spread out.
-Clausius defined entropy in terms of reversible processes and heat transfer,
- giving the differential form
+flow only from being concentrated in one place to becoming dispersed and spread out
+in another:
+
 
 || equation
 \\Delta S = \\frac{\\Delta Q}{T}
@@ -151,29 +150,26 @@ Clausius defined entropy in terms of reversible processes and heat transfer,
 where $\\Delta S$ is the change in entropy, $\\Delta Q$ is the incremental heat transfer, and $T$ is the temperature.
 all this .... XXX ....
 
-Clausius' work laid the foundation for the interpretation of entropy as a measure of disorder and the unavailability of energy to do work.
-Ludwig Boltzmann (1844–1906):
+This work laid the foundation for the interpretation of entropy as a measure of
+disorder and the unavailability of energy to do work.
 
-Boltzmann extended the concept of entropy into the statistical realm, connecting
+Ludwig Boltzmann (1844–1906) formulated the concept of entropy
+ using notions of probability theory, connecting
 it with the probabilistic behavior of particles in a gas.
-He is most famous for the Boltzmann equation and the statistical interpretation
-of entropy, which relates the macroscopic property of entropy to the microscopic
-behavior of particles. Boltzmann's insight was that entropy could be understood
-as a measure of the number of microscopic configurations $\\Omega$
+His statistical interpretation
+of entropy relates the macroscopic property of entropy to the microscopic
+behavior of particles and their statistics. Boltzmann's insight was that entropy could be understood
+as a measure of the number $\\Omega$ of microscopic configurations (microstates)
  that correspond to a macroscopic state (defined by macroscopic variables like temperature, volume, and pressure).
-The famous Boltzmann's entropy formula, 
+The entropy is given by the logarithm of this number:
 
 || equation
-S = k_B \\log \\Omega
+S = k_B \\log \\Omega,
 
-where $k_B$ is the Boltzmann constant, quantitatively links the entropy of a system
-to the logarithm of the number of ways the system's particles can be arranged,
-consistent with the observed macroscopic state (this is known as the statistical definition of entropy).
-Boltzmann's tombstone is inscribed with this formula.
- log(W), signifying its profound importance.
+for a constant $k_B$, now called the Boltzmann constant.
 
 
-The Boltzmann constant is $k_B = 1.380649 \\times 10^{-23} \\text{Joules/K}$, where $\\text{K}$
+The value of the Boltzmann constant is $k_B = 1.380649 \\times 10^{-23} \\text{Joules/K}$, where $\\text{K}$
 is the temperature in Kelvins. The degrees of the Kelvin scale are the same as the degrees of
 the Centigrade scale, except for the zero point.  Zero degrees K is $-273.16$ degrees C.
 This is the temperature at which all molecular motion ceases (except for quantum fluctuations).
@@ -182,7 +178,7 @@ This is the temperature at which all molecular motion ceases (except for quantum
 # Probabalistic Interpretation
 
 
-The [i Shannon entropy] of an  system with $\\Omega$ microstates is defined to be
+The [i Shannon entropy] of a  system with $\\Omega$ microstates is defined to be
 
 || equation
 H = - \\sum_{k=1}^\\Omega p_k \\log_2 p_k
@@ -191,8 +187,9 @@ where $p_k$ is the probability that the system is in state $k$.
 
 Shannon introduced his entropy function as a measure of the information that can
 be transmitted through a communication channel.  Consider a message like `m = 01101001` which consists
-of zeros and ones.  If zeroes and ones occurring in each position with  equal probability, then the we
-can consider the message to be a microstate of a system of $\\Omega = 2^n$ equally probable microstates, where $n$ is the length
+of zeros and ones.  If the transmission channel is such that zeroes and ones occur
+in each position with  equal probability, then  the message is a microstate of a system of
+$\\Omega = 2^n$ equally probable microstates, where $n$ is the length
 of the message.  The entropy of this system is
 
 || equation

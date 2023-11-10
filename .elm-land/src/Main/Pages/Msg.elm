@@ -3,6 +3,8 @@ module Main.Pages.Msg exposing (Msg(..))
 import Pages.Home_
 import Pages.About
 import Pages.Apps
+import Pages.Apps.DrumMachine
+import Pages.Apps.RandomExchangeModel
 import Pages.Art.ExperimentChatgpt
 import Pages.Counter
 import Pages.Photos
@@ -19,6 +21,8 @@ type Msg
     = Home_ Pages.Home_.Msg
     | About Pages.About.Msg
     | Apps Pages.Apps.Msg
+    | Apps_DrumMachine Pages.Apps.DrumMachine.Msg
+    | Apps_RandomExchangeModel Pages.Apps.RandomExchangeModel.Msg
     | Art_ExperimentChatgpt Pages.Art.ExperimentChatgpt.Msg
     | Counter Pages.Counter.Msg
     | Photos Pages.Photos.Msg

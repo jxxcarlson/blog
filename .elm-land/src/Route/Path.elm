@@ -10,6 +10,8 @@ type Path
     = Home_
     | About
     | Apps
+    | Apps_DrumMachine
+    | Apps_RandomExchangeModel
     | Art_ExperimentChatgpt
     | Counter
     | Photos
@@ -46,6 +48,12 @@ fromString urlPath =
 
         "apps" :: [] ->
             Just Apps
+
+        "apps" :: "drum-machine" :: [] ->
+            Just Apps_DrumMachine
+
+        "apps" :: "random-exchange-model" :: [] ->
+            Just Apps_RandomExchangeModel
 
         "art" :: "experiment-chatgpt" :: [] ->
             Just Art_ExperimentChatgpt
@@ -97,6 +105,12 @@ toString path =
 
                 Apps ->
                     [ "apps" ]
+
+                Apps_DrumMachine ->
+                    [ "apps", "drum-machine" ]
+
+                Apps_RandomExchangeModel ->
+                    [ "apps", "random-exchange-model" ]
 
                 Art_ExperimentChatgpt ->
                     [ "art", "experiment-chatgpt" ]

@@ -70,27 +70,44 @@ But when particle met antiparticle, an exceedingly frequent occurrence in those 
 the encounter was brief, violent, and almost always fatal, as both were destroyed, their substance
 vanishing in a flash of pure energy. When the great annihilation came to an end, there were
 few survivors of this many-fold decimation: no more than one in a billion remained.
-They were all of one kind, the kind we now call matter.  It is of these particles that
-all we see about us is made, from the grains of sand on the seashore to the trees to the sun,
+They were all of one kind, the kind we now call matter.
+All that we see about us is made is made of these tiny particles: from the grains of sand on the
+seashore to the trees in forest to the sun about which the Earth revolves, to the planets and
 the stars, and to the most distant galaxies.
 
 The clue for our improbable and miraculous existence
-is hidden in the image above, an image of muon neutrino traces in a bubble chamber,
+is hidden in the image you see at the head of this article: an image of muon neutrino traces in a bubble chamber,
 the paradoxically huge microscope that physicists use to probe the smallest realms.
 In the laws that govern us, it turns out, there is a small asymmetry,
 a kind of distinction between right and left, charge and anticharge,
 which are otherwise equal mirror images of one another.
 Neutrinos, born of the annihilation of particle and antiparticle, of
 the explosions of stars which create the iron and nickel of which our earth’s core is made,
-of the proton-proton reactions which power our sun,  carry to us the message of this tiny
+of the proton-proton reactions which power our sun,  carry to us the message of this minute
 discrepancy, the reason for our existence.
 
 
-[link Article by Dennis Overbye https://www.nytimes.com/2020/04/15/science/physics-neutrino-antimatter-ichikawa-t2k.html?smid=tw-share], New York Times
+[large [b Notes]]
 
-[link Physics note https://www.sns.ias.edu/~jnb/Papers/Popular/Scientificamerican69/scientificamerican69.html]: Neutrinos are ghostly particles that interact very weakly with matter.
+Neutrinos are ghostly particles that interact very weakly with matter.
 The proton-proton reactions that power the sun send out a huge stream of neutrinos.
-Each square centimeter of the Earth’s surface is bombarded by roughly 100 billion
-neutrinos per second.  Almost all of them pass through the Earth, exiting unchanged
+Each square centimeter of the Earth’s surface, with all of its
+plants, animals, and humans, is bombarded by roughly 100 billion
+neutrinos per second.  They pass through us all unnoticed, and almost all of
+them pass through the entire mass of the Earth, exiting unchanged
 on the opposite side.
+
+[large [b Links]]
+
+[link Article by Dennis Overbye https://www.nytimes.com/2020/04/15/science/physics-neutrino-antimatter-ichikawa-t2k.html?smid=tw-share]
+
+[link IceCube Neutrino Observatory https://icecube.wisc.edu/]
+
+[link 1968. First experiment to detect electron neutrinos produced by the sun https://icecube.wisc.edu/neutrino-history/1968/01/1968-first-experiment-to-detect-electron-neutrinos-produced-by-the-sun/]
+
+[link 1956. First discovery of the neutrino by an experiment https://icecube.wisc.edu/neutrino-history/1956/01/1956-first-discovery-of-the-neutrino-by-an-experiment/]
+
+
+
+[link 1931. Pauli presents hypothetical “neutron” particle https://icecube.wisc.edu/neutrino-history/1931/01/1931-pauli-presents-hypothetical-neutron-particle/]
 """

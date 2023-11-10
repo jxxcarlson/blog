@@ -2,7 +2,7 @@ module Pages.Apps exposing (Model, Msg, page)
 
 import Blog.Model
 import Blog.Msg
-import Blog.Scripta as Scripta
+import Blog.ScriptaApps as Scripta
 import Effect exposing (Effect)
 import Page exposing (Page)
 import Route exposing (Route)
@@ -55,19 +55,12 @@ content =
 | title
 Apps
 
-[vspace 30]
+[i A small collection of apps made with the [link Elm programming language https://elm-lang.org]]
 
-[i A small collection of Elm apps ... more apps and more explanatory text to come.]
+[vspace 1]
 
-# Techno Drum Language App
+- Drum Machine app:
+turns text into drum sounds.
 
-[link The App https://jxxcarlson.github.io/app/drumlanguage.html]
-
-[image https://global.discourse-cdn.com/standard17/uploads/elm_lang/optimized/2X/9/9b1b0a2734e88c93dc91e5cb711f32cb965d4ef1_2_1096x1000.png  width:350]
-
-# Random Exchange Model
-
-[link The App https://jxxcarlson.github.io/app/small-economy/index.html]
-
-[image https://imagedelivery.net/9U-0Y4sEzXlO6BXzTnQnYQ/69b4376a-51e8-41aa-8d29-4df56e40b900/public  width:350]
+- Random Exchange Model: a radically simplified model of a small economy.
 """
