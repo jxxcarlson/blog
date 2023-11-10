@@ -82,6 +82,8 @@ sidebar_ dimensions currentRoute =
         , Background.color Color.sidebar
         ]
         [ item currentRoute "/" "Home"
+        , item currentRoute "/photos" "Photos"
+        , text "---------"
         , item currentRoute "/photos/n-y-c" "New York City"
         , item currentRoute "/photos/paris" "Paris"
         , el [ alignBottom, Font.size (fontSize dimensions), Font.color Color.red ] (text <| "w = " ++ String.fromInt dimensions.width ++ ", h = " ++ String.fromInt dimensions.height)

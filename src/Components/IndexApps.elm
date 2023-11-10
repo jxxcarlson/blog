@@ -83,7 +83,7 @@ sidebar_ dimensions currentRoute =
         ]
         [ item currentRoute "/" "Home"
         , item currentRoute "/apps" "Apps"
-        , text "----------"
+        , text "-------"
         , item currentRoute "/apps/drum-machine" "Drum Machine"
         , item currentRoute "/apps/random-exchange-model" "Random Exchange Model"
         , el [ alignBottom, Font.size (fontSize dimensions), Font.color Color.red ] (text <| "w = " ++ String.fromInt dimensions.width ++ ", h = " ++ String.fromInt dimensions.height)
