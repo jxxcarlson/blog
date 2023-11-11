@@ -93,9 +93,22 @@ Neutrinos are ghostly particles that interact very weakly with matter.
 The proton-proton reactions that power the sun send out a huge stream of neutrinos.
 Each square centimeter of the Earth’s surface, with all of its
 plants, animals, and humans, is bombarded by roughly 100 billion
-neutrinos per second.  They pass through us all unnoticed, and almost all of
+neutrinos per second coming from the sun.  They pass through us unnoticed, and almost all of
 them pass through the entire mass of the Earth, exiting unchanged
 on the opposite side.
+
+[large [b Discovery]]
+
+The neutrino was first proposed by Wolfgang Pauli in 1930 to explain
+some odd results coming from exeriments with radioactive ...
+
+
+
+the continuous spectrum of beta decay.
+Let's unpack this statement.
+
+$$
+{}^{14}_6\\text{C} \\rightarrow {}^{14}_7\\text{N} + e^- + \\bar{\\nu}
 
 [large [b Links]]
 

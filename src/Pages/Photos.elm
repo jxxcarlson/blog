@@ -59,11 +59,11 @@ Photos
 
 [vspace 20]
 
-[large [b [link New York City https://jxx-blog.lamdera.app/photos/n-y-c]]]
+[large [b New York City]]
 
 [image https://imagedelivery.net/9U-0Y4sEzXlO6BXzTnQnYQ/d3316e61-b421-4b1c-3086-66b1ee7e7c00/public width:to-sides]
 
-[large [b [link Paris https://jxx-blog.lamdera.app/photos/paris]]]
+[large[b  Paris]]
 
 [image https://imagedelivery.net/9U-0Y4sEzXlO6BXzTnQnYQ/b447efe8-7df0-4070-6533-00f42ef18f00/public width:to-sides]
 

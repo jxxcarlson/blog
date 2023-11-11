@@ -18,9 +18,12 @@ type Path
     | Photos_NYC
     | Photos_Paris
     | Science
+    | Science_Atoms
     | Science_Champagne
     | Science_CreationAndAnnihilation
     | Science_Entropy
+    | Science_Neutrino
+    | Science_OldestTree
     | NotFound_
 
 
@@ -73,6 +76,9 @@ fromString urlPath =
         "science" :: [] ->
             Just Science
 
+        "science" :: "atoms" :: [] ->
+            Just Science_Atoms
+
         "science" :: "champagne" :: [] ->
             Just Science_Champagne
 
@@ -81,6 +87,12 @@ fromString urlPath =
 
         "science" :: "entropy" :: [] ->
             Just Science_Entropy
+
+        "science" :: "neutrino" :: [] ->
+            Just Science_Neutrino
+
+        "science" :: "oldest-tree" :: [] ->
+            Just Science_OldestTree
 
         _ ->
             Nothing
@@ -130,6 +142,9 @@ toString path =
                 Science ->
                     [ "science" ]
 
+                Science_Atoms ->
+                    [ "science", "atoms" ]
+
                 Science_Champagne ->
                     [ "science", "champagne" ]
 
@@ -138,6 +153,12 @@ toString path =
 
                 Science_Entropy ->
                     [ "science", "entropy" ]
+
+                Science_Neutrino ->
+                    [ "science", "neutrino" ]
+
+                Science_OldestTree ->
+                    [ "science", "oldest-tree" ]
 
                 NotFound_ ->
                     [ "404" ]
