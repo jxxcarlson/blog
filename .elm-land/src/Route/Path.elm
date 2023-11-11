@@ -22,6 +22,7 @@ type Path
     | Science_Champagne
     | Science_CreationAndAnnihilation
     | Science_Entropy
+    | Science_IdeaOfAtom
     | Science_Neutrino
     | Science_OldestTree
     | NotFound_
@@ -88,6 +89,9 @@ fromString urlPath =
         "science" :: "entropy" :: [] ->
             Just Science_Entropy
 
+        "science" :: "idea-of-atom" :: [] ->
+            Just Science_IdeaOfAtom
+
         "science" :: "neutrino" :: [] ->
             Just Science_Neutrino
 
@@ -153,6 +157,9 @@ toString path =
 
                 Science_Entropy ->
                     [ "science", "entropy" ]
+
+                Science_IdeaOfAtom ->
+                    [ "science", "idea-of-atom" ]
 
                 Science_Neutrino ->
                     [ "science", "neutrino" ]

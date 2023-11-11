@@ -15,6 +15,7 @@ import Pages.Science.Atoms
 import Pages.Science.Champagne
 import Pages.Science.CreationAndAnnihilation
 import Pages.Science.Entropy
+import Pages.Science.IdeaOfAtom
 import Pages.Science.Neutrino
 import Pages.Science.OldestTree
 import Pages.NotFound_
@@ -36,6 +37,7 @@ type Msg
     | Science_Champagne Pages.Science.Champagne.Msg
     | Science_CreationAndAnnihilation Pages.Science.CreationAndAnnihilation.Msg
     | Science_Entropy Pages.Science.Entropy.Msg
+    | Science_IdeaOfAtom Pages.Science.IdeaOfAtom.Msg
     | Science_Neutrino Pages.Science.Neutrino.Msg
     | Science_OldestTree Pages.Science.OldestTree.Msg
     | NotFound_ Pages.NotFound_.Msg

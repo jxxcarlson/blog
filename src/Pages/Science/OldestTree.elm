@@ -58,8 +58,10 @@ content =
 | title
 The Oldest Tree
 
-
 [vspace 40]
+[red [large [b D R A F T]]]
+[vspace 20]
+
 At an elevation of 10,000 feet in the White Mountains of California there lives the oldest tree known to science: a bristlecone pine tree that sprouted from a seed 4,855 years years ago, in 2832 BC.  By comparison, the oldest pyramid in 
 Egypt, that of King Djoser, dates to around over a century later, around 2870 BC.
 
@@ -85,14 +87,22 @@ the discovery of the atom, the realization that
 it is made of still smaller particles,
 and the discovery of radioactivity.
 
-To begin, lets think
-about the carbon atom. Like all atoms, it consists of protons,
+Lets begin with  carbon atom, whose habits and behavior
+are at the center of our story. Like all atoms, the
+carbon atom consists of protons,
 neutrons, and electrons.  The protons and neutrons
 are "fat" particles that weigh almost the same, and weigh
-about 2000 times as much as the electrons.  The protons and
+about 2000 times as much as the the much lighter electrons.
+The protons and
 neutrons are packed tightly together in a place called the
 [i nucleus] of the atom, while the electrons hover around
 the nucleus in a kind of cloud. (See figure below).
+
+
+
+
+
+
 Each of these particles carries an electric charge:
 +1 for the proton, 0 for the neutron, and -1 for the electron.
 Normal atoms have as many electrons as they do protons,
@@ -298,6 +308,8 @@ oxygen molecule $\\text{O}^2$ for form $\\text{CO}^2$ — carbon dioxide.  Plant
 
 
 [vspace 50]
+
+
 [b Links]
 
 [link U Chicago News: Carbon 14 dating https://news.uchicago.edu/explainer/what-is-carbon-14-dating#:~:text=Carbon%2D14%20has%20a%20half,in%20that%20amount%20of%20time.]

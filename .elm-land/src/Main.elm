@@ -29,6 +29,7 @@ import Pages.Science.Atoms
 import Pages.Science.Champagne
 import Pages.Science.CreationAndAnnihilation
 import Pages.Science.Entropy
+import Pages.Science.IdeaOfAtom
 import Pages.Science.Neutrino
 import Pages.Science.OldestTree
 import Pages.NotFound_
@@ -347,6 +348,23 @@ initPageAndLayout model =
                 Tuple.mapBoth
                     Main.Pages.Model.Science_Entropy
                     (Effect.map Main.Pages.Msg.Science_Entropy >> fromPageEffect model)
+                    ( pageModel, pageEffect )
+            , layout = Nothing
+            }
+
+        Route.Path.Science_IdeaOfAtom ->
+            let
+                page : Page.Page Pages.Science.IdeaOfAtom.Model Pages.Science.IdeaOfAtom.Msg
+                page =
+                    Pages.Science.IdeaOfAtom.page model.shared (Route.fromUrl () model.url)
+
+                ( pageModel, pageEffect ) =
+                    Page.init page ()
+            in
+            { page = 
+                Tuple.mapBoth
+                    Main.Pages.Model.Science_IdeaOfAtom
+                    (Effect.map Main.Pages.Msg.Science_IdeaOfAtom >> fromPageEffect model)
                     ( pageModel, pageEffect )
             , layout = Nothing
             }
@@ -698,6 +716,12 @@ updateFromPage msg model =
                 (Effect.map Main.Pages.Msg.Science_Entropy >> fromPageEffect model)
                 (Page.update (Pages.Science.Entropy.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
 
+        ( Main.Pages.Msg.Science_IdeaOfAtom pageMsg, Main.Pages.Model.Science_IdeaOfAtom pageModel ) ->
+            Tuple.mapBoth
+                Main.Pages.Model.Science_IdeaOfAtom
+                (Effect.map Main.Pages.Msg.Science_IdeaOfAtom >> fromPageEffect model)
+                (Page.update (Pages.Science.IdeaOfAtom.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
+
         ( Main.Pages.Msg.Science_Neutrino pageMsg, Main.Pages.Model.Science_Neutrino pageModel ) ->
             Tuple.mapBoth
                 Main.Pages.Model.Science_Neutrino
@@ -828,6 +852,12 @@ toLayoutFromPage model =
                 |> Pages.Science.Entropy.page model.shared
                 |> Page.layout pageModel
                 |> Maybe.map (Layouts.map (Main.Pages.Msg.Science_Entropy >> Page))
+
+        Main.Pages.Model.Science_IdeaOfAtom pageModel ->
+            Route.fromUrl () model.url
+                |> Pages.Science.IdeaOfAtom.page model.shared
+                |> Page.layout pageModel
+                |> Maybe.map (Layouts.map (Main.Pages.Msg.Science_IdeaOfAtom >> Page))
 
         Main.Pages.Model.Science_Neutrino pageModel ->
             Route.fromUrl () model.url
@@ -965,6 +995,11 @@ subscriptions model =
                 Main.Pages.Model.Science_Entropy pageModel ->
                     Page.subscriptions (Pages.Science.Entropy.page model.shared (Route.fromUrl () model.url)) pageModel
                         |> Sub.map Main.Pages.Msg.Science_Entropy
+                        |> Sub.map Page
+
+                Main.Pages.Model.Science_IdeaOfAtom pageModel ->
+                    Page.subscriptions (Pages.Science.IdeaOfAtom.page model.shared (Route.fromUrl () model.url)) pageModel
+                        |> Sub.map Main.Pages.Msg.Science_IdeaOfAtom
                         |> Sub.map Page
 
                 Main.Pages.Model.Science_Neutrino pageModel ->
@@ -1109,6 +1144,11 @@ viewPage model =
         Main.Pages.Model.Science_Entropy pageModel ->
             Page.view (Pages.Science.Entropy.page model.shared (Route.fromUrl () model.url)) pageModel
                 |> View.map Main.Pages.Msg.Science_Entropy
+                |> View.map Page
+
+        Main.Pages.Model.Science_IdeaOfAtom pageModel ->
+            Page.view (Pages.Science.IdeaOfAtom.page model.shared (Route.fromUrl () model.url)) pageModel
+                |> View.map Main.Pages.Msg.Science_IdeaOfAtom
                 |> View.map Page
 
         Main.Pages.Model.Science_Neutrino pageModel ->
@@ -1280,6 +1320,12 @@ toPageUrlHookCmd model routes =
                 |> List.map Page
                 |> toCommands
 
+        Main.Pages.Model.Science_IdeaOfAtom pageModel ->
+            Page.toUrlMessages routes (Pages.Science.IdeaOfAtom.page model.shared (Route.fromUrl () model.url)) 
+                |> List.map Main.Pages.Msg.Science_IdeaOfAtom
+                |> List.map Page
+                |> toCommands
+
         Main.Pages.Model.Science_Neutrino pageModel ->
             Page.toUrlMessages routes (Pages.Science.Neutrino.page model.shared (Route.fromUrl () model.url)) 
                 |> List.map Main.Pages.Msg.Science_Neutrino
@@ -1391,6 +1437,9 @@ isAuthProtected routePath =
             False
 
         Route.Path.Science_Entropy ->
+            False
+
+        Route.Path.Science_IdeaOfAtom ->
             False
 
         Route.Path.Science_Neutrino ->
