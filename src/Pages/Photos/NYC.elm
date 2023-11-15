@@ -113,9 +113,20 @@ nycPhotos =
     , neighborhoodPlace
     , playgroundLenoxAvenue
     , sylvanaJazz
+    , unionSquare
 
     --, dockScene
     ]
+
+
+unionSquare =
+    { url = " https://imagedelivery.net/9U-0Y4sEzXlO6BXzTnQnYQ/156b7fa1-0377-4473-43dd-b36d428fd600/public3"
+    , caption = "Our Neighborhood Place, New York City 2023"
+    , details = "Union Square, November 2024"
+    , year = Just 2024
+    , month = Just 11
+    , location = Just "New York City"
+    }
 
 
 neighborhoodPlace =

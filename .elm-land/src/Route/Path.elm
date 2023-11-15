@@ -25,6 +25,7 @@ type Path
     | Science_IdeaOfAtom
     | Science_Neutrino
     | Science_OldestTree
+    | Science_PeriodicTable
     | NotFound_
 
 
@@ -98,6 +99,9 @@ fromString urlPath =
         "science" :: "oldest-tree" :: [] ->
             Just Science_OldestTree
 
+        "science" :: "periodic-table" :: [] ->
+            Just Science_PeriodicTable
+
         _ ->
             Nothing
 
@@ -166,6 +170,9 @@ toString path =
 
                 Science_OldestTree ->
                     [ "science", "oldest-tree" ]
+
+                Science_PeriodicTable ->
+                    [ "science", "periodic-table" ]
 
                 NotFound_ ->
                     [ "404" ]

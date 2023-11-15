@@ -18,6 +18,7 @@ import Pages.Science.Entropy
 import Pages.Science.IdeaOfAtom
 import Pages.Science.Neutrino
 import Pages.Science.OldestTree
+import Pages.Science.PeriodicTable
 import Pages.NotFound_
 
 
@@ -40,4 +41,5 @@ type Msg
     | Science_IdeaOfAtom Pages.Science.IdeaOfAtom.Msg
     | Science_Neutrino Pages.Science.Neutrino.Msg
     | Science_OldestTree Pages.Science.OldestTree.Msg
+    | Science_PeriodicTable
     | NotFound_ Pages.NotFound_.Msg

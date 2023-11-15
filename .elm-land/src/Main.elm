@@ -32,6 +32,7 @@ import Pages.Science.Entropy
 import Pages.Science.IdeaOfAtom
 import Pages.Science.Neutrino
 import Pages.Science.OldestTree
+import Pages.Science.PeriodicTable
 import Pages.NotFound_
 import Pages.NotFound_
 import Route exposing (Route)
@@ -403,6 +404,11 @@ initPageAndLayout model =
             , layout = Nothing
             }
 
+        Route.Path.Science_PeriodicTable ->
+            { page = ( Main.Pages.Model.Science_PeriodicTable, Cmd.none )
+            , layout = Nothing
+            }
+
         Route.Path.NotFound_ ->
             let
                 page : Page.Page Pages.NotFound_.Model Pages.NotFound_.Msg
@@ -734,6 +740,11 @@ updateFromPage msg model =
                 (Effect.map Main.Pages.Msg.Science_OldestTree >> fromPageEffect model)
                 (Page.update (Pages.Science.OldestTree.page model.shared (Route.fromUrl () model.url)) pageMsg pageModel)
 
+        ( Main.Pages.Msg.Science_PeriodicTable, Main.Pages.Model.Science_PeriodicTable ) ->
+            ( model.page
+            , Cmd.none
+            )
+
         ( Main.Pages.Msg.NotFound_ pageMsg, Main.Pages.Model.NotFound_ pageModel ) ->
             Tuple.mapBoth
                 Main.Pages.Model.NotFound_
@@ -870,6 +881,9 @@ toLayoutFromPage model =
                 |> Pages.Science.OldestTree.page model.shared
                 |> Page.layout pageModel
                 |> Maybe.map (Layouts.map (Main.Pages.Msg.Science_OldestTree >> Page))
+
+        Main.Pages.Model.Science_PeriodicTable ->
+            Nothing
 
         Main.Pages.Model.NotFound_ pageModel ->
             Route.fromUrl () model.url
@@ -1011,6 +1025,9 @@ subscriptions model =
                     Page.subscriptions (Pages.Science.OldestTree.page model.shared (Route.fromUrl () model.url)) pageModel
                         |> Sub.map Main.Pages.Msg.Science_OldestTree
                         |> Sub.map Page
+
+                Main.Pages.Model.Science_PeriodicTable ->
+                    Sub.none
 
                 Main.Pages.Model.NotFound_ pageModel ->
                     Page.subscriptions (Pages.NotFound_.page model.shared (Route.fromUrl () model.url)) pageModel
@@ -1160,6 +1177,9 @@ viewPage model =
             Page.view (Pages.Science.OldestTree.page model.shared (Route.fromUrl () model.url)) pageModel
                 |> View.map Main.Pages.Msg.Science_OldestTree
                 |> View.map Page
+
+        Main.Pages.Model.Science_PeriodicTable ->
+            (Pages.Science.PeriodicTable.page)
 
         Main.Pages.Model.NotFound_ pageModel ->
             Page.view (Pages.NotFound_.page model.shared (Route.fromUrl () model.url)) pageModel
@@ -1338,6 +1358,9 @@ toPageUrlHookCmd model routes =
                 |> List.map Page
                 |> toCommands
 
+        Main.Pages.Model.Science_PeriodicTable ->
+            Cmd.none
+
         Main.Pages.Model.NotFound_ pageModel ->
             Page.toUrlMessages routes (Pages.NotFound_.page model.shared (Route.fromUrl () model.url)) 
                 |> List.map Main.Pages.Msg.NotFound_
@@ -1446,6 +1469,9 @@ isAuthProtected routePath =
             False
 
         Route.Path.Science_OldestTree ->
+            False
+
+        Route.Path.Science_PeriodicTable ->
             False
 
         Route.Path.NotFound_ ->

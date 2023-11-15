@@ -18,6 +18,7 @@ import Pages.Science.Entropy
 import Pages.Science.IdeaOfAtom
 import Pages.Science.Neutrino
 import Pages.Science.OldestTree
+import Pages.Science.PeriodicTable
 import Pages.NotFound_
 import View exposing (View)
 
@@ -41,6 +42,7 @@ type Model
     | Science_IdeaOfAtom Pages.Science.IdeaOfAtom.Model
     | Science_Neutrino Pages.Science.Neutrino.Model
     | Science_OldestTree Pages.Science.OldestTree.Model
+    | Science_PeriodicTable
     | NotFound_ Pages.NotFound_.Model
     | Redirecting_
     | Loading_

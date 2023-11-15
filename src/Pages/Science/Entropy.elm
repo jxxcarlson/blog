@@ -55,8 +55,11 @@ content =
 | title
 Entropy
 
-[vspace 30]
-[red Work in Progress]
+[vspace 40]
+[red [large [b D R A F T]]]
+[vspace 20]
+
+
 
 # Introduction and History
 

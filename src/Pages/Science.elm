@@ -61,25 +61,29 @@ Science
 [b About the essays ...  ]
 
 
-Science is one of the great achievements of the human mind,
-an achievement that is as much a part of our culture
+Science is one of the great activities and achievements of the human mind,
+one that is as much a part of our culture
 as the music of the great composers and improvisers,
 the work of the great writers and painters, and the architects who
 have raised up cathedrals, temples, mosques, and skyscrapers.
 
-The aim of this blog is to present some of this common cultural
-heritage in a form that conveys the intricacies of the path
-to discovery. It is rarely a straight line. The motive
-force for those who follow the path is curiosity, and
-the guide is an idea, or perhaps just a guess or a hunch.
+The aim of the science section of this blog is to present
+a view of science that conveys the intricacies of the path
+to discovery, the path from question to idea to confirmed
+result. The path is seldom a straight line nor is it short,
+and the motive force for those who follow it seeking truth
+is what every young child posesses: curiosity..
+
+
+[image https://imagedelivery.net/9U-0Y4sEzXlO6BXzTnQnYQ/61127cfc-b1de-433c-e8ba-e20b2f9c0300/public width:100]
 
 Science is first of all a way of thinking, a way of
-of finding out about the world, and of trying
-to make sure that what find is reliable knowledge. We often think
-about science as a body of answers, a collection of facts
+of finding out about the world, and a way of weeding
+out incorrect conclusions and results. We often view
+science as a body of answers, a collection of facts
 to be memorized  But before there
-can be answers, there most be questions.  And for
-the answers to be valuable, the questions must be good ones.
+can be answers, there must be questions.  And for
+the answers to be worthwhile, the questions must be good ones.
 What
 is the world made of? What are the stars? Are the stars made of the same stuff
 as we are? How far away are they? What is the nature of light?
@@ -89,26 +93,27 @@ Why do viruses exist? And so on ...
 
 
 Consider the
-first question, [i what is the world made of?].
+first question, [i what is the world made of?]
 For this one we know the answer: everything we can see
 around us is made [i atoms]: the
 Earth itself, the fish of the sea,
 the flowers in the garden, the trees in the forest — as
-well as the sun, the stars of our galaxies, and also
-of the most distant and ancient galaxies — all are
-made of atoms, particles so small that even the
+well as the sun, the stars of our galaxy, and even
+the most distant and ancient galaxies — all are
+made of atoms, particles so small that the
 most powerful microscope cannot see them.
 
 That the world is made of atoms is now common knowledge.
 But [i how] is it that we know this? How did we suspect
 that the world is made of tiny particles that we cannot see?
 How did we find out that this is so? Can we be sure
-that we are right?  To be sure about something we
-cannot see is a tall order.
+that we are right?  (See [i The Idea of Atom, parts I and II]
+for a discussion of these questions.)
 
-There are also unanswered questions, which we
-will also discuss.  Consider, for example,
-the case of [i dark matter].  This  is another form of
+
+
+There are also unanswered questions.  Consider, for example,
+the case of [i dark matter].  This  is a kind of
 matter which we cannot see —
 not with our own eyes, or with a microscope or a telescope.
 This may sound like science fiction or magic, but
@@ -122,12 +127,34 @@ But what is this unseen matter? We do not yet know, despite years of
 effort by many scientists.
 
 
+[image https://imagedelivery.net/9U-0Y4sEzXlO6BXzTnQnYQ/61127cfc-b1de-433c-e8ba-e20b2f9c0300/public width:100]
 
+[i I had two goals in writing these essays. The first was to bring greater
+public understanding to the intricate, often circuitous path from
+question to idea to discovery, with a special emphasis on two quite
+different things: the role and interaction of ideas on the one hand
+and of experiment and technology on the other.]
+
+[i The second was to give more detail than is usual in popular science
+articles and books, of which there are many, and many which are excellent.
+For that reason I have tried to write in such a way that the
+first part of each article is accessible a very wide audience,
+while the second part is for those who want go to farther.]
 
 """
 
 
 
+--
+--As we see in [i The Idea of Atom, parts I and II], the idea of atom
+--is an old one, going back to the the Greek philosophers
+--Leucippus and Democritus in the fifth century B.C.
+--It took well over two millennia for the idea to become
+--what we would call today a [i scientific theory]. There
+--was the work of the Chemist John Dalton in the early
+--19th century, and then the work of Albert Einstein
+--and the physicist Jean Perrin in the early 20th century.
+----
 --These are the questions to be explored in this blog.
 --
 --|| hide
